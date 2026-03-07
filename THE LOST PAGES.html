@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>THE LOST PAGES</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --void: #03010a;
+      --deep: #07021a;
+      --nebula1: #1a0533;
+      --nebula2: #0a1a3a;
+      --gold: #c9a84c;
+      --gold-light: #f0d080;
+      --silver: #a8b8d8;
+      --glow: #7b3fe4;
+      --glow2: #3f8fe4;
+      --text: #d8cfe8;
+      --muted: #7a6e8a;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--void);
+      color: var(--text);
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 18px;
+      overflow-x: hidden;
+    }
+
+    /* ── STARFIELD ── */
+    #starfield {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ── NEBULA BG ── */
+    .nebula-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 30%, rgba(123,63,228,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 70%, rgba(63,143,228,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 100% 50% at 50% 100%, rgba(26,5,51,0.8) 0%, transparent 70%),
+        var(--void);
+      pointer-events: none;
+    }
+
+    /* ── WRAPPER ── */
+    .site-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: relative;
+      text-align: center;
+      padding: 7rem 2rem 4rem;
+      overflow: hidden;
+    }
+
+    .header-rune {
+      font-size: 0.75rem;
+      letter-spacing: 0.5em;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 1.2rem;
+      animation: fadeDown 1.2s ease both;
+    }
+
+    h1 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.2rem, 7vw, 5rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 40%, var(--silver) 70%, var(--gold-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.08em;
+      line-height: 1.1;
+      animation: fadeDown 1.4s ease both;
+      filter: drop-shadow(0 0 30px rgba(201,168,76,0.4));
+    }
+
+    .header-sub {
+      margin-top: 1rem;
+      font-style: italic;
+      color: var(--silver);
+      opacity: 0.7;
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      animation: fadeDown 1.6s ease both;
+    }
+
+    .header-divider {
+      width: 200px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 1rem auto 0;
+      animation: expandWidth 1.8s ease both;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.3rem 0 2rem;
+      animation: fadeDown 2s ease both;
+    }
+
+    nav a {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--silver);
+      text-decoration: none;
+      transition: color 0.3s, text-shadow 0.3s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 1px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+
+    nav a:hover { color: var(--gold-light); text-shadow: 0 0 12px rgba(240,208,128,0.5); }
+    nav a:hover::after { transform: scaleX(1); }
+
+    /* ── SOCIAL BAR ── */
+    .social-bar {
+      position: fixed;
+      top: 50%;
+      right: 1.5rem;
+      transform: translateY(-50%);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .social-bar a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 50%;
+      color: var(--silver);
+      text-decoration: none;
+      font-size: 0.8rem;
+      transition: all 0.3s;
+      background: rgba(3,1,10,0.7);
+      backdrop-filter: blur(6px);
+    }
+
+    .social-bar a:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+      box-shadow: 0 0 15px rgba(201,168,76,0.4);
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 4rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.8;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.08em;
+    }
+
+    .section-line {
+      width: 120px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--glow), transparent);
+      margin: 1rem auto 0;
+    }
+
+    /* ── PROJECT CARDS ── */
+    .projects-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: linear-gradient(135deg, rgba(26,5,51,0.6), rgba(10,26,58,0.5));
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      backdrop-filter: blur(4px);
+    }
+
+    .project-card:hover {
+      border-color: rgba(201,168,76,0.5);
+      box-shadow: 0 0 30px rgba(123,63,228,0.2), 0 0 60px rgba(63,143,228,0.1);
+    }
+
+    .project-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 2rem;
+      cursor: pointer;
+      user-select: none;
+      gap: 1rem;
+    }
+
+    .project-header-left {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .project-number {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.6rem;
+      color: var(--gold);
+      opacity: 0.5;
+      letter-spacing: 0.2em;
+      min-width: 30px;
+    }
+
+    .project-title-wrap h3 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.1em;
+      color: var(--gold-light);
+    }
+
+    .project-title-wrap .project-tag {
+      font-size: 0.72rem;
+      color: var(--muted);
+      font-style: italic;
+      margin-top: 0.2rem;
+      letter-spacing: 0.05em;
+    }
+
+    .project-header-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .status-pill {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-family: 'Cinzel Decorative', serif;
+    }
+
+    .status-live {
+      background: rgba(63,228,123,0.1);
+      border: 1px solid rgba(63,228,123,0.4);
+      color: #7fe4a8;
+    }
+
+    .status-upcoming {
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.4);
+      color: var(--gold);
+    }
+
+    .dropdown-arrow {
+      width: 24px;
+      height: 24px;
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 0.7rem;
+      transition: transform 0.4s, border-color 0.3s;
+      flex-shrink: 0;
+    }
+
+    .project-card.open .dropdown-arrow {
+      transform: rotate(180deg);
+      border-color: var(--gold);
+    }
+
+    /* ── DROPDOWN BODY ── */
+    .project-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .project-card.open .project-body {
+      max-height: 900px;
+    }
+
+    .project-body-inner {
+      padding: 0 2rem 2rem;
+      border-top: 1px solid rgba(201,168,76,0.1);
+    }
+
+    .project-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 1.8rem;
+    }
+
+    @media (max-width: 680px) {
+      .project-layout { grid-template-columns: 1fr; }
+      .social-bar { display: none; }
+    }
+
+    /* ── GALLERY VIEWER ── */
+    .gallery-viewer {
+      position: relative;
+      aspect-ratio: 1;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid rgba(201,168,76,0.2);
+      background: rgba(26,5,51,0.8);
+    }
+
+    .gallery-slide {
+      display: none;
+      width: 100%;
+      height: 100%;
+    }
+    .gallery-slide.active { display: block; }
+
+    .gallery-slide img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+
+    /* Placeholder gradient tiles */
+    .gallery-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.5rem;
+      letter-spacing: 0.2em;
+      color: rgba(201,168,76,0.3);
+    }
+
+    .gp-1 { background: linear-gradient(135deg, #1a0533 0%, #3f0f70 50%, #0a1a3a 100%); }
+    .gp-2 { background: linear-gradient(135deg, #07021a 0%, #1a3060 50%, #3f0f70 100%); }
+    .gp-3 { background: linear-gradient(135deg, #0a1a3a 0%, #1a0533 50%, #07021a 100%); }
+    .gp-4 { background: linear-gradient(135deg, #200540 0%, #0d2050 50%, #200540 100%); }
+    .gp-5 { background: linear-gradient(135deg, #0d2050 0%, #3a0a60 50%, #0d2050 100%); }
+    .gp-6 { background: linear-gradient(135deg, #3a0a60 0%, #0a1a3a 50%, #3a0a60 100%); }
+
+    .gallery-controls {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 0.75rem;
+      background: linear-gradient(0deg, rgba(3,1,10,0.75) 0%, transparent 100%);
+    }
+
+    .gallery-btn {
+      background: rgba(3,1,10,0.6);
+      border: 1px solid rgba(201,168,76,0.35);
+      color: var(--gold);
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      font-size: 0.7rem;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .gallery-btn:hover {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.15);
+      box-shadow: 0 0 10px rgba(201,168,76,0.3);
+    }
+/* ── PROJECT INFO ── */
+    .project-info h4 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+      margin-bottom: 0.6rem;
+    }
+
+    .project-info p {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--text);
+      opacity: 0.85;
+      font-style: italic;
+    }
+
+    .desc-preview { display: block; }
+    .desc-full { display: none; }
+    .desc-full.expanded { display: block; }
+    .desc-preview.hidden { display: none; }
+
+    .btn-show-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.6rem;
+      background: none;
+      border: none;
+      color: var(--gold);
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.2s, color 0.2s;
+      padding: 0;
+    }
+    .btn-show-more:hover { opacity: 1; color: var(--gold-light); }
+
+    .project-meta {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .meta-chip {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      padding: 0.3rem 0.8rem;
+      border: 1px solid rgba(168,184,216,0.2);
+      border-radius: 2px;
+      color: var(--silver);
+      font-family: 'Cinzel Decorative', serif;
+    }
+
+    .project-links {
+      margin-top: 1.8rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .btn-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.4rem;
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.1));
+      border: 1px solid rgba(201,168,76,0.5);
+      color: var(--gold-light);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, rgba(201,168,76,0.35), rgba(201,168,76,0.2));
+      box-shadow: 0 0 20px rgba(201,168,76,0.3);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid rgba(168,184,216,0.25);
+      color: var(--silver);
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(168,184,216,0.5);
+      color: #fff;
+    }
+
+    /* ── UPCOMING SECTION ── */
+    .upcoming-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    .upcoming-card {
+      display: block;
+      text-decoration: none;
+      background: linear-gradient(135deg, rgba(26,5,51,0.4), rgba(10,26,58,0.3));
+      border: 1px dashed rgba(201,168,76,0.25);
+      border-radius: 4px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .upcoming-card:hover {
+      border-color: rgba(201,168,76,0.5);
+      background: linear-gradient(135deg, rgba(26,5,51,0.6), rgba(10,26,58,0.5));
+    }
+
+    .upcoming-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+      font-family: 'Cinzel Decorative', serif;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      color: var(--gold);
+    }
+
+    .upcoming-card h4 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .upcoming-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    .upcoming-badge {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.55rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.7rem;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 20px;
+      color: var(--gold);
+      font-family: 'Cinzel Decorative', serif;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 4rem 2rem 3rem;
+      border-top: 1px solid rgba(201,168,76,0.1);
+      margin-top: 4rem;
+    }
+
+    .footer-logo {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1rem;
+      letter-spacing: 0.3em;
+      background: linear-gradient(90deg, var(--gold), var(--silver), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+
+    footer p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-style: italic;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes expandWidth {
+      from { width: 0; opacity: 0; }
+      to   { width: 200px; opacity: 1; }
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50%       { opacity: 1; }
+    }
+
+    /* ── SHOOTING STAR ── */
+    .shooting-star {
+      position: fixed;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="nebula-bg"></div>
+<canvas id="starfield"></canvas>
+
+<!-- Social Bar -->
+<div class="social-bar">
+  <a href="https://x.com/trillionbear" target="_blank" title="Twitter / X" aria-label="Twitter">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+  </a>
+</div>
+
+<div class="site-wrap">
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-rune"><a href="https://trillionbear.com/" target="_blank" style="color:inherit;text-decoration:none;letter-spacing:inherit;">TRILLIONBEAR</a></div>
+    <h1>THE LOST PAGES</h1>
+    <div class="header-sub">Relics of Forgotten Worlds</div>
+    <div class="header-divider"></div>
+    <nav>
+      <a href="https://dexscreener.com/solana/969wmqydp6mc8jel2v7tmpv5pwzwbfqzkmienne2jbfe" target="_blank" style="font-size: 0.6rem; letter-spacing: 0.1em; opacity: 0.5; font-family: 'Crimson Pro', serif; font-style: italic; text-transform: none;">4NBTf8PfLH4oLFnwf3knv46FY9i5oXjDxffCetXRpump</a>
+      <a href="https://x.com/i/communities/1891898427790733405" target="_blank">YEEZY 4NBT</a>
+    </nav>
+  </header>
+
+  <!-- COLLECTIONS -->
+  <section id="collections">
+    <div class="section-header">
+      <div class="section-eyebrow">✦ The Archive ✦</div>
+      <div class="section-title">Existing Collections</div>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- PROJECT 1 -->
+      <div class="project-card" id="card-1">
+        <div class="project-header" onclick="toggleCard('card-1')">
+          <div class="project-header-left">
+            <span class="project-number">I</span>
+            <div class="project-title-wrap">
+              <h3>TT 1 | THE BOOK OF BUILDERS</h3>
+              <div class="project-tag">51 pages &nbsp;·&nbsp; Solana</div>
+            </div>
+          </div>
+          <div class="project-header-right">
+            <span class="status-pill status-live">Live</span>
+            <div class="dropdown-arrow">&#9660;</div>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-body-inner">
+            <div class="project-layout">
+              <div class="gallery-viewer" id="gallery-1">
+                <div class="gallery-slide active"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F13" alt="Book of Builders #1" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F39" alt="Book of Builders #2" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F37" alt="Book of Builders #3" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F27" alt="Book of Builders #4" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F46" alt="Book of Builders #5" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F29" alt="Book of Builders #6" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F9" alt="Book of Builders #7" /></div>
+                <div class="gallery-controls">
+                  <button class="gallery-btn" onclick="slideGallery('gallery-1',-1)">&#8592;</button>
+                  <button class="gallery-btn" onclick="slideGallery('gallery-1',1)">&#8594;</button>
+                </div>
+              </div>
+              <div class="project-info">
+                <h4>Lore:</h4>
+                <p>These verses recount the fall of a once-visionary land that became trapped in its own echo. The rebels became rulers, the thinkers became gatekeepers, and the spirit of true creation was cast out. But among the exiled a new force awakens—the Builders. They reject stagnation, destroy the altars of imitation, and begin constructing a new kingdom founded on vision alone. The passage stands as a declaration that the future will not be granted by the old world, but forged by those courageous enough to create without permission.</p>
+                <div class="project-meta">
+                  <span class="meta-chip">51 Pages</span>
+                  <span class="meta-chip">Solana</span>
+                  <span class="meta-chip">2025</span>
+                </div>
+                <div class="project-links">
+                  <a href="https://magiceden.us/marketplace/tt_1_book_of_builders" target="_blank" class="btn-link btn-primary">Magic Eden ↗</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 2 -->
+      <div class="project-card" id="card-2">
+        <div class="project-header" onclick="toggleCard('card-2')">
+          <div class="project-header-left">
+            <span class="project-number">II</span>
+            <div class="project-title-wrap">
+              <h3>TT 2 | THE BOOK OF REBELS</h3>
+              <div class="project-tag">108 pages &nbsp;·&nbsp; Solana</div>
+            </div>
+          </div>
+          <div class="project-header-right">
+            <span class="status-pill status-live">Live</span>
+            <div class="dropdown-arrow">&#9660;</div>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-body-inner">
+            <div class="project-layout">
+              <div class="gallery-viewer" id="gallery-2">
+                <div class="gallery-slide active"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F30" alt="Book of Rebels #1" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F4" alt="Book of Rebels #2" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F56" alt="Book of Rebels #3" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F31" alt="Book of Rebels #4" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F80" alt="Book of Rebels #5" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F60" alt="Book of Rebels #6" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F79" alt="Book of Rebels #7" /></div>
+                <div class="gallery-controls">
+                  <button class="gallery-btn" onclick="slideGallery('gallery-2',-1)">&#8592;</button>
+                  <button class="gallery-btn" onclick="slideGallery('gallery-2',1)">&#8594;</button>
+                </div>
+              </div>
+              <div class="project-info">
+                <h4>Lore:</h4>
+                <p>These verses tell of a hidden war not fought with swords, but within the minds of the people. Though the old kings have fallen, new systems of control arise through machines, algorithms, and invisible structures that shape thought, speech, and creation. The people, unaware of their chains, slowly surrender their vision and freedom. Yet from within the noise a remnant awakens—rebels who refuse obedience to the systems that govern imagination. Mocked, censored, and cast out, they continue to create and resist, reclaiming the fire of true expression. In their rebellion they begin to build a new Jerusalem—not a physical city, but a living network of creators united by vision, courage, and the refusal to kneel.</p>
+                <div class="project-meta">
+                  <span class="meta-chip">108 Pages</span>
+                  <span class="meta-chip">Solana</span>
+                  <span class="meta-chip">2025</span>
+                </div>
+                <div class="project-links">
+                  <a href="https://magiceden.us/marketplace/tt_2_book_of_rebels" target="_blank" class="btn-link btn-primary">Magic Eden ↗</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 3 -->
+      <div class="project-card" id="card-3">
+        <div class="project-header" onclick="toggleCard('card-3')">
+          <div class="project-header-left">
+            <span class="project-number">III</span>
+            <div class="project-title-wrap">
+              <h3>TT 3 | THE BOOK OF KINGS</h3>
+              <div class="project-tag">74 pages &nbsp;·&nbsp; Solana</div>
+            </div>
+          </div>
+          <div class="project-header-right">
+            <span class="status-pill status-live">Live</span>
+            <div class="dropdown-arrow">&#9660;</div>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-body-inner">
+            <div class="project-layout">
+              <div class="gallery-viewer" id="gallery-3">
+                <div class="gallery-slide active"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F0" alt="Book of Kings #1" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F19" alt="Book of Kings #2" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F73" alt="Book of Kings #3" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F25" alt="Book of Kings #4" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F35" alt="Book of Kings #5" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F1" alt="Book of Kings #6" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F45" alt="Book of Kings #7" /></div>
+                <div class="gallery-controls">
+                  <button class="gallery-btn" onclick="slideGallery('gallery-3',-1)">&#8592;</button>
+                  <button class="gallery-btn" onclick="slideGallery('gallery-3',1)">&#8594;</button>
+                </div>
+              </div>
+              <div class="project-info">
+                <h4>Lore:</h4>
+                <p>These verses tell of the moment after rebellion—when those who fought for freedom must confront the burden of leadership. The fire of struggle refines the rebels, revealing that true kingship is not about power, but about purpose, sacrifice, and vision. Only those who endured without losing their flame are worthy to guide what comes next. Rather than building another hierarchy, the new kings reject the old systems of control and create a decentralized kingdom where creation, transparency, and shared power define the law. In this new Jerusalem, leadership is not a throne but a responsibility, and the crown ultimately belongs to every creator who carries the vision forward.</p>
+                <div class="project-meta">
+                  <span class="meta-chip">74 Pages</span>
+                  <span class="meta-chip">Solana</span>
+                  <span class="meta-chip">2025</span>
+                </div>
+                <div class="project-links">
+                  <a href="https://magiceden.us/marketplace/tt_3_book_of_kings_p1" target="_blank" class="btn-link btn-primary">Magic Eden ↗</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 4 -->
+      <div class="project-card" id="card-4">
+        <div class="project-header" onclick="toggleCard('card-4')">
+          <div class="project-header-left">
+            <span class="project-number">IV</span>
+            <div class="project-title-wrap">
+              <h3>TT 3 | THE BOOK OF KINGS | 2</h3>
+              <div class="project-tag">45 pages &nbsp;·&nbsp; Solana</div>
+            </div>
+          </div>
+          <div class="project-header-right">
+            <span class="status-pill status-live">Live</span>
+            <div class="dropdown-arrow">&#9660;</div>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-body-inner">
+            <div class="project-layout">
+              <div class="gallery-viewer" id="gallery-4">
+                <div class="gallery-slide active"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F30" alt="Book of Kings 2 #1" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F38" alt="Book of Kings 2 #2" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F39" alt="Book of Kings 2 #3" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F11" alt="Book of Kings 2 #4" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F33" alt="Book of Kings 2 #5" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F31" alt="Book of Kings 2 #6" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F24" alt="Book of Kings 2 #7" /></div>
+                <div class="gallery-controls">
+                  <button class="gallery-btn" onclick="slideGallery('gallery-4',-1)">&#8592;</button>
+                  <button class="gallery-btn" onclick="slideGallery('gallery-4',1)">&#8594;</button>
+                </div>
+              </div>
+              <div class="project-info">
+                <h4>Lore:</h4>
+                <p>These verses tell of the moment when the Kings realize that freedom alone cannot sustain the new kingdom. Though creation has been unleashed, the land remains fragmented—each builder working alone, each vision burning in isolation. The Kings come to understand that true creation is not only freedom, but connection. Rather than ruling, they guide the people toward unity, where creators build together instead of apart. The crown is no longer held by kings, but shared among all who contribute to the vision. In this new Jerusalem, the kingdom is not governed by rulers but sustained through collaboration—an enduring world built by the collective spirit of creators.</p>
+                <div class="project-meta">
+                  <span class="meta-chip">45 Pages</span>
+                  <span class="meta-chip">Solana</span>
+                  <span class="meta-chip">2025</span>
+                </div>
+                <div class="project-links">
+                  <a href="https://magiceden.us/marketplace/tt_3_book_of_kings_part_2" target="_blank" class="btn-link btn-primary">Magic Eden ↗</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 5 -->
+      <div class="project-card" id="card-5">
+        <div class="project-header" onclick="toggleCard('card-5')">
+          <div class="project-header-left">
+            <span class="project-number">V</span>
+            <div class="project-title-wrap">
+              <h3>TT 4 | THE BOOK OF SEEKERS</h3>
+              <div class="project-tag">32 pages &nbsp;·&nbsp; Solana</div>
+            </div>
+          </div>
+          <div class="project-header-right">
+            <span class="status-pill status-live">Live</span>
+            <div class="dropdown-arrow">&#9660;</div>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-body-inner">
+            <div class="project-layout">
+              <div class="gallery-viewer" id="gallery-5">
+                <div class="gallery-slide active"><img src="https://img-cdn.magiceden.dev/da:t/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F22" alt="Book of Seekers #1" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F19" alt="Book of Seekers #2" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F6" alt="Book of Seekers #3" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F5" alt="Book of Seekers #4" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F3" alt="Book of Seekers #5" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F15" alt="Book of Seekers #6" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F11" alt="Book of Seekers #7" /></div>
+                <div class="gallery-controls">
+                  <button class="gallery-btn" onclick="slideGallery('gallery-5',-1)">&#8592;</button>
+                  <button class="gallery-btn" onclick="slideGallery('gallery-5',1)">&#8594;</button>
+                </div>
+              </div>
+              <div class="project-info">
+                <h4>Lore:</h4>
+                <p>These verses recount a great digital hunt where fragments of a hidden key are scattered across the web, calling forth a community of seekers. Guided by clues hidden in posts, images, and code, they work together to assemble the Master Key and unlock a vault whose value lies not only in treasure, but in the shared pursuit of truth. Yet the true trial begins after the vault is opened. The seekers must choose what to do with what they have discovered—keep it, share it, or sacrifice it for something greater. In the end, the passage reveals that the real test is not the puzzle itself, but the character of those who solve it, and what they choose to build from the fire they have uncovered.</p>
+                <div class="project-meta">
+                  <span class="meta-chip">32 Pages</span>
+                  <span class="meta-chip">Solana</span>
+                  <span class="meta-chip">2026</span>
+                </div>
+                <div class="project-links">
+                  <a href="https://magiceden.us/marketplace/3QFBVipiBLCC3sEiHdXbawdC7ed7h2Mw3KsiCBqVdgMA" target="_blank" class="btn-link btn-primary">Magic Eden ↗</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- UPCOMING -->
+  <section id="upcoming">
+    <div class="section-header">
+      <div class="section-eyebrow">✦ Lost Pages ✦</div>
+      <div class="section-title">Coming Soon</div>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="upcoming-grid">
+      <a href="https://x.com/trillionbear/status/1915308095258951999?s=20" target="_blank" class="upcoming-card">
+        <div class="upcoming-icon">TT</div>
+        <h4>HUNTERS</h4>
+        <span class="upcoming-badge">Coming Soon</span>
+      </a>
+      <a href="https://x.com/trillionbear/status/1922882572368961860?s=20" target="_blank" class="upcoming-card">
+        <div class="upcoming-icon">TT</div>
+        <h4>WATCHERS</h4>
+        <span class="upcoming-badge">Coming Soon</span>
+      </a>
+      <a href="https://x.com/trillionbear/status/2010921503441682876?s=20" target="_blank" class="upcoming-card">
+        <div class="upcoming-icon">TT</div>
+        <h4>WARRIORS</h4>
+        <span class="upcoming-badge">Coming Soon</span>
+      </a>
+      <a href="https://x.com/trillionbear/status/2011169136538243085?s=20" target="_blank" class="upcoming-card">
+        <div class="upcoming-icon">TT</div>
+        <h4>BUILDERS 2</h4>
+        <span class="upcoming-badge">Coming Soon</span>
+      </a>
+      <a href="https://x.com/trillionbear/status/2011243871477305852?s=20" target="_blank" class="upcoming-card">
+        <div class="upcoming-icon">TT</div>
+        <h4>CRUSADERS</h4>
+        <span class="upcoming-badge">Coming Soon</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">THE LOST PAGES</div>
+    <div style="margin-bottom: 1rem;">
+      <a href="https://x.com/nosheks" target="_blank" style="font-family: 'Cinzel Decorative', serif; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--silver); opacity: 0.6; text-decoration: none; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">-shekels</a>
+    </div>
+    <p>Relics of Forgotten Worlds &nbsp;·&nbsp; All Rights Reserved</p>
+    <p style="margin-top:0.5rem; font-size:0.7rem; opacity:0.4; letter-spacing:0.2em;">✦ &nbsp; ✦ &nbsp; ✦</p>
+  </footer>
+
+</div>
+
+<script>
+  // ── STARFIELD ──
+  const canvas = document.getElementById('starfield');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  function initStars() {
+    stars = [];
+    for (let i = 0; i < 280; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.4 + 0.2,
+        a: Math.random(),
+        speed: Math.random() * 0.008 + 0.002,
+        offset: Math.random() * Math.PI * 2
+      });
+    }
+  }
+
+  function drawStars(t) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+      const alpha = 0.2 + 0.8 * (0.5 + 0.5 * Math.sin(t * s.speed + s.offset));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(220,210,255,${alpha})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(ts => drawStars(ts * 0.001));
+  }
+
+  resizeCanvas();
+  initStars();
+  requestAnimationFrame(ts => drawStars(ts * 0.001));
+  window.addEventListener('resize', () => { resizeCanvas(); initStars(); });
+
+  // ── GALLERY SLIDER ──
+  function slideGallery(id, dir) {
+    const viewer = document.getElementById(id);
+    const slides = viewer.querySelectorAll('.gallery-slide');
+    let current = [...slides].findIndex(s => s.classList.contains('active'));
+    slides[current].classList.remove('active');
+    current = (current + dir + slides.length) % slides.length;
+    slides[current].classList.add('active');
+  }
+
+  // ── SHOW MORE / LESS ──
+  function toggleDesc(btn) {
+    const info = btn.parentElement;
+    const preview = info.querySelector('.desc-preview');
+    const full = info.querySelector('.desc-full');
+    const isExpanded = full.classList.contains('expanded');
+    if (isExpanded) {
+      full.classList.remove('expanded');
+      preview.classList.remove('hidden');
+      btn.textContent = 'Read More ↓';
+    } else {
+      full.classList.add('expanded');
+      preview.classList.add('hidden');
+      btn.textContent = 'Read Less ↑';
+    }
+  }
+
+  // ── DROPDOWN TOGGLE ──
+  function toggleCard(id) {
+    const card = document.getElementById(id);
+    card.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
