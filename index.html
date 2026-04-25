@@ -90,7 +90,7 @@
       background-clip: text;
       letter-spacing: 0.08em;
       line-height: 1.1;
-      animation: fadeDown 1.4s ease both;
+      animation: fadeDown 1.4s ease both, titleGlow 4s ease-in-out 1.4s infinite;
       filter: drop-shadow(0 0 30px rgba(201,168,76,0.4));
     }
 
@@ -330,12 +330,13 @@
     }
 
     .project-card.open .project-body {
-      max-height: 900px;
+      max-height: 3000px;
     }
 
     .project-body-inner {
       padding: 0 2rem 2rem;
       border-top: 1px solid rgba(201,168,76,0.1);
+      cursor: pointer;
     }
 
     .project-layout {
@@ -345,9 +346,105 @@
       margin-top: 1.8rem;
     }
 
+    .deco-quote {
+      font-family: 'Crimson Pro', serif;
+      color: var(--gold);
+      opacity: 0.5;
+      font-size: 1.1em;
+      vertical-align: middle;
+    }
+
+
+    /* Hide mobile CA inline on desktop */
+    .mobile-ca-inline { display: none; }
+
+    @media (max-width: 680px) {
+      .mobile-ca-inline {
+        display: block !important;
+        text-align: center;
+        margin-top: 0.2rem;
+      }
+      .mobile-ca-inline a {
+        font-family: 'Crimson Pro', serif;
+        font-style: italic;
+        font-size: 0.7rem;
+        letter-spacing: 0.07em;
+        color: var(--gold);
+        opacity: 0.5;
+        text-decoration: none;
+        word-break: break-all;
+      }
+      .header-divider { margin-top: 0.4rem; }
+    }
+    .mobile-feature { display: none; }
+    .mobile-ca { display: none; }
+    .mobile-quote-panel { display: none; }
+    .mobile-bear-wrap { display: none; }
+
     @media (max-width: 680px) {
       .project-layout { grid-template-columns: 1fr; }
       .social-bar { display: none; }
+      .quote-panel { display: none !important; }
+      .vertical-ca { display: none !important; }
+      .tb-bear { display: none !important; }
+
+      .mobile-quote-panel {
+        display: block !important;
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        z-index: 100;
+        padding: 0.8rem 1.2rem 1rem;
+        background: linear-gradient(180deg, rgba(3,1,15,0.95) 0%, rgba(3,1,15,0.75) 80%, transparent 100%);
+        backdrop-filter: blur(6px);
+        text-align: center;
+      }
+
+      .mobile-quote-mark {
+        display: block;
+        font-family: 'Crimson Pro', serif;
+        font-size: 1.4rem;
+        color: var(--gold);
+        opacity: 0.5;
+        line-height: 1;
+        margin-bottom: 0.15rem;
+      }
+
+      .mobile-quote-body {
+        display: block;
+        font-family: 'Crimson Pro', serif;
+        font-style: italic;
+        font-size: 0.9rem;
+        line-height: 1.55;
+        color: var(--silver);
+        opacity: 0.9;
+      }
+
+      .mobile-quote-source {
+        display: block;
+        margin-top: 0.35rem;
+        font-family: 'Cinzel Decorative', serif;
+        font-size: 0.45rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--gold);
+        opacity: 0.6;
+      }
+
+      .site-wrap { padding-top: 95px; }
+      header { padding-top: 1rem; }
+
+      .mobile-bear-wrap {
+        display: flex !important;
+        justify-content: center;
+        padding: 1rem 0 0;
+      }
+
+      .mobile-bear-wrap img {
+        width: 200px;
+        border-radius: 6px;
+        filter: saturate(0.5) brightness(0.55) hue-rotate(200deg) contrast(1.1);
+        opacity: 0.7;
+      }
     }
 
     /* ── GALLERY VIEWER ── */
@@ -358,6 +455,10 @@
       overflow: hidden;
       border: 1px solid rgba(201,168,76,0.2);
       background: rgba(26,5,51,0.8);
+    }
+
+    #gallery-6 {
+      aspect-ratio: 4 / 5;
     }
 
     .gallery-slide {
@@ -612,6 +713,11 @@
     }
 
     /* ── ANIMATIONS ── */
+    @keyframes titleGlow {
+      0%, 100% { text-shadow: 0 0 20px rgba(201,168,76,0.3), 0 0 60px rgba(123,63,228,0.15); }
+      50%       { text-shadow: 0 0 40px rgba(201,168,76,0.6), 0 0 100px rgba(123,63,228,0.35), 0 0 160px rgba(63,143,228,0.15); }
+    }
+
     @keyframes fadeDown {
       from { opacity: 0; transform: translateY(-20px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -627,7 +733,137 @@
       50%       { opacity: 1; }
     }
 
-    /* ── SHOOTING STAR ── */
+    @keyframes charFade {
+      0%, 100% { opacity: 0.1; }
+      50%       { opacity: 0.7; }
+    }
+
+    .vertical-ca .ca-char {
+      display: inline-block;
+      animation: charFade var(--dur) ease-in-out var(--delay) infinite;
+    }
+
+    /* ── QUOTE PANEL ── */
+    .quote-panel {
+      position: fixed;
+      left: 140px;
+      bottom: 370px;
+      width: 220px;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .quote-text {
+      font-family: 'Crimson Pro', serif;
+      font-style: italic;
+      font-size: 1rem;
+      line-height: 1.75;
+      letter-spacing: 0.03em;
+      color: var(--silver);
+      text-align: left;
+      opacity: 0;
+    }
+
+    .quote-text .quote-mark {
+      display: block;
+      font-size: 2rem;
+      color: var(--gold);
+      opacity: 0.5;
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .quote-text .quote-source {
+      display: block;
+      margin-top: 0.6rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.6;
+      font-style: normal;
+      font-family: 'Cinzel Decorative', serif;
+      text-align: left;
+    }
+
+    .quote-text .quote-page {
+      display: inline;
+      margin-left: 0.4rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      opacity: 0.45;
+      font-style: italic;
+      font-family: 'Crimson Pro', serif;
+    }
+
+    @keyframes quoteAppear {
+      0%   { opacity: 0; filter: blur(6px); transform: translateY(6px) scale(0.98); }
+      15%  { opacity: 0.85; filter: blur(0px); transform: translateY(0px) scale(1); }
+      75%  { opacity: 0.85; filter: blur(0px); transform: translateY(0px) scale(1); }
+      85%  { opacity: 0.6; filter: blur(1px); transform: translateY(-3px) scale(1.01); }
+      93%  { opacity: 0.2; filter: blur(4px); transform: translateY(-8px) scale(1.04); }
+      100% { opacity: 0; filter: blur(9px); transform: translateY(-14px) scale(1.07); }
+    }
+    .vertical-ca {
+      position: fixed;
+      left: 18px;
+      top: 60px;
+      bottom: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .vertical-ca a {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+      font-family: 'Crimson Pro', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      letter-spacing: 0.2em;
+      color: var(--silver);
+      opacity: 0.4;
+      text-decoration: none;
+      pointer-events: auto;
+      transition: opacity 0.3s;
+      white-space: nowrap;
+    }
+
+    .vertical-ca a:hover {
+      opacity: 0.8;
+    }
+    .tb-bear {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 320px;
+      z-index: 2;
+      pointer-events: none;
+      mask-image: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 60%, transparent 100%),
+                  linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 70%, transparent 100%);
+      mask-composite: intersect;
+      -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 60%, transparent 100%),
+                          linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 70%, transparent 100%);
+      -webkit-mask-composite: source-in;
+      filter: saturate(0.5) brightness(0.55) hue-rotate(200deg) contrast(1.1);
+      opacity: 0.6;
+      transition: opacity 0.4s, filter 0.4s;
+    }
+
+    .tb-bear:hover {
+      opacity: 0.9;
+      filter: saturate(0.75) brightness(0.7) hue-rotate(200deg) contrast(1.1);
+      pointer-events: auto;
+    }
+
+    .tb-bear img {
+      width: 100%;
+      display: block;
+    }
     .shooting-star {
       position: fixed;
       width: 2px;
@@ -644,6 +880,23 @@
 <div class="nebula-bg"></div>
 <canvas id="starfield"></canvas>
 
+<div class="quote-panel">
+  <div class="quote-text">
+    <span class="quote-mark">❝</span>
+    <span class="quote-body"></span>
+    <span class="quote-source"></span>
+    <span class="quote-page"></span>
+  </div>
+</div>
+
+<div class="vertical-ca">
+  <a href="https://dexscreener.com/solana/969wmqydp6mc8jel2v7tmpv5pwzwbfqzkmienne2jbfe" target="_blank">4NBTf8PfLH4oLFnwf3knv46FY9i5oXjDxffCetXRpump</a>
+</div>
+
+<div class="tb-bear">
+  <img src="https://gateway.pinit.io/ipfs/QmWT9GxqqLPR47TMUL7obU3Y7cx3TLp6h82yEerCr7pTLh/0" alt="Trillionbear" />
+</div>
+
 <!-- Social Bar -->
 <div class="social-bar">
   <a href="https://x.com/trillionbear" target="_blank" title="Twitter / X" aria-label="Twitter">
@@ -657,12 +910,24 @@
   <header>
     <div class="header-rune"><a href="https://trillionbear.com/" target="_blank" style="color:inherit;text-decoration:none;letter-spacing:inherit;">TRILLIONBEAR</a></div>
     <h1>THE LOST PAGES</h1>
-    <div class="header-sub">Relics of Forgotten Worlds</div>
+    <div class="header-sub"><span class="deco-quote">❝</span> Relics of Forgotten Worlds <span class="deco-quote">❞</span></div>
+    <div class="mobile-ca-inline">
+      <a href="https://dexscreener.com/solana/969wmqydp6mc8jel2v7tmpv5pwzwbfqzkmienne2jbfe" target="_blank">4NBTf8PfLH4oLFnwf3knv46FY9i5oXjDxffCetXRpump</a>
+    </div>
     <div class="header-divider"></div>
     <nav>
-      <a href="https://dexscreener.com/solana/969wmqydp6mc8jel2v7tmpv5pwzwbfqzkmienne2jbfe" target="_blank" style="font-size: 0.6rem; letter-spacing: 0.1em; opacity: 0.5; font-family: 'Crimson Pro', serif; font-style: italic; text-transform: none;">4NBTf8PfLH4oLFnwf3knv46FY9i5oXjDxffCetXRpump</a>
       <a href="https://x.com/i/communities/1891898427790733405" target="_blank">YEEZY 4NBT</a>
     </nav>
+
+    <div class="mobile-bear-wrap">
+      <img src="https://cloudflare-ipfs.com/ipfs/QmWT9GxqqLPR47TMUL7obU3Y7cx3TLp6h82yEerCr7pTLh/0" alt="Trillionbear" />
+    </div>
+
+    <div class="mobile-quote-panel">
+      <span class="mobile-quote-mark">❝</span>
+      <span class="mobile-quote-body"></span>
+      <span class="mobile-quote-source"></span>
+    </div>
   </header>
 
   <!-- COLLECTIONS -->
@@ -694,13 +959,13 @@
           <div class="project-body-inner">
             <div class="project-layout">
               <div class="gallery-viewer" id="gallery-1">
-                <div class="gallery-slide active"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F13" alt="Book of Builders #1" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F39" alt="Book of Builders #2" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F37" alt="Book of Builders #3" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F27" alt="Book of Builders #4" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F46" alt="Book of Builders #5" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F29" alt="Book of Builders #6" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F9" alt="Book of Builders #7" /></div>
+                <div class="gallery-slide active"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F13" alt="Book of Builders #1" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F39" alt="Book of Builders #2" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F37" alt="Book of Builders #3" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F27" alt="Book of Builders #4" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F46" alt="Book of Builders #5" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F29" alt="Book of Builders #6" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F9" alt="Book of Builders #7" loading="lazy" /></div>
                 <div class="gallery-controls">
                   <button class="gallery-btn" onclick="slideGallery('gallery-1',-1)">&#8592;</button>
                   <button class="gallery-btn" onclick="slideGallery('gallery-1',1)">&#8594;</button>
@@ -708,7 +973,7 @@
               </div>
               <div class="project-info">
                 <h4>Lore:</h4>
-                <p>These verses recount the fall of a once-visionary land that became trapped in its own echo. The rebels became rulers, the thinkers became gatekeepers, and the spirit of true creation was cast out. But among the exiled a new force awakens—the Builders. They reject stagnation, destroy the altars of imitation, and begin constructing a new kingdom founded on vision alone. The passage stands as a declaration that the future will not be granted by the old world, but forged by those courageous enough to create without permission.</p>
+                <p>Where it all started. The first Book of Trillionbear — originally posted as an article on his X account — where an imaginary world collided with the current state of crypto and the beliefs held by the 4NBT community. Prophetic in its own way. These verses recount the fall of a once-visionary land that became trapped in its own echo: rebels turned rulers, thinkers turned gatekeepers, and the spirit of true creation cast into exile. But from among the exiled, a new force awakens — the Builders. They reject stagnation, destroy the altars of imitation, and begin raising a new kingdom founded on vision alone. A declaration that the future will not be handed down by the old world, but forged by those bold enough to create without permission.</p>
                 <div class="project-meta">
                   <span class="meta-chip">51 Pages</span>
                   <span class="meta-chip">Solana</span>
@@ -742,13 +1007,13 @@
           <div class="project-body-inner">
             <div class="project-layout">
               <div class="gallery-viewer" id="gallery-2">
-                <div class="gallery-slide active"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F30" alt="Book of Rebels #1" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F4" alt="Book of Rebels #2" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F56" alt="Book of Rebels #3" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F31" alt="Book of Rebels #4" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F80" alt="Book of Rebels #5" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F60" alt="Book of Rebels #6" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F79" alt="Book of Rebels #7" /></div>
+                <div class="gallery-slide active"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F30" alt="Book of Rebels #1" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F4" alt="Book of Rebels #2" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F56" alt="Book of Rebels #3" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F31" alt="Book of Rebels #4" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F80" alt="Book of Rebels #5" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F60" alt="Book of Rebels #6" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F79" alt="Book of Rebels #7" loading="lazy" /></div>
                 <div class="gallery-controls">
                   <button class="gallery-btn" onclick="slideGallery('gallery-2',-1)">&#8592;</button>
                   <button class="gallery-btn" onclick="slideGallery('gallery-2',1)">&#8594;</button>
@@ -790,13 +1055,13 @@
           <div class="project-body-inner">
             <div class="project-layout">
               <div class="gallery-viewer" id="gallery-3">
-                <div class="gallery-slide active"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F0" alt="Book of Kings #1" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F19" alt="Book of Kings #2" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F73" alt="Book of Kings #3" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F25" alt="Book of Kings #4" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F35" alt="Book of Kings #5" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F1" alt="Book of Kings #6" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F45" alt="Book of Kings #7" /></div>
+                <div class="gallery-slide active"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F0" alt="Book of Kings #1" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F19" alt="Book of Kings #2" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F73" alt="Book of Kings #3" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F25" alt="Book of Kings #4" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F35" alt="Book of Kings #5" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F1" alt="Book of Kings #6" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F45" alt="Book of Kings #7" loading="lazy" /></div>
                 <div class="gallery-controls">
                   <button class="gallery-btn" onclick="slideGallery('gallery-3',-1)">&#8592;</button>
                   <button class="gallery-btn" onclick="slideGallery('gallery-3',1)">&#8594;</button>
@@ -838,13 +1103,13 @@
           <div class="project-body-inner">
             <div class="project-layout">
               <div class="gallery-viewer" id="gallery-4">
-                <div class="gallery-slide active"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F30" alt="Book of Kings 2 #1" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F38" alt="Book of Kings 2 #2" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F39" alt="Book of Kings 2 #3" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F11" alt="Book of Kings 2 #4" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F33" alt="Book of Kings 2 #5" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F31" alt="Book of Kings 2 #6" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F24" alt="Book of Kings 2 #7" /></div>
+                <div class="gallery-slide active"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F30" alt="Book of Kings 2 #1" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F38" alt="Book of Kings 2 #2" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F39" alt="Book of Kings 2 #3" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F11" alt="Book of Kings 2 #4" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F33" alt="Book of Kings 2 #5" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F31" alt="Book of Kings 2 #6" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F24" alt="Book of Kings 2 #7" loading="lazy" /></div>
                 <div class="gallery-controls">
                   <button class="gallery-btn" onclick="slideGallery('gallery-4',-1)">&#8592;</button>
                   <button class="gallery-btn" onclick="slideGallery('gallery-4',1)">&#8594;</button>
@@ -886,13 +1151,13 @@
           <div class="project-body-inner">
             <div class="project-layout">
               <div class="gallery-viewer" id="gallery-5">
-                <div class="gallery-slide active"><img src="https://img-cdn.magiceden.dev/da:t/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F22" alt="Book of Seekers #1" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F19" alt="Book of Seekers #2" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F6" alt="Book of Seekers #3" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F5" alt="Book of Seekers #4" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F3" alt="Book of Seekers #5" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F15" alt="Book of Seekers #6" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F11" alt="Book of Seekers #7" /></div>
+                <div class="gallery-slide active"><img src="https://img-cdn.magiceden.dev/da:t/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F22" alt="Book of Seekers #1" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F19" alt="Book of Seekers #2" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F6" alt="Book of Seekers #3" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F5" alt="Book of Seekers #4" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F3" alt="Book of Seekers #5" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F15" alt="Book of Seekers #6" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F11" alt="Book of Seekers #7" loading="lazy" /></div>
                 <div class="gallery-controls">
                   <button class="gallery-btn" onclick="slideGallery('gallery-5',-1)">&#8592;</button>
                   <button class="gallery-btn" onclick="slideGallery('gallery-5',1)">&#8594;</button>
@@ -915,6 +1180,53 @@
         </div>
       </div>
 
+      <div class="project-card" id="card-6">
+        <div class="project-header" onclick="toggleCard('card-6')">
+          <div class="project-header-left">
+            <span class="project-number">VI</span>
+            <div class="project-title-wrap">
+              <h3>TT 5 | THE BOOK OF HUNTERS</h3>
+              <div class="project-tag">39 pages &nbsp;·&nbsp; Solana</div>
+            </div>
+          </div>
+          <div class="project-header-right">
+            <span class="status-pill status-live">Live</span>
+            <div class="dropdown-arrow">&#9660;</div>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-body-inner">
+            <div class="project-layout">
+              <div class="gallery-viewer" id="gallery-6">
+                <div class="gallery-slide active"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/1" alt="Hunters #1" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/6" alt="Hunters #2" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/12" alt="Hunters #3" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/18" alt="Hunters #4" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/5" alt="Hunters #5" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/0" alt="Hunters #6" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/13" alt="Hunters #7" loading="lazy" /></div>
+                <div class="gallery-controls">
+                  <button class="gallery-btn" onclick="slideGallery('gallery-6',-1)">&#8592;</button>
+                  <button class="gallery-btn" onclick="slideGallery('gallery-6',1)">&#8594;</button>
+                </div>
+              </div>
+              <div class="project-info">
+                <h4>Lore:</h4>
+                <p>In the days after the seeking, when the vault had been foretold and the fragments gathered, the people grew restless — and the Hunters rose. No longer pursuing the fruit of the earth, they turned their weapons on one another, mistaking kin for enemy and rumor for truth. The Great Turning had begun. Garments woven for unity were cast down in fear. The gift of belonging became a banner of division. And the soil lay waiting, untouched, while a community consumed itself from within. Yet among the ruins, a remnant remembered the plow. Bruised but unbroken, they turned their blades to the earth and their scorn to seed — mocked by those still hunting, but quietly growing strong. Gardens rose from the wreckage. Songs rose from the gardens. And every harvest carried the taste of what becomes possible when a people choose to build rather than devour. In the end, even the hunters paused — and in the silence between them, one whispered: "We were never enemies. We were afraid." The Book of Hunters is a mirror held up to every community that has ever nearly destroyed itself on the way to something great.</p>
+                <div class="project-meta">
+                  <span class="meta-chip">39 Pages</span>
+                  <span class="meta-chip">Solana</span>
+                  <span class="meta-chip">2026</span>
+                </div>
+                <div class="project-links">
+                  <a href="https://magiceden.us/marketplace/DukRLtAEcVjsUyMVqz9aqr3v7ZbckVyGVLZTSm6NgbGL" target="_blank" class="btn-link btn-primary">Magic Eden ↗</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -927,11 +1239,6 @@
     </div>
 
     <div class="upcoming-grid">
-      <a href="https://x.com/trillionbear/status/1915308095258951999?s=20" target="_blank" class="upcoming-card">
-        <div class="upcoming-icon">TT</div>
-        <h4>HUNTERS</h4>
-        <span class="upcoming-badge">Coming Soon</span>
-      </a>
       <a href="https://x.com/trillionbear/status/1922882572368961860?s=20" target="_blank" class="upcoming-card">
         <div class="upcoming-icon">TT</div>
         <h4>WATCHERS</h4>
@@ -971,7 +1278,7 @@
   // ── STARFIELD ──
   const canvas = document.getElementById('starfield');
   const ctx = canvas.getContext('2d');
-  let stars = [];
+  let stars = [], shootingStars = [];
 
   function resizeCanvas() {
     canvas.width = window.innerWidth;
@@ -980,34 +1287,251 @@
 
   function initStars() {
     stars = [];
-    for (let i = 0; i < 280; i++) {
+    for (let i = 0; i < 350; i++) {
+      const tier = Math.random();
       stars.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        r: Math.random() * 1.4 + 0.2,
-        a: Math.random(),
-        speed: Math.random() * 0.008 + 0.002,
-        offset: Math.random() * Math.PI * 2
+        r: tier > 0.95 ? Math.random() * 2 + 1.2
+          : tier > 0.7  ? Math.random() * 1.2 + 0.6
+          :               Math.random() * 0.6 + 0.2,
+        speed:  Math.random() * 0.008 + 0.002,
+        offset: Math.random() * Math.PI * 2,
+        hue:    Math.random() > 0.85 ? 200 + Math.random() * 60 : 260 + Math.random() * 30,
+        pulse:  Math.random() > 0.7
       });
     }
   }
 
+  function spawnShootingStar() {
+    const fromLeft = Math.random() > 0.5;
+    shootingStars.push({
+      x:      fromLeft ? -20 : canvas.width + 20,
+      y:      Math.random() * canvas.height * 0.6,
+      vx:     fromLeft ? (4 + Math.random() * 4) : -(4 + Math.random() * 4),
+      vy:     1.5 + Math.random() * 2,
+      len:    80 + Math.random() * 120,
+      alpha:  1,
+      width:  Math.random() * 1.2 + 0.4
+    });
+  }
+
   function drawStars(t) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw pulsating stars
     stars.forEach(s => {
-      const alpha = 0.2 + 0.8 * (0.5 + 0.5 * Math.sin(t * s.speed + s.offset));
+      const pulse = s.pulse
+        ? Math.abs(Math.sin(t * s.speed * 2.5 + s.offset))
+        : 0.1 + 0.9 * (0.5 + 0.5 * Math.sin(t * s.speed + s.offset));
+      const alpha = Math.max(0.02, pulse);
+
+      // Glow for larger stars
+      if (s.r > 1) {
+        const glow = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 4);
+        glow.addColorStop(0, `hsla(${s.hue},80%,90%,${alpha * 0.6})`);
+        glow.addColorStop(1, `hsla(${s.hue},60%,70%,0)`);
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r * 4, 0, Math.PI * 2);
+        ctx.fillStyle = glow;
+        ctx.fill();
+      }
+
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(220,210,255,${alpha})`;
+      ctx.fillStyle = `hsla(${s.hue},60%,92%,${alpha})`;
       ctx.fill();
     });
+
+    // Draw shooting stars
+    shootingStars.forEach((ss, i) => {
+      const tailX = ss.x - (ss.vx / Math.abs(ss.vx)) * ss.len;
+      const tailY = ss.y - (ss.vy / Math.abs(ss.vy || 1)) * (ss.len * 0.5);
+      const grad = ctx.createLinearGradient(tailX, tailY, ss.x, ss.y);
+      grad.addColorStop(0, `rgba(255,255,255,0)`);
+      grad.addColorStop(1, `rgba(200,180,255,${ss.alpha})`);
+      ctx.beginPath();
+      ctx.moveTo(tailX, tailY);
+      ctx.lineTo(ss.x, ss.y);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = ss.width;
+      ctx.stroke();
+
+      ss.x += ss.vx;
+      ss.y += ss.vy;
+      ss.alpha -= 0.012;
+
+      if (ss.alpha <= 0 || ss.x < -200 || ss.x > canvas.width + 200) {
+        shootingStars.splice(i, 1);
+      }
+    });
+
     requestAnimationFrame(ts => drawStars(ts * 0.001));
   }
+
+  // Spawn shooting stars at random intervals
+  let shootingStarTimer;
+  function scheduleShootingStar() {
+    shootingStarTimer = setTimeout(() => {
+      if (!document.hidden) spawnShootingStar();
+      scheduleShootingStar();
+    }, 2500 + Math.random() * 5000);
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      // Clear any queued shots and start fresh
+      shootingStars = [];
+      clearTimeout(shootingStarTimer);
+      scheduleShootingStar();
+    }
+  });
 
   resizeCanvas();
   initStars();
   requestAnimationFrame(ts => drawStars(ts * 0.001));
+  setTimeout(scheduleShootingStar, 1500);
   window.addEventListener('resize', () => { resizeCanvas(); initStars(); });
+
+  // ── QUOTE PANEL ──
+  const quotes = [
+    // Book of Builders
+    { text: "The time of comfort is over. The time of asking is over. The time of waiting is over. The time to build is now.", source: "Book of Builders", verse: "Page 51" },
+    { text: "The future is not given, it is built.", source: "Book of Builders", verse: "Page 44" },
+    { text: "Innovation is not granted, it is taken.", source: "Book of Builders", verse: "Page 43" },
+    { text: "Do not wait for permission, for it shall never come.", source: "Book of Builders", verse: "Page 40" },
+    { text: "For the greatest enemy of the new world is not the rulers of the old - it is the doubt sown in the minds of those who would build.", source: "Book of Builders", verse: "Page 30" },
+    { text: "For the greatest sin of all is to see the chains and do nothing.", source: "Book of Builders", verse: "Page 50" },
+    { text: "For true innovation does not simply meet resistance - it is met with attack.", source: "Book of Builders", verse: "Page 23" },
+    { text: "And they built - not in the manner of their fathers, nor in the ways of the merchants, but in the fire of true creation.", source: "Book of Builders", verse: "Page 21" },
+    { text: "The ones who do not wait for permission shall rise. The ones who do not seek validation shall reign. The ones who create without asking shall inherit the new kingdom.", source: "Book of Builders", verse: "Page 32" },
+    // Book of Rebels
+    { text: "And the enemy laughed, for a slave who cannot see his chains will never seek to break them.", source: "Book of Rebels", verse: "Page 10" },
+    { text: "Each doubt, a weapon. Each hesitation, a chain. Each act of courage, a crack in the wall.", source: "Book of Rebels", verse: "Page 32" },
+    { text: "For to rebel is to suffer. To create is to bleed. And yet they chose the cross over the crown, the fire over comfort.", source: "Book of Rebels", verse: "Page 37" },
+    { text: "But the fire knows its own.", source: "Book of Rebels", verse: "Page 30" },
+    { text: "WE BUILD WHAT THEY TRIED TO ERASE. WE SERVE ONLY THE VISION. WE BEGIN NOW.", source: "Book of Rebels", verse: "Page 42" },
+    { text: "And Jerusalem stirred - not the city of old, but the state of becoming. Not a crown, but a calling. Not a building, but a blueprint.", source: "Book of Rebels", verse: "Page 27" },
+    { text: "For it was not a brand. It was not a trend. It was not an algorithm. It was truth made visible. Creation without leash. Imagination unshackled.", source: "Book of Rebels", verse: "Page 26" },
+    // Book of Kings
+    { text: "For not all who rebel are ready to rule.", source: "Book of Kings", verse: "Page 4" },
+    { text: "And the crown was not made of gold, but of memory. Each link forged in suffering. Each jewel cut from the cost.", source: "Book of Kings", verse: "Page 9" },
+    { text: "The Kings wore not robes, but scars. Their authority was not inherited, but earned.", source: "Book of Kings", verse: "Page 10" },
+    { text: "WE DO NOT LEAD TO BE OBEYED. WE LEAD TO SET OTHERS FREE.", source: "Book of Kings", verse: "Page 20" },
+    { text: "THOSE WHO CREATE WITHOUT ASKING, RULE WITHOUT CROWNS. THOSE WHO SERVE THE VISION, ARE KINGS INDEED.", source: "Book of Kings", verse: "Page 48" },
+    { text: "For the throne was not a seat - it was a spirit.", source: "Book of Kings", verse: "Page 45" },
+    { text: "Protocol became prophecy. Smart contracts became scripture.", source: "Book of Kings", verse: "Page 29" },
+    { text: "And thus the kingdom did not fall to one line, but fractaled like light through glass - infinite, diverse, alive.", source: "Book of Kings", verse: "Page 34" },
+    // Book of Kings II
+    { text: "True creation cometh not from solitude, but from unity and purpose.", source: "Book of Kings II", verse: "Page 4" },
+    { text: "A kingdom built by the individual shall fall - only a kingdom woven together by many, bound in truth, shall endure.", source: "Book of Kings II", verse: "Page 5" },
+    { text: "Freedom, unaccompanied by understanding, brings division; creation, unrooted in unity, remains incomplete.", source: "Book of Kings II", verse: "Page 8" },
+    { text: "Every voice, no matter how small, contributes to the whole. Every hand, no matter how weak, strengthens the fabric of the kingdom.", source: "Book of Kings II", verse: "Page 11" },
+    { text: "We are not rulers, but servants to the vision.", source: "Book of Kings II", verse: "Page 16" },
+    { text: "The truth is the thread that binds all creation. Without truth, no kingdom can stand; with truth, all things are made whole.", source: "Book of Kings II", verse: "Page 19" },
+    { text: "The crown belongs not to those who seek dominion, but to those who seek to build together.", source: "Book of Kings II", verse: "Page 22" },
+    { text: "The people are the kingdom. The creators are the sovereigns.", source: "Book of Kings II", verse: "Page 41" },
+    { text: "Creation is the birthright of all, and together we shall build a world that cannot be shaken.", source: "Book of Kings II", verse: "Page 43" },
+    // Book of Seekers
+    { text: "For the treasure was not measured in coin, but in truth - gathered not by one, but by many, each shard born of offering, each fragment shaped by sacrifice.", source: "Book of Seekers", verse: "Page 6" },
+    { text: "THREE DOORS NOW STAND BEFORE THEE - EACH CARVED FROM FIRE, EACH A REFLECTION OF THE SOUL.", source: "Book of Seekers", verse: "Page 14" },
+    { text: "WHAT THOU DOEST NOW SHALL ECHO IN THE CHAMBERS OF FOREVER. FOR THE KEY REVEALED THE VAULT, BUT THY CHOICE SHALL REVEAL THEE.", source: "Book of Seekers", verse: "Page 23" },
+    { text: "For the true test was not the hunt, but the heart.", source: "Book of Seekers", verse: "Page 26" },
+    { text: "And each path was a mirror, and each mirror showed the soul.", source: "Book of Seekers", verse: "Page 27" },
+    { text: "Blessed are they who give, who trust, who build - for they shall inherit what cannot be stolen.", source: "Book of Seekers", verse: "Page 28" },
+    { text: "For the vault was never the end, but the beginning of what comes next.", source: "Book of Seekers", verse: "Page 29" },
+    { text: "And the flame shall not go out, but leap from builder to builder, until the dark mills are no more.", source: "Book of Seekers", verse: "Page 31" },
+    { text: "And the age of light begins.", source: "Book of Seekers", verse: "Page 32" },
+    // Book of Hunters
+    { text: "And it was recorded in the scroll: that those who devour their own shall starve, but those who build shall feast.", source: "Book of Hunters", verse: "Page 31" },
+    { text: "WE WERE NEVER ENEMIES - WE WERE AFRAID.", source: "Book of Hunters", verse: "Page 34" },
+    { text: "Blessed are those who stop the hunt and begin the harvest.", source: "Book of Hunters", verse: "Page 35" },
+    { text: "They dug where the others fought. They planted where the others doubted.", source: "Book of Hunters", verse: "Page 22" },
+    { text: "And the land that once wept shall sing again.", source: "Book of Hunters", verse: "Page 38" },
+    { text: "THERE IS STILL TIME. TURN THY BLADE TO PLOW. TURN THY SCORN TO SEED.", source: "Book of Hunters", verse: "Page 20" },
+  ];
+
+  // Shuffle quotes so they don't cycle in order
+  function shuffleArray(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  const quoteEl   = document.querySelector('.quote-text');
+  const quoteBody = document.querySelector('.quote-body');
+  const quoteSrc  = document.querySelector('.quote-source');
+  const quotePage = document.querySelector('.quote-page');
+  let shuffledQuotes = shuffleArray([...quotes]);
+  let quoteIndex  = 0;
+
+  function showNextQuote() {
+    // Reshuffle when we've gone through all quotes
+    if (quoteIndex >= shuffledQuotes.length) {
+      shuffledQuotes = shuffleArray([...quotes]);
+      quoteIndex = 0;
+    }
+    const q = shuffledQuotes[quoteIndex++];
+    quoteBody.textContent = q.text;
+    quoteSrc.textContent  = '— ' + q.source;
+    quotePage.textContent = '(' + q.verse + ')';
+    const duration = 9000 + Math.random() * 4000;
+    quoteEl.style.animation = 'none';
+    quoteEl.offsetHeight;
+    quoteEl.style.animation = `quoteAppear ${duration}ms ease forwards`;
+    setTimeout(showNextQuote, duration + 1500 + Math.random() * 3000);
+  }
+
+  setTimeout(showNextQuote, 3000);
+
+  // ── MOBILE QUOTE PANEL ──
+  const mqBody = document.querySelector('.mobile-quote-body');
+  const mqSrc  = document.querySelector('.mobile-quote-source');
+  if (mqBody) {
+    let mqShuffled = shuffleArray([...quotes]);
+    let mqIndex = 0;
+    function showMobileQuote() {
+      if (mqIndex >= mqShuffled.length) { mqShuffled = shuffleArray([...quotes]); mqIndex = 0; }
+      const q = mqShuffled[mqIndex++];
+      mqBody.textContent = q.text;
+      mqSrc.textContent  = '— ' + q.source + ' · ' + q.verse;
+      setTimeout(showMobileQuote, 10000 + Math.random() * 5000);
+    }
+    setTimeout(showMobileQuote, 800);
+  }
+
+  // ── FLOATING CA CHARACTERS ──
+  document.querySelectorAll('.vertical-ca a').forEach(caLink => {
+    if (!caLink) return;
+    const text = caLink.textContent;
+    caLink.textContent = '';
+    text.split('').forEach(char => {
+      const span = document.createElement('span');
+      span.className = 'ca-char';
+      span.textContent = char;
+      const dur   = (2 + Math.random() * 5).toFixed(1) + 's';
+      const delay = (Math.random() * 6).toFixed(1) + 's';
+      span.style.setProperty('--dur', dur);
+      span.style.setProperty('--delay', delay);
+      caLink.appendChild(span);
+    });
+  });
+
+  // ── KEYBOARD NAVIGATION ──
+  let hoveredGallery = null;
+
+  document.querySelectorAll('.gallery-viewer').forEach(viewer => {
+    viewer.addEventListener('mouseenter', () => { hoveredGallery = viewer.id; });
+    viewer.addEventListener('mouseleave', () => { hoveredGallery = null; });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!hoveredGallery) return;
+    if (e.key === 'ArrowLeft') { e.preventDefault(); slideGallery(hoveredGallery, -1); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); slideGallery(hoveredGallery, 1); }
+  });
 
   // ── GALLERY SLIDER ──
   function slideGallery(id, dir) {
@@ -1037,10 +1561,36 @@
   }
 
   // ── DROPDOWN TOGGLE ──
+  function scrollToCard(card) {
+    const mobilePanel = document.querySelector('.mobile-quote-panel');
+    const offset = (mobilePanel && window.innerWidth <= 680)
+      ? mobilePanel.getBoundingClientRect().bottom + 12
+      : 0;
+    const top = card.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+
   function toggleCard(id) {
     const card = document.getElementById(id);
+    const wasOpen = card.classList.contains('open');
     card.classList.toggle('open');
+    if (wasOpen) {
+      setTimeout(() => scrollToCard(card), 50);
+    }
   }
+
+  // Click anywhere in expanded body to collapse, except interactive elements
+  document.querySelectorAll('.project-body').forEach(body => {
+    body.addEventListener('click', function(e) {
+      const ignore = e.target.closest('a, button, .gallery-viewer, .gallery-btn, .gallery-slide, img, .meta-chip');
+      if (ignore) return;
+      const card = body.closest('.project-card');
+      if (card) {
+        card.classList.remove('open');
+        setTimeout(() => scrollToCard(card), 50);
+      }
+    });
+  });
 </script>
 </body>
 </html>
