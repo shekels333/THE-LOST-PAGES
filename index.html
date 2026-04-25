@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#03010a"/>
   <title>THE LOST PAGES</title>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"/>
   <style>
@@ -24,12 +25,24 @@
 
     html { scroll-behavior: smooth; }
 
+    html {
+      background: var(--void);
+      height: 100%;
+    }
+
     body {
       background: var(--void);
       color: var(--text);
       font-family: 'Crimson Pro', Georgia, serif;
       font-size: 18px;
       overflow-x: hidden;
+      min-height: 100%;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: none;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -webkit-perspective: 1000;
+      perspective: 1000;
     }
 
     /* ── STARFIELD ── */
@@ -40,6 +53,8 @@
       pointer-events: none;
       transform: translateZ(0);
       will-change: transform;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
     }
 
     /* ── NEBULA BG ── */
@@ -55,6 +70,8 @@
       pointer-events: none;
       transform: translateZ(0);
       will-change: transform;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
     }
 
     /* ── WRAPPER ── */
@@ -374,7 +391,6 @@
         font-size: 0.7rem;
         letter-spacing: 0.07em;
         color: var(--gold);
-        opacity: 0;
         text-decoration: none;
         word-break: break-all;
       }
