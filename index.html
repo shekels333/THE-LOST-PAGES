@@ -38,6 +38,8 @@
       inset: 0;
       z-index: 0;
       pointer-events: none;
+      transform: translateZ(0);
+      will-change: transform;
     }
 
     /* ── NEBULA BG ── */
@@ -51,6 +53,8 @@
         radial-gradient(ellipse 100% 50% at 50% 100%, rgba(26,5,51,0.8) 0%, transparent 70%),
         var(--void);
       pointer-events: none;
+      transform: translateZ(0);
+      will-change: transform;
     }
 
     /* ── WRAPPER ── */
@@ -370,7 +374,7 @@
         font-size: 0.7rem;
         letter-spacing: 0.07em;
         color: var(--gold);
-        opacity: 0.5;
+        opacity: 0;
         text-decoration: none;
         word-break: break-all;
       }
@@ -748,11 +752,12 @@
     }
 
     @keyframes charFade {
-      0%, 100% { opacity: 0.1; }
-      50%       { opacity: 0.7; }
+      0%, 100% { opacity: 0.08; }
+      50%       { opacity: 0.6; }
     }
 
-    .vertical-ca .ca-char {
+    .vertical-ca .ca-char,
+    .mobile-ca-inline .ca-char {
       display: inline-block;
       animation: charFade var(--dur) ease-in-out var(--delay) infinite;
     }
@@ -1516,7 +1521,7 @@
   }
 
   // ── FLOATING CA CHARACTERS ──
-  document.querySelectorAll('.vertical-ca a').forEach(caLink => {
+  document.querySelectorAll('.vertical-ca a, .mobile-ca-inline a').forEach(caLink => {
     if (!caLink) return;
     const text = caLink.textContent;
     caLink.textContent = '';
