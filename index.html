@@ -39,10 +39,6 @@
       min-height: 100%;
       -webkit-overflow-scrolling: touch;
       overscroll-behavior: none;
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
-      -webkit-perspective: 1000;
-      perspective: 1000;
     }
 
     /* ── STARFIELD ── */
@@ -51,10 +47,6 @@
       inset: 0;
       z-index: 0;
       pointer-events: none;
-      transform: translateZ(0);
-      will-change: transform;
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
     }
 
     /* ── NEBULA BG ── */
@@ -68,10 +60,6 @@
         radial-gradient(ellipse 100% 50% at 50% 100%, rgba(26,5,51,0.8) 0%, transparent 70%),
         var(--void);
       pointer-events: none;
-      transform: translateZ(0);
-      will-change: transform;
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
     }
 
     /* ── WRAPPER ── */
