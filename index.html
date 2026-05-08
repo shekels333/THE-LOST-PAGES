@@ -155,6 +155,25 @@
     nav a:hover { color: var(--gold-light); text-shadow: 0 0 12px rgba(240,208,128,0.5); }
     nav a:hover::after { transform: scaleX(1); }
 
+    nav a.mint-btn {
+      margin-top: 1.2rem;
+      padding: 1.4rem 5rem;
+      border: 2px solid var(--gold);
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(123,63,228,0.1));
+      letter-spacing: 0.45em;
+      font-size: 1.55rem;
+      color: var(--gold-light);
+      box-shadow: 0 0 40px rgba(201,168,76,0.25), inset 0 0 20px rgba(201,168,76,0.12);
+      transition: all 0.3s;
+    }
+    nav a.mint-btn::after { display: none; }
+    nav a.mint-btn:hover {
+      background: linear-gradient(135deg, rgba(201,168,76,0.3), rgba(123,63,228,0.25));
+      box-shadow: 0 0 30px rgba(201,168,76,0.4), inset 0 0 20px rgba(201,168,76,0.15);
+      transform: translateY(-1px);
+    }
+
     /* ── SOCIAL BAR ── */
     .social-bar {
       position: fixed;
@@ -940,6 +959,7 @@
     <div class="header-divider"></div>
     <nav>
       <a href="https://x.com/i/communities/1891898427790733405" target="_blank">YEEZY 4NBT</a>
+      <a href="https://www.launchmynft.io/profile/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy" target="_blank" class="mint-btn">Mint</a>
     </nav>
 
     <div class="mobile-quote-panel">
