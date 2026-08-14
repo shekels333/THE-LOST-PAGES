@@ -992,10 +992,12 @@
     /* ── RELIC STRIP ── */
     .relic-strip {
       position: relative;
-      margin: 2.5rem calc(50% - 50vw) 0;
+      margin: 0.4rem calc(50% - 50vw) -1.8rem;
       width: 100vw;
       overflow: hidden;
-      padding: 0.5rem 0;
+      /* Generous vertical padding so a hovered tile's glow can fade out
+         instead of being sliced flat by the overflow clip. */
+      padding: 3.2rem 0;
       -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
       mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
       animation: fadeDown 2.2s ease both;
@@ -1009,26 +1011,39 @@
     }
 
     .relic-track a {
+      position: relative;
       display: block;
       width: 150px;
       height: 150px;
       flex-shrink: 0;
       border-radius: 3px;
-      overflow: hidden;
       border: 1px solid rgba(201,168,76,0.25);
       box-shadow: 0 6px 24px rgba(0,0,0,0.5);
-      transition: transform 0.35s ease, border-color 0.35s, box-shadow 0.35s;
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), border-color 0.4s, box-shadow 0.4s;
     }
 
-    .relic-track a:hover {
-      transform: translateY(-6px) scale(1.03);
-      border-color: rgba(201,168,76,0.7);
-      box-shadow: 0 10px 30px rgba(123,63,228,0.35), 0 0 20px rgba(201,168,76,0.2);
+    /* Layered shadows of increasing blur give a gradual falloff instead of one
+       hard-edged halo. The strip's padding leaves room for the outer layer. */
+    .relic-track a.is-hover {
+      transform: translateY(-7px) scale(1.045);
+      border-color: rgba(240,208,128,0.5);
+      box-shadow:
+        0 12px 28px rgba(0,0,0,0.55),
+        0 0 18px 2px rgba(154,96,236,0.32),
+        0 0 38px 8px rgba(123,63,228,0.2),
+        0 0 66px 18px rgba(123,63,228,0.09);
+    }
+
+    .relic-track a img { border-radius: 2px; }
+
+    .relic-track a.is-hover img {
+      filter: saturate(1.05) brightness(1.06);
     }
 
     .relic-track img {
       width: 100%; height: 100%; object-fit: cover; display: block;
       filter: saturate(0.95);
+      transition: filter 0.4s ease;
     }
 
     /* 4:5 pages get a 4:5 tile, so nothing is cropped in the strip either */
@@ -2122,7 +2137,8 @@
     function bind(a, item) {
       a.href = '#' + item.cid;
       a.setAttribute('aria-label', item.label);
-      a.onclick = function (e) { openFromStrip(e, item.cid); };
+      // Clicks are handled by the strip's capture listener, which resolves the
+      // tile by painted position rather than by the browser's hit test.
     }
 
     // Hunters is the one 4:5 book; its tiles are narrower so pages aren't cropped
@@ -2151,6 +2167,58 @@
 
     // Pace the drift to the number of tiles so speed stays constant
     track.style.animationDuration = (VISIBLE * 5) + 's';
+
+
+    // The marquee's transform runs on the compositor, but the browser hit-tests
+    // against the main thread's stale position — so :hover and clicks can land on
+    // a tile other than the one visually under the cursor. Resolve the tile from
+    // its painted rect instead, which reflects the animated position.
+    let hovered = null;
+    let pending = false;
+    let lastPoint = null;
+
+    function tileAt(x, y) {
+      const tiles = track.children;
+      for (let i = 0; i < tiles.length; i++) {
+        const r = tiles[i].getBoundingClientRect();
+        // Ignore tiles sitting in the strip's faded edges — they aren't really visible
+        if (r.right <= 0 || r.left >= window.innerWidth) continue;
+        if (x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) return tiles[i];
+      }
+      return null;
+    }
+
+    function setHovered(tile) {
+      if (tile === hovered) return;
+      if (hovered) hovered.classList.remove('is-hover');
+      hovered = tile;
+      if (hovered) hovered.classList.add('is-hover');
+    }
+
+    function syncHover() {
+      pending = false;
+      if (!lastPoint) return setHovered(null);
+      setHovered(tileAt(lastPoint.x, lastPoint.y));
+    }
+
+    strip.addEventListener('pointermove', e => {
+      lastPoint = { x: e.clientX, y: e.clientY };
+      if (!pending) { pending = true; requestAnimationFrame(syncHover); }
+    });
+
+    strip.addEventListener('pointerleave', () => { lastPoint = null; setHovered(null); });
+
+    // Tiles keep drifting under a stationary cursor, so re-check every frame
+    (function track_(){ if (lastPoint) syncHover(); requestAnimationFrame(track_); })();
+
+    // Route the click by painted position too, so it can never open the wrong book
+    strip.addEventListener('click', e => {
+      const tile = tileAt(e.clientX, e.clientY);
+      if (!tile) { e.preventDefault(); return; }
+      e.preventDefault();
+      const href = tile.getAttribute('href') || '';
+      if (href.startsWith('#card-')) openFromStrip(e, href.slice(1));
+    }, true);
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
