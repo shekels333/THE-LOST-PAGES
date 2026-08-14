@@ -2089,7 +2089,14 @@
       const label = raw.split('|').pop().trim();
       card.querySelectorAll('.gallery-slide img').forEach(img => {
         const s = img.getAttribute('src');
-        if (s) pool.push({ src: thumb(s), cid: card.id, label: label });
+        // Keep a reference to the slide itself, not an index — slides can be
+        // removed when a page 404s, which would shift any stored position.
+        if (s) pool.push({
+          src: thumb(s),
+          cid: card.id,
+          label: label,
+          slide: img.closest('.gallery-slide')
+        });
       });
     });
     if (pool.length < 4) return;
@@ -2142,7 +2149,8 @@
 
     function bind(a, item) {
       a.href = '#' + item.cid;
-      a.setAttribute('aria-label', item.label);
+      a.setAttribute('aria-label', item.label + ' — open this page');
+      a._item = item;
       // Clicks are handled by the strip's capture listener, which resolves the
       // tile by painted position rather than by the browser's hit test.
     }
@@ -2222,8 +2230,12 @@
       const tile = tileAt(e.clientX, e.clientY);
       if (!tile) { e.preventDefault(); return; }
       e.preventDefault();
-      const href = tile.getAttribute('href') || '';
-      if (href.startsWith('#card-')) openFromStrip(e, href.slice(1));
+      const item = tile._item;
+      if (item) openFromStrip(e, item.cid, item.slide);
+      else {
+        const href = tile.getAttribute('href') || '';
+        if (href.startsWith('#card-')) openFromStrip(e, href.slice(1));
+      }
     }, true);
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -2347,9 +2359,21 @@
   })();
 
   // ── OPEN CARD FROM RELIC STRIP ──
-  function openFromStrip(e, id) {
+  function showSlide(slide) {
+    if (!slide || !slide.isConnected) return;
+    const viewer = slide.closest('.gallery-viewer');
+    if (!viewer) return;
+    viewer.querySelectorAll('.gallery-slide.active').forEach(s => s.classList.remove('active'));
+    slide.classList.add('active');
+    updateGalleryCount(viewer.id);
+  }
+
+  function openFromStrip(e, id, slide) {
     e.preventDefault();
     const card = document.getElementById(id);
+    if (!card) return;
+    // Select the page first so the card opens already showing it
+    if (slide) showSlide(slide);
     if (!card.classList.contains('open')) toggleCard(id);
     setTimeout(() => scrollToCard(card), 60);
   }
