@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="theme-color" content="#03010a"/>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2303010a'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' fill='%23c9a84c'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E"/>
   <title>THE LOST PAGES</title>
   <meta name="description" content="The Lost Pages — Relics of Forgotten Worlds. The Trillionbear NFT collection on Solana." />
 
@@ -22,7 +23,7 @@
   <meta name="twitter:title" content="THE LOST PAGES" />
   <meta name="twitter:description" content="Relics of Forgotten Worlds — The Trillionbear NFT collection on Solana." />
   <meta name="twitter:image" content="https://thelostpages.net/thumbnail.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"/>
   <style>
     :root {
       --void: #03010a;
@@ -93,7 +94,6 @@
       position: relative;
       text-align: center;
       padding: 7rem 2rem 4rem;
-      overflow: hidden;
     }
 
     .header-rune {
@@ -116,8 +116,8 @@
       background-clip: text;
       letter-spacing: 0.08em;
       line-height: 1.1;
-      animation: fadeDown 1.4s ease both, titleGlow 4s ease-in-out 1.4s infinite;
-      filter: drop-shadow(0 0 30px rgba(201,168,76,0.4));
+      animation: fadeDown 1.4s ease both, titleGlow 7s ease-in-out 1.4s infinite;
+      filter: drop-shadow(0 0 18px rgba(201,168,76,0.25));
     }
 
     .header-sub {
@@ -149,7 +149,7 @@
     }
 
     nav a {
-      font-family: 'Cinzel Decorative', serif;
+      font-family: 'Cinzel', serif;
       font-size: 0.65rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
@@ -173,13 +173,15 @@
     nav a:hover::after { transform: scaleX(1); }
 
     nav a.mint-btn {
-      margin-top: 1.2rem;
-      padding: 1.4rem 5rem;
-      border: 2px solid var(--gold);
+      margin-top: 1.4rem;
+      padding: 0.95rem 3.4rem;
+      border: 1px solid var(--gold);
       border-radius: 999px;
       background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(123,63,228,0.1));
-      letter-spacing: 0.45em;
-      font-size: 1.55rem;
+      letter-spacing: 0.4em;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-indent: 0.4em;
       color: var(--gold-light);
       box-shadow: 0 0 40px rgba(201,168,76,0.25), inset 0 0 20px rgba(201,168,76,0.12);
       transition: all 0.3s;
@@ -298,7 +300,7 @@
     }
 
     .project-number {
-      font-family: 'Cinzel Decorative', serif;
+      font-family: 'Cinzel', serif;
       font-size: 0.6rem;
       color: var(--gold);
       opacity: 0.5;
@@ -307,9 +309,10 @@
     }
 
     .project-title-wrap h3 {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 0.95rem;
-      letter-spacing: 0.1em;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
       color: var(--gold-light);
     }
 
@@ -333,7 +336,7 @@
       text-transform: uppercase;
       padding: 0.25rem 0.75rem;
       border-radius: 20px;
-      font-family: 'Cinzel Decorative', serif;
+      font-family: 'Cinzel', serif;
     }
 
     .status-live {
@@ -480,7 +483,7 @@
       .mobile-quote-source {
         display: block;
         margin-top: 0.3rem;
-        font-family: 'Cinzel Decorative', serif;
+        font-family: 'Cinzel', serif;
         font-size: 0.42rem;
         letter-spacing: 0.12em;
         text-transform: uppercase;
@@ -515,6 +518,7 @@
       background: rgba(26,5,51,0.8);
     }
 
+    /* Hunters pages are 4:5, so its frame matches — the page fills it, no bars. */
     #gallery-6 {
       aspect-ratio: 4 / 5;
     }
@@ -537,7 +541,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Cinzel Decorative', serif;
+      font-family: 'Cinzel', serif;
       font-size: 0.5rem;
       letter-spacing: 0.2em;
       color: rgba(201,168,76,0.3);
@@ -556,15 +560,16 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.5rem 0.75rem;
-      background: linear-gradient(0deg, rgba(3,1,10,0.75) 0%, transparent 100%);
+      padding: 0.6rem 0.75rem;
+      background: linear-gradient(0deg, rgba(3,1,10,0.9) 0%, rgba(3,1,10,0.45) 55%, transparent 100%);
     }
 
     .gallery-btn {
       background: rgba(3,1,10,0.6);
-      border: 1px solid rgba(201,168,76,0.35);
-      color: var(--gold);
-      width: 28px; height: 28px;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(201,168,76,0.28);
+      color: var(--gold-light);
+      width: 30px; height: 30px;
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       cursor: pointer;
@@ -579,13 +584,24 @@
     }
 /* ── PROJECT INFO ── */
     .project-info h4 {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 0.65rem;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      font-family: 'Cinzel', serif;
+      font-weight: 600;
+      font-size: 0.62rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--gold);
-      opacity: 0.7;
-      margin-bottom: 0.6rem;
+      opacity: 0.75;
+      margin-bottom: 0.9rem;
+    }
+
+    .project-info h4::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(201,168,76,0.35), transparent);
     }
 
     .project-info p {
@@ -609,7 +625,7 @@
       background: none;
       border: none;
       color: var(--gold);
-      font-family: 'Cinzel Decorative', serif;
+      font-family: 'Cinzel', serif;
       font-size: 0.55rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -621,42 +637,63 @@
     .btn-show-more:hover { opacity: 1; color: var(--gold-light); }
 
     .project-meta {
-      margin-top: 1.5rem;
+      margin-top: 1.6rem;
       display: flex;
       flex-wrap: wrap;
-      gap: 0.8rem;
+      gap: 0.5rem;
     }
 
     .meta-chip {
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      padding: 0.3rem 0.8rem;
-      border: 1px solid rgba(168,184,216,0.2);
-      border-radius: 2px;
-      color: var(--silver);
-      font-family: 'Cinzel Decorative', serif;
+      display: inline-flex;
+      align-items: center;
+      height: 28px;
+      padding: 0 0.85rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: rgba(168,184,216,0.05);
+      border: 1px solid rgba(168,184,216,0.16);
+      border-radius: 3px;
     }
 
     .project-links {
-      margin-top: 1.8rem;
+      margin-top: 1.6rem;
       display: flex;
       flex-wrap: wrap;
-      gap: 0.8rem;
+      gap: 0.6rem;
     }
 
     .btn-link {
+      flex: 1 1 160px;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 0.5rem;
-      padding: 0.6rem 1.4rem;
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
+      min-height: 44px;
+      padding: 0 0.9rem;
+      font-family: 'Cinzel', serif;
+      font-weight: 600;
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       text-decoration: none;
-      border-radius: 2px;
-      transition: all 0.3s;
+      border-radius: 3px;
+      transition: background 0.3s, border-color 0.3s, box-shadow 0.3s, transform 0.2s;
     }
+
+    .btn-link:hover { transform: translateY(-1px); }
+
+    .btn-link .btn-arrow {
+      font-size: 0.75rem;
+      line-height: 1;
+      opacity: 0.7;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+
+    .btn-link:hover .btn-arrow { opacity: 1; transform: translate(2px, -2px); }
 
     .btn-primary {
       background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.1));
@@ -676,9 +713,13 @@
     }
 
     .btn-secondary:hover {
-      border-color: rgba(168,184,216,0.5);
+      border-color: rgba(168,184,216,0.55);
+      background: rgba(168,184,216,0.08);
       color: #fff;
     }
+
+    .btn-secondary svg { opacity: 0.85; }
+    .btn-secondary:hover svg { opacity: 1; }
 
     /* ── UPCOMING SECTION ── */
     .upcoming-grid {
@@ -706,17 +747,31 @@
     }
 
     .upcoming-icon {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-      opacity: 0.5;
-      font-family: 'Cinzel Decorative', serif;
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-family: 'Cinzel', serif;
       font-weight: 700;
-      letter-spacing: -0.05em;
+      letter-spacing: 0.05em;
       color: var(--gold);
+      border: 1px solid rgba(201,168,76,0.4);
+      border-radius: 50%;
+      box-shadow: inset 0 0 12px rgba(201,168,76,0.12);
+      opacity: 0.85;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+
+    .upcoming-card:hover .upcoming-icon {
+      box-shadow: inset 0 0 16px rgba(201,168,76,0.25), 0 0 14px rgba(201,168,76,0.2);
+      transform: scale(1.05);
     }
 
     .upcoming-card h4 {
-      font-family: 'Cinzel Decorative', serif;
+      font-family: 'Cinzel', serif;
       font-size: 0.7rem;
       letter-spacing: 0.15em;
       color: var(--gold);
@@ -741,7 +796,7 @@
       border: 1px solid rgba(201,168,76,0.3);
       border-radius: 20px;
       color: var(--gold);
-      font-family: 'Cinzel Decorative', serif;
+      font-family: 'Cinzel', serif;
     }
 
     /* ── FOOTER ── */
@@ -772,8 +827,8 @@
 
     /* ── ANIMATIONS ── */
     @keyframes titleGlow {
-      0%, 100% { text-shadow: 0 0 20px rgba(201,168,76,0.3), 0 0 60px rgba(123,63,228,0.15); }
-      50%       { text-shadow: 0 0 40px rgba(201,168,76,0.6), 0 0 100px rgba(123,63,228,0.35), 0 0 160px rgba(63,143,228,0.15); }
+      0%, 100% { text-shadow: 0 0 16px rgba(201,168,76,0.2), 0 0 50px rgba(123,63,228,0.1); }
+      50%       { text-shadow: 0 0 28px rgba(201,168,76,0.4), 0 0 80px rgba(123,63,228,0.2); }
     }
 
     @keyframes fadeDown {
@@ -810,6 +865,15 @@
       width: 220px;
       z-index: 3;
       pointer-events: none;
+      transition: opacity 0.7s ease;
+    }
+
+    /* While the relic strip is on screen, the left rail steps aside */
+    body.rail-dimmed .quote-panel,
+    body.rail-dimmed .vertical-ca,
+    body.rail-dimmed .tb-bear {
+      opacity: 0;
+      pointer-events: none;
     }
 
     .quote-text {
@@ -841,7 +905,7 @@
       color: var(--gold);
       opacity: 0.6;
       font-style: normal;
-      font-family: 'Cinzel Decorative', serif;
+      font-family: 'Cinzel', serif;
       text-align: left;
     }
 
@@ -874,6 +938,7 @@
       justify-content: center;
       z-index: 3;
       pointer-events: none;
+      transition: opacity 0.7s ease;
     }
 
     .vertical-ca a {
@@ -910,7 +975,7 @@
       -webkit-mask-composite: source-in;
       filter: saturate(0.5) brightness(0.55) hue-rotate(200deg) contrast(1.1);
       opacity: 0.6;
-      transition: opacity 0.4s, filter 0.4s;
+      transition: opacity 0.7s ease, filter 0.4s;
     }
 
     .tb-bear:hover {
@@ -923,6 +988,139 @@
       width: 100%;
       display: block;
     }
+
+    /* ── RELIC STRIP ── */
+    .relic-strip {
+      position: relative;
+      margin: 2.5rem calc(50% - 50vw) 0;
+      width: 100vw;
+      overflow: hidden;
+      padding: 0.5rem 0;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+      animation: fadeDown 2.2s ease both;
+    }
+
+    .relic-track {
+      display: flex;
+      gap: 1rem;
+      width: max-content;
+      animation: relicDrift 70s linear infinite;
+    }
+
+    .relic-track a {
+      display: block;
+      width: 150px;
+      height: 150px;
+      flex-shrink: 0;
+      border-radius: 3px;
+      overflow: hidden;
+      border: 1px solid rgba(201,168,76,0.25);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.5);
+      transition: transform 0.35s ease, border-color 0.35s, box-shadow 0.35s;
+    }
+
+    .relic-track a:hover {
+      transform: translateY(-6px) scale(1.03);
+      border-color: rgba(201,168,76,0.7);
+      box-shadow: 0 10px 30px rgba(123,63,228,0.35), 0 0 20px rgba(201,168,76,0.2);
+    }
+
+    .relic-track img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      filter: saturate(0.95);
+    }
+
+    /* 4:5 pages get a 4:5 tile, so nothing is cropped in the strip either */
+    .relic-track a.portrait { width: 120px; }
+
+    @keyframes relicDrift {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── ARCHIVE STATS ── */
+    .archive-stats {
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+      gap: 3.5rem;
+      margin-top: 2.2rem;
+      animation: fadeDown 2.4s ease both;
+    }
+
+    .archive-stat { text-align: center; }
+
+    .archive-stat .stat-num {
+      display: block;
+      font-family: 'Cinzel', serif;
+      font-weight: 600;
+      font-size: 1.6rem;
+      letter-spacing: 0.08em;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .archive-stat .stat-label {
+      display: block;
+      margin-top: 0.3rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.58rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    @media (max-width: 680px) {
+      .archive-stats { gap: 2rem; }
+      .relic-track a { width: 110px; height: 110px; }
+      .relic-track a.portrait { width: 88px; }
+    }
+
+    /* ── SLIDE COUNTER ── */
+    .gallery-count {
+      font-family: 'Cinzel', serif;
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      color: var(--gold-light);
+      padding: 0.28rem 0.7rem;
+      border: 1px solid rgba(201,168,76,0.28);
+      border-radius: 999px;
+      background: rgba(3,1,10,0.6);
+      backdrop-filter: blur(4px);
+      user-select: none;
+    }
+
+    /* ── ACCESSIBILITY FLOOR ── */
+    :focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .project-header:focus-visible {
+      outline-offset: -2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .relic-track { animation: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* The fixed left rail only has room once the page margins are wide enough.
+       Below that it would overlap the cards, so it stands down. */
+    @media (max-width: 1579px) {
+      .quote-panel, .vertical-ca, .tb-bear { display: none !important; }
+    }
+
     .shooting-star {
       position: fixed;
       width: 2px;
@@ -979,6 +1177,37 @@
       <a href="https://www.launchmynft.io/profile/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy" target="_blank" class="mint-btn">Mint</a>
     </nav>
 
+    <div class="relic-strip" aria-label="Pages from the archive">
+      <div class="relic-track">
+        <a href="#card-1" onclick="openFromStrip(event,'card-1')" aria-label="Book of Builders"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F13" alt="Book of Builders page" loading="lazy" /></a>
+        <a href="#card-2" onclick="openFromStrip(event,'card-2')" aria-label="Book of Rebels"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F30" alt="Book of Rebels page" loading="lazy" /></a>
+        <a href="#card-3" onclick="openFromStrip(event,'card-3')" aria-label="Book of Kings"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F0" alt="Book of Kings page" loading="lazy" /></a>
+        <a href="#card-4" onclick="openFromStrip(event,'card-4')" aria-label="Book of Kings II"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F30" alt="Book of Kings II page" loading="lazy" /></a>
+        <a href="#card-5" onclick="openFromStrip(event,'card-5')" aria-label="Book of Seekers"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F22" alt="Book of Seekers page" loading="lazy" /></a>
+        <a href="#card-6" onclick="openFromStrip(event,'card-6')" aria-label="Book of Hunters"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/1" alt="Book of Hunters page" loading="lazy" /></a>
+        <a href="#card-7" onclick="openFromStrip(event,'card-7')" aria-label="Book of Watchers"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/d85c78ed-319d-4c62-b724-04a69cc2f7e7/506c8946-902f-4ad9-b23e-30b8fbabd111-WATCHERS4.png" alt="Book of Watchers page" loading="lazy" /></a>
+        <a href="#card-2" onclick="openFromStrip(event,'card-2')" aria-label="Book of Rebels"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F56" alt="Book of Rebels page" loading="lazy" /></a>
+        <a href="#card-3" onclick="openFromStrip(event,'card-3')" aria-label="Book of Kings"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F73" alt="Book of Kings page" loading="lazy" /></a>
+        <a href="#card-7" onclick="openFromStrip(event,'card-7')" aria-label="Book of Watchers"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/d85c78ed-319d-4c62-b724-04a69cc2f7e7/e73dba68-288c-4b2e-bc68-a45a01aa8683-WATCHERS16.png" alt="Book of Watchers page" loading="lazy" /></a>
+        <a href="#card-1" onclick="openFromStrip(event,'card-1')" aria-label="Book of Builders"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F13" alt="Book of Builders page" loading="lazy" /></a>
+        <a href="#card-2" onclick="openFromStrip(event,'card-2')" aria-label="Book of Rebels"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F30" alt="Book of Rebels page" loading="lazy" /></a>
+        <a href="#card-3" onclick="openFromStrip(event,'card-3')" aria-label="Book of Kings"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F0" alt="Book of Kings page" loading="lazy" /></a>
+        <a href="#card-4" onclick="openFromStrip(event,'card-4')" aria-label="Book of Kings II"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F30" alt="Book of Kings II page" loading="lazy" /></a>
+        <a href="#card-5" onclick="openFromStrip(event,'card-5')" aria-label="Book of Seekers"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F22" alt="Book of Seekers page" loading="lazy" /></a>
+        <a href="#card-6" onclick="openFromStrip(event,'card-6')" aria-label="Book of Hunters"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/1" alt="Book of Hunters page" loading="lazy" /></a>
+        <a href="#card-7" onclick="openFromStrip(event,'card-7')" aria-label="Book of Watchers"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/d85c78ed-319d-4c62-b724-04a69cc2f7e7/506c8946-902f-4ad9-b23e-30b8fbabd111-WATCHERS4.png" alt="Book of Watchers page" loading="lazy" /></a>
+        <a href="#card-2" onclick="openFromStrip(event,'card-2')" aria-label="Book of Rebels"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F56" alt="Book of Rebels page" loading="lazy" /></a>
+        <a href="#card-3" onclick="openFromStrip(event,'card-3')" aria-label="Book of Kings"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F73" alt="Book of Kings page" loading="lazy" /></a>
+        <a href="#card-7" onclick="openFromStrip(event,'card-7')" aria-label="Book of Watchers"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/d85c78ed-319d-4c62-b724-04a69cc2f7e7/e73dba68-288c-4b2e-bc68-a45a01aa8683-WATCHERS16.png" alt="Book of Watchers page" loading="lazy" /></a>
+      </div>
+    </div>
+
+    <div class="archive-stats">
+      <div class="archive-stat"><span class="stat-num">VII</span><span class="stat-label">Books</span></div>
+      <div class="archive-stat"><span class="stat-num">389</span><span class="stat-label">Pages</span></div>
+      <div class="archive-stat"><span class="stat-num">✦</span><span class="stat-label">Solana</span></div>
+    </div>
+
     <div class="mobile-quote-panel">
       <img class="mobile-quote-bear" src="https://gateway.pinit.io/ipfs/QmWT9GxqqLPR47TMUL7obU3Y7cx3TLp6h82yEerCr7pTLh/0" alt="Trillionbear" />
       <div class="mobile-quote-text">
@@ -1001,7 +1230,7 @@
 
       <!-- PROJECT 1 -->
       <div class="project-card" id="card-1">
-        <div class="project-header" onclick="toggleCard('card-1')">
+        <div class="project-header" onclick="toggleCard('card-1')" role="button" tabindex="0" aria-expanded="false" aria-controls="card-1" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCard('card-1')}">
           <div class="project-header-left">
             <span class="project-number">I</span>
             <div class="project-title-wrap">
@@ -1025,9 +1254,13 @@
                 <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F46" alt="Book of Builders #5" loading="lazy" /></div>
                 <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F29" alt="Book of Builders #6" loading="lazy" /></div>
                 <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F9" alt="Book of Builders #7" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F47" alt="Book of Builders #8" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F12" alt="Book of Builders #9" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F10" alt="Book of Builders #10" loading="lazy" /></div>
                 <div class="gallery-controls">
-                  <button class="gallery-btn" onclick="slideGallery('gallery-1',-1)">&#8592;</button>
-                  <button class="gallery-btn" onclick="slideGallery('gallery-1',1)">&#8594;</button>
+                  <button class="gallery-btn" aria-label="Previous page" onclick="slideGallery('gallery-1',-1)">&#8592;</button>
+                  <span class="gallery-count" data-for="gallery-1"></span>
+                  <button class="gallery-btn" aria-label="Next page" onclick="slideGallery('gallery-1',1)">&#8594;</button>
                 </div>
               </div>
               <div class="project-info">
@@ -1039,9 +1272,10 @@
                   <span class="meta-chip">2025</span>
                 </div>
                 <div class="project-links">
-                  <a href="https://magiceden.us/marketplace/tt_1_book_of_builders" target="_blank" class="btn-link btn-primary">Magic Eden ↗</a>
+                  <a href="https://magiceden.us/marketplace/tt_1_book_of_builders" target="_blank" class="btn-link btn-primary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>Magic Eden<span class="btn-arrow">&#8599;</span></a>
+                  <a href="https://x.com/trillionbear/status/1903343718381330710" target="_blank" rel="noopener" class="btn-link btn-secondary"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Read the Book<span class="btn-arrow">&#8599;</span></a>
                 </div>
-              </div>
+</div>
             </div>
           </div>
         </div>
@@ -1049,7 +1283,7 @@
 
       <!-- PROJECT 2 -->
       <div class="project-card" id="card-2">
-        <div class="project-header" onclick="toggleCard('card-2')">
+        <div class="project-header" onclick="toggleCard('card-2')" role="button" tabindex="0" aria-expanded="false" aria-controls="card-2" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCard('card-2')}">
           <div class="project-header-left">
             <span class="project-number">II</span>
             <div class="project-title-wrap">
@@ -1073,9 +1307,13 @@
                 <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F80" alt="Book of Rebels #5" loading="lazy" /></div>
                 <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F60" alt="Book of Rebels #6" loading="lazy" /></div>
                 <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F79" alt="Book of Rebels #7" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F94" alt="Book of Rebels #8" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F50" alt="Book of Rebels #9" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F57" alt="Book of Rebels #10" loading="lazy" /></div>
                 <div class="gallery-controls">
-                  <button class="gallery-btn" onclick="slideGallery('gallery-2',-1)">&#8592;</button>
-                  <button class="gallery-btn" onclick="slideGallery('gallery-2',1)">&#8594;</button>
+                  <button class="gallery-btn" aria-label="Previous page" onclick="slideGallery('gallery-2',-1)">&#8592;</button>
+                  <span class="gallery-count" data-for="gallery-2"></span>
+                  <button class="gallery-btn" aria-label="Next page" onclick="slideGallery('gallery-2',1)">&#8594;</button>
                 </div>
               </div>
               <div class="project-info">
@@ -1087,9 +1325,10 @@
                   <span class="meta-chip">2025</span>
                 </div>
                 <div class="project-links">
-                  <a href="https://magiceden.us/marketplace/tt_2_book_of_rebels" target="_blank" class="btn-link btn-primary">Magic Eden ↗</a>
+                  <a href="https://magiceden.us/marketplace/tt_2_book_of_rebels" target="_blank" class="btn-link btn-primary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>Magic Eden<span class="btn-arrow">&#8599;</span></a>
+                  <a href="https://x.com/trillionbear/status/1904056341267677221" target="_blank" rel="noopener" class="btn-link btn-secondary"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Read the Book<span class="btn-arrow">&#8599;</span></a>
                 </div>
-              </div>
+</div>
             </div>
           </div>
         </div>
@@ -1097,7 +1336,7 @@
 
       <!-- PROJECT 3 -->
       <div class="project-card" id="card-3">
-        <div class="project-header" onclick="toggleCard('card-3')">
+        <div class="project-header" onclick="toggleCard('card-3')" role="button" tabindex="0" aria-expanded="false" aria-controls="card-3" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCard('card-3')}">
           <div class="project-header-left">
             <span class="project-number">III</span>
             <div class="project-title-wrap">
@@ -1121,9 +1360,13 @@
                 <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F35" alt="Book of Kings #5" loading="lazy" /></div>
                 <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F1" alt="Book of Kings #6" loading="lazy" /></div>
                 <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F45" alt="Book of Kings #7" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F6" alt="Book of Kings #8" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F13" alt="Book of Kings #9" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F11" alt="Book of Kings #10" loading="lazy" /></div>
                 <div class="gallery-controls">
-                  <button class="gallery-btn" onclick="slideGallery('gallery-3',-1)">&#8592;</button>
-                  <button class="gallery-btn" onclick="slideGallery('gallery-3',1)">&#8594;</button>
+                  <button class="gallery-btn" aria-label="Previous page" onclick="slideGallery('gallery-3',-1)">&#8592;</button>
+                  <span class="gallery-count" data-for="gallery-3"></span>
+                  <button class="gallery-btn" aria-label="Next page" onclick="slideGallery('gallery-3',1)">&#8594;</button>
                 </div>
               </div>
               <div class="project-info">
@@ -1135,9 +1378,10 @@
                   <span class="meta-chip">2025</span>
                 </div>
                 <div class="project-links">
-                  <a href="https://magiceden.us/marketplace/tt_3_book_of_kings_p1" target="_blank" class="btn-link btn-primary">Magic Eden ↗</a>
+                  <a href="https://magiceden.us/marketplace/tt_3_book_of_kings_p1" target="_blank" class="btn-link btn-primary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>Magic Eden<span class="btn-arrow">&#8599;</span></a>
+                  <a href="https://x.com/trillionbear/status/1904735663154487417" target="_blank" rel="noopener" class="btn-link btn-secondary"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Read the Book<span class="btn-arrow">&#8599;</span></a>
                 </div>
-              </div>
+</div>
             </div>
           </div>
         </div>
@@ -1145,7 +1389,7 @@
 
       <!-- PROJECT 4 -->
       <div class="project-card" id="card-4">
-        <div class="project-header" onclick="toggleCard('card-4')">
+        <div class="project-header" onclick="toggleCard('card-4')" role="button" tabindex="0" aria-expanded="false" aria-controls="card-4" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCard('card-4')}">
           <div class="project-header-left">
             <span class="project-number">IV</span>
             <div class="project-title-wrap">
@@ -1169,9 +1413,13 @@
                 <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F33" alt="Book of Kings 2 #5" loading="lazy" /></div>
                 <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F31" alt="Book of Kings 2 #6" loading="lazy" /></div>
                 <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F24" alt="Book of Kings 2 #7" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F21" alt="Book of Kings 2 #8" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F7" alt="Book of Kings 2 #9" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F41" alt="Book of Kings 2 #10" loading="lazy" /></div>
                 <div class="gallery-controls">
-                  <button class="gallery-btn" onclick="slideGallery('gallery-4',-1)">&#8592;</button>
-                  <button class="gallery-btn" onclick="slideGallery('gallery-4',1)">&#8594;</button>
+                  <button class="gallery-btn" aria-label="Previous page" onclick="slideGallery('gallery-4',-1)">&#8592;</button>
+                  <span class="gallery-count" data-for="gallery-4"></span>
+                  <button class="gallery-btn" aria-label="Next page" onclick="slideGallery('gallery-4',1)">&#8594;</button>
                 </div>
               </div>
               <div class="project-info">
@@ -1183,9 +1431,10 @@
                   <span class="meta-chip">2025</span>
                 </div>
                 <div class="project-links">
-                  <a href="https://magiceden.us/marketplace/tt_3_book_of_kings_part_2" target="_blank" class="btn-link btn-primary">Magic Eden ↗</a>
+                  <a href="https://magiceden.us/marketplace/tt_3_book_of_kings_part_2" target="_blank" class="btn-link btn-primary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>Magic Eden<span class="btn-arrow">&#8599;</span></a>
+                  <a href="https://x.com/trillionbear/status/1905417816095760581" target="_blank" rel="noopener" class="btn-link btn-secondary"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Read the Book<span class="btn-arrow">&#8599;</span></a>
                 </div>
-              </div>
+</div>
             </div>
           </div>
         </div>
@@ -1193,7 +1442,7 @@
 
       <!-- PROJECT 5 -->
       <div class="project-card" id="card-5">
-        <div class="project-header" onclick="toggleCard('card-5')">
+        <div class="project-header" onclick="toggleCard('card-5')" role="button" tabindex="0" aria-expanded="false" aria-controls="card-5" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCard('card-5')}">
           <div class="project-header-left">
             <span class="project-number">V</span>
             <div class="project-title-wrap">
@@ -1210,16 +1459,20 @@
           <div class="project-body-inner">
             <div class="project-layout">
               <div class="gallery-viewer" id="gallery-5">
-                <div class="gallery-slide active"><img src="https://img-cdn.magiceden.dev/da:t/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F22" alt="Book of Seekers #1" loading="lazy" /></div>
+                <div class="gallery-slide active"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F22" alt="Book of Seekers #1" loading="lazy" /></div>
                 <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F19" alt="Book of Seekers #2" loading="lazy" /></div>
                 <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F6" alt="Book of Seekers #3" loading="lazy" /></div>
                 <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F5" alt="Book of Seekers #4" loading="lazy" /></div>
                 <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F3" alt="Book of Seekers #5" loading="lazy" /></div>
                 <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F15" alt="Book of Seekers #6" loading="lazy" /></div>
                 <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F11" alt="Book of Seekers #7" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F29" alt="Book of Seekers #8" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F18" alt="Book of Seekers #9" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F30" alt="Book of Seekers #10" loading="lazy" /></div>
                 <div class="gallery-controls">
-                  <button class="gallery-btn" onclick="slideGallery('gallery-5',-1)">&#8592;</button>
-                  <button class="gallery-btn" onclick="slideGallery('gallery-5',1)">&#8594;</button>
+                  <button class="gallery-btn" aria-label="Previous page" onclick="slideGallery('gallery-5',-1)">&#8592;</button>
+                  <span class="gallery-count" data-for="gallery-5"></span>
+                  <button class="gallery-btn" aria-label="Next page" onclick="slideGallery('gallery-5',1)">&#8594;</button>
                 </div>
               </div>
               <div class="project-info">
@@ -1231,16 +1484,17 @@
                   <span class="meta-chip">2026</span>
                 </div>
                 <div class="project-links">
-                  <a href="https://magiceden.us/marketplace/3QFBVipiBLCC3sEiHdXbawdC7ed7h2Mw3KsiCBqVdgMA" target="_blank" class="btn-link btn-primary">Magic Eden ↗</a>
+                  <a href="https://magiceden.us/marketplace/3QFBVipiBLCC3sEiHdXbawdC7ed7h2Mw3KsiCBqVdgMA" target="_blank" class="btn-link btn-primary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>Magic Eden<span class="btn-arrow">&#8599;</span></a>
+                  <a href="https://x.com/trillionbear/status/1914824798468792411" target="_blank" rel="noopener" class="btn-link btn-secondary"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Read the Book<span class="btn-arrow">&#8599;</span></a>
                 </div>
-              </div>
+</div>
             </div>
           </div>
         </div>
       </div>
 
       <div class="project-card" id="card-6">
-        <div class="project-header" onclick="toggleCard('card-6')">
+        <div class="project-header" onclick="toggleCard('card-6')" role="button" tabindex="0" aria-expanded="false" aria-controls="card-6" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCard('card-6')}">
           <div class="project-header-left">
             <span class="project-number">VI</span>
             <div class="project-title-wrap">
@@ -1264,9 +1518,13 @@
                 <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/5" alt="Hunters #5" loading="lazy" /></div>
                 <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/0" alt="Hunters #6" loading="lazy" /></div>
                 <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/13" alt="Hunters #7" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/22" alt="Hunters #8" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/35" alt="Hunters #9" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/37" alt="Hunters #10" loading="lazy" /></div>
                 <div class="gallery-controls">
-                  <button class="gallery-btn" onclick="slideGallery('gallery-6',-1)">&#8592;</button>
-                  <button class="gallery-btn" onclick="slideGallery('gallery-6',1)">&#8594;</button>
+                  <button class="gallery-btn" aria-label="Previous page" onclick="slideGallery('gallery-6',-1)">&#8592;</button>
+                  <span class="gallery-count" data-for="gallery-6"></span>
+                  <button class="gallery-btn" aria-label="Next page" onclick="slideGallery('gallery-6',1)">&#8594;</button>
                 </div>
               </div>
               <div class="project-info">
@@ -1278,16 +1536,17 @@
                   <span class="meta-chip">2026</span>
                 </div>
                 <div class="project-links">
-                  <a href="https://magiceden.us/marketplace/DukRLtAEcVjsUyMVqz9aqr3v7ZbckVyGVLZTSm6NgbGL" target="_blank" class="btn-link btn-primary">Magic Eden ↗</a>
+                  <a href="https://magiceden.us/marketplace/DukRLtAEcVjsUyMVqz9aqr3v7ZbckVyGVLZTSm6NgbGL" target="_blank" class="btn-link btn-primary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>Magic Eden<span class="btn-arrow">&#8599;</span></a>
+                  <a href="https://x.com/trillionbear/status/1915308095258951999" target="_blank" rel="noopener" class="btn-link btn-secondary"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Read the Book<span class="btn-arrow">&#8599;</span></a>
                 </div>
-              </div>
+</div>
             </div>
           </div>
         </div>
       </div>
 
       <div class="project-card" id="card-7">
-        <div class="project-header" onclick="toggleCard('card-7')">
+        <div class="project-header" onclick="toggleCard('card-7')" role="button" tabindex="0" aria-expanded="false" aria-controls="card-7" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCard('card-7')}">
           <div class="project-header-left">
             <span class="project-number">VII</span>
             <div class="project-title-wrap">
@@ -1304,19 +1563,50 @@
           <div class="project-body-inner">
             <div class="project-layout">
               <div class="gallery-viewer" id="gallery-7">
-                <div class="gallery-slide active"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/d85c78ed-319d-4c62-b724-04a69cc2f7e7/506c8946-902f-4ad9-b23e-30b8fbabd111-WATCHERS4.png" alt="Watchers #1" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/d85c78ed-319d-4c62-b724-04a69cc2f7e7/e73dba68-288c-4b2e-bc68-a45a01aa8683-WATCHERS16.png" alt="Watchers #2" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/d85c78ed-319d-4c62-b724-04a69cc2f7e7/66d4ce7f-7523-4318-bed8-e5548c343b8f-WATCHERS40.png" alt="Watchers #3" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/d85c78ed-319d-4c62-b724-04a69cc2f7e7/45f14f72-cb22-44f3-a969-153c939cbfbc-WATCHERS35.png" alt="Watchers #4" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/d85c78ed-319d-4c62-b724-04a69cc2f7e7/493114b4-d0d9-475d-ad0e-f002315d7c1e-WATCHERS36.png" alt="Watchers #5" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/d85c78ed-319d-4c62-b724-04a69cc2f7e7/c7fec995-7f82-4c6c-b47c-63297aec980f-WATCHERS28.png" alt="Watchers #6" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/d85c78ed-319d-4c62-b724-04a69cc2f7e7/1e0343cd-3e55-46da-8784-f4481d73df64-WATCHERS22.png" alt="Watchers #7" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/d85c78ed-319d-4c62-b724-04a69cc2f7e7/42d90907-4eca-4c8f-a79e-afd54bcc35e7-WATCHERS21.png" alt="Watchers #8" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/d85c78ed-319d-4c62-b724-04a69cc2f7e7/cb536c64-e2f3-4630-82be-6570b8f15c30-WATCHERS24%20(2).png" alt="Watchers #9" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/d85c78ed-319d-4c62-b724-04a69cc2f7e7/16279c3c-7811-4bcc-a3ff-60ecbccfcf15-WATCHERS30.png" alt="Watchers #10" loading="lazy" /></div>
+                <div class="gallery-slide active"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F195580bc-daa6-4dd0-948f-8ec8cedcebd0-WATCHERS1.png" alt="Book of Watchers — page 1" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fe5ad23d3-0a47-4ca8-ad36-438aa955a990-WATCHERS2.png" alt="Book of Watchers — page 2" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fad663d30-5d64-4419-bc40-42c477351784-WATCHERS3.png" alt="Book of Watchers — page 3" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F506c8946-902f-4ad9-b23e-30b8fbabd111-WATCHERS4.png" alt="Book of Watchers — page 4" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Ff8e488e0-aa97-45b7-ad6e-227df77a1b41-WATCHERS5.png" alt="Book of Watchers — page 5" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F93b44f10-d658-4e1e-a3a1-76ffc3a6fb11-WATCHERS6.png" alt="Book of Watchers — page 6" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F6ff43df0-f260-4a7f-be5f-ded845057599-WATCHERS7.png" alt="Book of Watchers — page 7" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F63b24d59-5719-427b-9b03-1fc40c3cbbe6-WATCHERS8.png" alt="Book of Watchers — page 8" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F21a17345-b39f-4c31-82ac-90c99bc4bd5b-WATCHERS9.png" alt="Book of Watchers — page 9" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F672882d8-b8a4-4d41-9c04-5699ed0b8fee-WATCHERS10.png" alt="Book of Watchers — page 10" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fd76512d4-2940-41b4-8581-aea4c625b334-WATCHERS11.png" alt="Book of Watchers — page 11" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fb49801b3-6033-4c91-82cb-f5d795e8f758-WATCHERS12.png" alt="Book of Watchers — page 12" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F6e8f36e3-5c57-4038-a324-1c968a2705e0-WATCHERS13.png" alt="Book of Watchers — page 13" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F471d161b-725c-412c-9231-a4c4e28ac912-WATCHERS14.png" alt="Book of Watchers — page 14" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F00fcb4ac-12fb-45be-b77b-df11ef114f0a-WATCHERS15.png" alt="Book of Watchers — page 15" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fe73dba68-288c-4b2e-bc68-a45a01aa8683-WATCHERS16.png" alt="Book of Watchers — page 16" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fe84850cd-808b-4aad-83f7-8354a6f1c77d-WATCHERS17.png" alt="Book of Watchers — page 17" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fd5f02c86-9000-4172-b89d-6742fe90f1da-WATCHERS18.png" alt="Book of Watchers — page 18" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F5a46c1a7-25fa-4dd8-a105-5fba7517a0cb-WATCHERS19.png" alt="Book of Watchers — page 19" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F159b3634-ed54-404d-81df-639ec91115f6-WATCHERS20.png" alt="Book of Watchers — page 20" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F42d90907-4eca-4c8f-a79e-afd54bcc35e7-WATCHERS21.png" alt="Book of Watchers — page 21" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F1e0343cd-3e55-46da-8784-f4481d73df64-WATCHERS22.png" alt="Book of Watchers — page 22" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F89f57a22-eea4-4731-bf2a-c4a1c9f4a1ba-WATCHERS23.png" alt="Book of Watchers — page 23" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fcb536c64-e2f3-4630-82be-6570b8f15c30-WATCHERS24%2520(2).png" alt="Book of Watchers — page 24" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F05fad470-ecea-495f-937c-60f88962c65c-WATCHERS25.png" alt="Book of Watchers — page 25" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fdca2c5d8-5039-4482-9cd4-4db4e2053039-WATCHERS26.png" alt="Book of Watchers — page 26" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F96084ce3-e74b-4dda-96c8-bc0fd600abfb-WATCHERS27.png" alt="Book of Watchers — page 27" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fc7fec995-7f82-4c6c-b47c-63297aec980f-WATCHERS28.png" alt="Book of Watchers — page 28" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fbddbd163-80e2-4758-9b46-b1958345a189-WATCHERS29.png" alt="Book of Watchers — page 29" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F16279c3c-7811-4bcc-a3ff-60ecbccfcf15-WATCHERS30.png" alt="Book of Watchers — page 30" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F201bb4a0-ff9f-4b7e-8f3d-1ccb48336941-WATCHERS31.png" alt="Book of Watchers — page 31" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fc2386720-96c7-4abf-b831-fa26a95353fa-WATCHERS32.png" alt="Book of Watchers — page 32" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Ff7ef4524-b1a1-4433-97d7-cad57380feee-WATCHERS33.png" alt="Book of Watchers — page 33" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fb3b2b440-83f5-4796-8310-2ed986da0a75-WATCHERS34.png" alt="Book of Watchers — page 34" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F45f14f72-cb22-44f3-a969-153c939cbfbc-WATCHERS35.png" alt="Book of Watchers — page 35" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F493114b4-d0d9-475d-ad0e-f002315d7c1e-WATCHERS36.png" alt="Book of Watchers — page 36" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F16e37a9a-971f-4479-bb05-014b5cce265f-WATCHERS37.png" alt="Book of Watchers — page 37" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F5ae04343-b4ac-4e92-ab3f-513dac730a7c-WATCHERS38.png" alt="Book of Watchers — page 38" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F6aabf33c-2973-4d18-ad12-bfa62f660c09-WATCHERS39.png" alt="Book of Watchers — page 39" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F66d4ce7f-7523-4318-bed8-e5548c343b8f-WATCHERS40.png" alt="Book of Watchers — page 40" loading="lazy" /></div>
                 <div class="gallery-controls">
-                  <button class="gallery-btn" onclick="slideGallery('gallery-7',-1)">&#8592;</button>
-                  <button class="gallery-btn" onclick="slideGallery('gallery-7',1)">&#8594;</button>
+                  <button class="gallery-btn" aria-label="Previous page" onclick="slideGallery('gallery-7',-1)">&#8592;</button>
+                  <span class="gallery-count" data-for="gallery-7"></span>
+                  <button class="gallery-btn" aria-label="Next page" onclick="slideGallery('gallery-7',1)">&#8594;</button>
                 </div>
               </div>
               <div class="project-info">
@@ -1328,9 +1618,10 @@
                   <span class="meta-chip">2026</span>
                 </div>
                 <div class="project-links">
-                  <a href="https://magiceden.us/marketplace/E3e7SnugMdGSovBK6SD6FKbxfXVrpHFjVKHSSSApz6Lm" target="_blank" class="btn-link btn-primary">Magic Eden ↗</a>
+                  <a href="https://magiceden.us/marketplace/E3e7SnugMdGSovBK6SD6FKbxfXVrpHFjVKHSSSApz6Lm" target="_blank" class="btn-link btn-primary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>Magic Eden<span class="btn-arrow">&#8599;</span></a>
+                  <a href="https://x.com/trillionbear/status/1922882572368961860" target="_blank" rel="noopener" class="btn-link btn-secondary"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Read the Book<span class="btn-arrow">&#8599;</span></a>
                 </div>
-              </div>
+</div>
             </div>
           </div>
         </div>
@@ -1368,7 +1659,7 @@
   <footer>
     <div class="footer-logo">THE LOST PAGES</div>
     <div style="margin-bottom: 1rem;">
-      <a href="https://x.com/nosheks" target="_blank" style="font-family: 'Cinzel Decorative', serif; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--silver); opacity: 0.6; text-decoration: none; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">-shekels</a>
+      <a href="https://x.com/nosheks" target="_blank" style="font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--silver); opacity: 0.6; text-decoration: none; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">-shekels</a>
     </div>
     <p>Relics of Forgotten Worlds &nbsp;·&nbsp; All Rights Reserved</p>
     <p style="margin-top:0.5rem; font-size:0.7rem; opacity:0.4; letter-spacing:0.2em;">✦ &nbsp; ✦ &nbsp; ✦</p>
@@ -1489,11 +1780,26 @@
     }
   });
 
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   resizeCanvas();
   initStars();
-  requestAnimationFrame(ts => drawStars(ts * 0.001));
-  setTimeout(scheduleShootingStar, 1500);
-  window.addEventListener('resize', () => { resizeCanvas(); initStars(); });
+  if (reducedMotion) {
+    drawStaticStars();
+  } else {
+    requestAnimationFrame(ts => drawStars(ts * 0.001));
+    setTimeout(scheduleShootingStar, 1500);
+  }
+
+  function drawStaticStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${s.hue},60%,92%,0.6)`;
+      ctx.fill();
+    });
+  }
+  window.addEventListener('resize', () => { resizeCanvas(); initStars(); if (reducedMotion) drawStaticStars(); });
 
   // ── QUOTE PANEL ──
   const quotes = [
@@ -1630,6 +1936,7 @@
     });
   });
 
+
   // ── KEYBOARD NAVIGATION ──
   let hoveredGallery = null;
 
@@ -1645,6 +1952,21 @@
   });
 
   // ── GALLERY SLIDER ──
+  function updateGalleryCount(id) {
+    const viewer = document.getElementById(id);
+    const counter = viewer.querySelector('.gallery-count');
+    if (!counter) return;
+    const slides = viewer.querySelectorAll('.gallery-slide');
+    const controls = viewer.querySelector('.gallery-controls');
+    if (!slides.length) {
+      if (controls) controls.style.display = 'none';
+      return;
+    }
+    if (controls) controls.style.display = '';
+    const current = [...slides].findIndex(s => s.classList.contains('active'));
+    counter.textContent = (current + 1) + ' / ' + slides.length;
+  }
+
   function slideGallery(id, dir) {
     const viewer = document.getElementById(id);
     const slides = viewer.querySelectorAll('.gallery-slide');
@@ -1652,6 +1974,265 @@
     slides[current].classList.remove('active');
     current = (current + dir + slides.length) % slides.length;
     slides[current].classList.add('active');
+    updateGalleryCount(id);
+  }
+
+  document.querySelectorAll('.gallery-viewer').forEach(v => updateGalleryCount(v.id));
+
+  // ── BOOK REGISTRY ────────────────────────────────────────────────
+  // To add pages, change `pages`. URLs are derived, not pasted.
+  // Optional `order: [...]` lists asset indices in printed-page order.
+  // Watchers uses filename-based paths, so its slides stay in the HTML.
+  const BOOKS = [
+    { gallery: 'gallery-1', name: 'Book of Builders', uuid: '9a469bc2-f989-413a-a7ad-c2ee1931433d', pages: 51 },
+    { gallery: 'gallery-2', name: 'Book of Rebels',   uuid: '62df7017-6931-4bbd-8a1b-74b3a10f07a1', pages: 108 },
+    { gallery: 'gallery-3', name: 'Book of Kings',    uuid: '8b58226d-a7ca-4501-81e5-1603870931dd', pages: 74 },
+    { gallery: 'gallery-4', name: 'Book of Kings 2',  uuid: '2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48', pages: 45 },
+    { gallery: 'gallery-5', name: 'Book of Seekers',  uuid: '1ddfaadf-124c-4379-a615-641c894e1d52', pages: 32 },
+    { gallery: 'gallery-6', name: 'Book of Hunters',  uuid: '2f928638-5d37-4db2-9f06-ec11cd4bb92a', pages: 39 },
+    // Watchers: explicit filenames, left as authored in the markup
+  ];
+
+  const CREATOR = '35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy';
+
+  function pageUrl(uuid, index) {
+    const inner = encodeURIComponent('https://na-assets.pinit.io/' + CREATOR + '/' + uuid + '/' + index);
+    return 'https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/' + inner;
+  }
+
+  // A page that 404s removes itself rather than showing a broken frame
+  function handleMissing(img) {
+    const slide = img.closest('.gallery-slide');
+    if (!slide) return;
+    const viewer = slide.closest('.gallery-viewer');
+    const wasActive = slide.classList.contains('active');
+    slide.remove();
+    if (viewer) {
+      const remaining = viewer.querySelectorAll('.gallery-slide');
+      if (wasActive && remaining.length) remaining[0].classList.add('active');
+      updateGalleryCount(viewer.id);
+    }
+  }
+
+  BOOKS.forEach(book => {
+    const viewer = document.getElementById(book.gallery);
+    if (!viewer) return;
+    const controls = viewer.querySelector('.gallery-controls');
+    viewer.querySelectorAll('.gallery-slide').forEach(s => s.remove());
+
+    // `order` lists asset indices in true page order. Without it, assets
+    // render in upload order (0,1,2…), which may not match the printed pages.
+    const seq = (book.order && book.order.length)
+      ? book.order
+      : Array.from({ length: book.pages }, (_, i) => i);
+
+    const frag = document.createDocumentFragment();
+    seq.forEach((assetIndex, position) => {
+      const slide = document.createElement('div');
+      slide.className = 'gallery-slide' + (position === 0 ? ' active' : '');
+      const img = document.createElement('img');
+      img.src = pageUrl(book.uuid, assetIndex);
+      img.alt = book.name + ' — page ' + (position + 1);
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.onerror = function () { handleMissing(this); };
+      slide.appendChild(img);
+      frag.appendChild(slide);
+    });
+    viewer.insertBefore(frag, controls);
+    updateGalleryCount(book.gallery);
+  });
+
+  // ── RELIC STRIP: draws from every page in the archive ──
+  (function () {
+    const strip = document.querySelector('.relic-strip');
+    const track = strip && strip.querySelector('.relic-track');
+    if (!track) return;
+
+    function shuffle(a) {
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    // Smaller renditions for 150px tiles where the CDN allows it
+    function thumb(u) { return u.replace('/rs:fill:800:0:0/', '/rs:fill:400:0:0/'); }
+
+    // Harvest every gallery image on the page
+    const pool = [];
+    document.querySelectorAll('.project-card').forEach(card => {
+      const h3 = card.querySelector('.project-title-wrap h3');
+      const raw = h3 ? h3.textContent.trim() : 'The Lost Pages';
+      const label = raw.split('|').pop().trim();
+      card.querySelectorAll('.gallery-slide img').forEach(img => {
+        const s = img.getAttribute('src');
+        if (s) pool.push({ src: thumb(s), cid: card.id, label: label });
+      });
+    });
+    if (pool.length < 4) return;
+
+    const VISIBLE = Math.min(14, pool.length);
+
+    // Group by book so neighbouring tiles can be kept from the same collection
+    const byBook = {};
+    pool.forEach(p => { (byBook[p.cid] = byBook[p.cid] || []).push(p); });
+    const bookKeys = Object.keys(byBook);
+    bookKeys.forEach(k => shuffle(byBook[k]));
+
+    // Deal one page from each book in turn, so books alternate along the strip
+    function dealSpread(count) {
+      const cursor = {};
+      const out = [];
+      let last = null;
+      let guard = 0;
+      while (out.length < count && guard++ < 200) {
+        const round = shuffle(bookKeys.slice());
+        if (round.length > 1 && round[0] === last) round.push(round.shift());
+        let placed = false;
+        for (let i = 0; i < round.length && out.length < count; i++) {
+          const k = round[i];
+          const c = cursor[k] || 0;
+          if (c >= byBook[k].length) continue;
+          cursor[k] = c + 1;
+          out.push(byBook[k][c]);
+          last = k;
+          placed = true;
+        }
+        if (!placed) break;
+      }
+      // The strip loops, so the last tile also sits beside the first
+      if (out.length > 2 && out[out.length - 1].cid === out[0].cid) {
+        for (let i = out.length - 2; i > 0; i--) {
+          if (out[i].cid !== out[0].cid &&
+              out[i].cid !== out[out.length - 2].cid &&
+              out[out.length - 1].cid !== out[i - 1].cid) {
+            const t = out[i]; out[i] = out[out.length - 1]; out[out.length - 1] = t;
+            break;
+          }
+        }
+      }
+      return out;
+    }
+
+    const active = dealSpread(VISIBLE);
+    let queue = shuffle(pool.filter(p => active.indexOf(p) === -1));
+
+    function bind(a, item) {
+      a.href = '#' + item.cid;
+      a.setAttribute('aria-label', item.label);
+      a.onclick = function (e) { openFromStrip(e, item.cid); };
+    }
+
+    // Hunters is the one 4:5 book; its tiles are narrower so pages aren't cropped
+    const PORTRAIT_BOOK = 'card-6';
+    const isPortrait = item => item.cid === PORTRAIT_BOOK;
+
+    function makeTile(item, slot) {
+      const a = document.createElement('a');
+      a.dataset.slot = slot;
+      if (isPortrait(item)) a.classList.add('portrait');
+      bind(a, item);
+      const img = document.createElement('img');
+      img.src = item.src;
+      img.alt = item.label + ' page';
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      a.appendChild(img);
+      return a;
+    }
+
+    // Two identical runs so the marquee loop stays seamless
+    track.innerHTML = '';
+    for (let copy = 0; copy < 2; copy++) {
+      active.forEach((item, i) => track.appendChild(makeTile(item, i)));
+    }
+
+    // Pace the drift to the number of tiles so speed stays constant
+    track.style.animationDuration = (VISIBLE * 5) + 's';
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    // A tile may only change while it is off the page entirely — never in view.
+    function offscreen(a) {
+      const r = a.getBoundingClientRect();
+      return r.right <= 0 || r.left >= window.innerWidth;
+    }
+
+    // Both copies of a slot must be off the page before it is safe to swap.
+    function findHiddenSlot(from) {
+      for (let n = 0; n < VISIBLE; n++) {
+        const s = (from + n) % VISIBLE;
+        const copies = track.querySelectorAll('a[data-slot="' + s + '"]');
+        if (copies.length && [...copies].every(offscreen)) return s;
+      }
+      return -1;
+    }
+
+    let slot = 0;
+    function rotate() {
+      const target = findHiddenSlot(slot);
+      if (target === -1) return;           // everything on screen, wait for the next tick
+      if (!queue.length) queue = shuffle(pool.filter(p => active.indexOf(p) === -1));
+      if (!queue.length) return;
+      // Take the first queued page that differs from both neighbouring tiles.
+      // It must also match the slot's shape, so tile widths never change and the
+      // marquee can't jump while it's drifting.
+      const leftBook  = active[(target - 1 + VISIBLE) % VISIBLE];
+      const rightBook = active[(target + 1) % VISIBLE];
+      const l = leftBook && leftBook.cid, r = rightBook && rightBook.cid;
+      const wantPortrait = isPortrait(active[target]);
+      const sameShape = p => isPortrait(p) === wantPortrait;
+      let qi = queue.findIndex(p => sameShape(p) && p.cid !== l && p.cid !== r);
+      if (qi === -1) qi = queue.findIndex(sameShape);
+      if (qi === -1) {
+        queue = shuffle(pool.filter(p => active.indexOf(p) === -1));
+        qi = queue.findIndex(sameShape);
+        if (qi === -1) return;
+      }
+      const next = queue.splice(qi, 1)[0];
+      const pre = new Image();
+      pre.onload = function () {
+        // Re-check: the drift may have carried it into view while preloading
+        const copies = track.querySelectorAll('a[data-slot="' + target + '"]');
+        if (![...copies].every(offscreen)) { queue.unshift(next); return; }
+        const outgoing = active[target];
+        copies.forEach(a => {
+          const img = a.querySelector('img');
+          img.src = next.src;
+          img.alt = next.label + ' page';
+          bind(a, next);
+        });
+        if (outgoing) queue.push(outgoing);
+        active[target] = next;
+        slot = (target + 1) % VISIBLE;
+      };
+      pre.onerror = function () { slot = (target + 1) % VISIBLE; };
+      pre.src = next.src;
+    }
+
+    setInterval(() => { if (!document.hidden) rotate(); }, 2000);
+  })();
+
+
+  // ── RAIL YIELDS TO RELIC STRIP ──
+  const relicStrip = document.querySelector('.relic-strip');
+  if (relicStrip && 'IntersectionObserver' in window) {
+    const railObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        document.body.classList.toggle('rail-dimmed', entry.isIntersecting);
+      });
+    }, { rootMargin: '80px 0px 80px 0px' });
+    railObserver.observe(relicStrip);
+  }
+
+  // ── OPEN CARD FROM RELIC STRIP ──
+  function openFromStrip(e, id) {
+    e.preventDefault();
+    const card = document.getElementById(id);
+    if (!card.classList.contains('open')) toggleCard(id);
+    setTimeout(() => scrollToCard(card), 60);
   }
 
   // ── SHOW MORE / LESS ──
@@ -1685,6 +2266,8 @@
     const card = document.getElementById(id);
     const wasOpen = card.classList.contains('open');
     card.classList.toggle('open');
+    const header = card.querySelector('.project-header');
+    if (header) header.setAttribute('aria-expanded', String(!wasOpen));
     if (wasOpen) {
       setTimeout(() => scrollToCard(card), 50);
     }
