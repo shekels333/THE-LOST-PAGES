@@ -871,10 +871,13 @@
       transition: opacity 0.7s ease;
     }
 
-    /* While the relic strip is on screen, the left rail steps aside */
-    body.rail-dimmed .quote-panel,
-    body.rail-dimmed .vertical-ca,
-    body.rail-dimmed .tb-bear {
+    /* Each rail element hides only while it would actually overlap the relic
+       strip, so it reappears the moment it has clear room of its own. */
+    .rail-measuring { opacity: 0 !important; transition: none !important; }
+
+    .quote-panel.rail-hidden,
+    .vertical-ca.rail-hidden,
+    .tb-bear.rail-hidden {
       opacity: 0;
       pointer-events: none;
     }
@@ -1133,9 +1136,9 @@
       html { scroll-behavior: auto; }
     }
 
-    /* The fixed left rail only has room once the page margins are wide enough.
-       Below that it would overlap the cards, so it stands down. */
-    @media (max-width: 1579px) {
+    /* Below tablet width the rail can never fit; above it, each element is
+       measured individually against the content column and the relic strip. */
+    @media (max-width: 1023px) {
       .quote-panel, .vertical-ca, .tb-bear { display: none !important; }
     }
 
@@ -2288,15 +2291,60 @@
 
 
   // ── RAIL YIELDS TO RELIC STRIP ──
-  const relicStrip = document.querySelector('.relic-strip');
-  if (relicStrip && 'IntersectionObserver' in window) {
-    const railObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        document.body.classList.toggle('rail-dimmed', entry.isIntersecting);
+  // The rail elements sit at different heights, so each is judged on its own:
+  // it stays hidden only while its box would actually collide with the strip,
+  // and reappears as soon as it has clearance.
+  (function railClearance() {
+    const strip = document.querySelector('.relic-strip');
+    const rail = [...document.querySelectorAll('.quote-panel, .vertical-ca, .tb-bear')];
+    if (!strip || !rail.length) return;
+
+    const GAP = 14; // breathing room so nothing reappears flush against the strip
+    let queued = false;
+
+    const wrap = document.querySelector('.site-wrap');
+
+    function check() {
+      queued = false;
+      const s = strip.getBoundingClientRect();
+      const w = wrap ? wrap.getBoundingClientRect() : null;
+      const stripOnScreen = s.bottom > 0 && s.top < window.innerHeight;
+
+      rail.forEach(el => {
+        if (getComputedStyle(el).display === 'none') return;
+
+        // Measure the real box even while the element is faded out
+        const wasHidden = el.classList.contains('rail-hidden');
+        if (wasHidden) el.classList.add('rail-measuring');
+        const r = el.getBoundingClientRect();
+        if (wasHidden) el.classList.remove('rail-measuring');
+
+        // The bear's right edge is masked to transparent, so its visible edge
+        // sits well inside its box.
+        const fade = el.classList.contains('tb-bear') ? 0.32 : 0;
+        const visibleRight = r.right - r.width * fade;
+
+        // Vertical: would it collide with the drifting strip right now?
+        const hitsStrip = stripOnScreen &&
+                          r.bottom + GAP > s.top && r.top - GAP < s.bottom;
+
+        // Horizontal: is there room beside the content column at this width?
+        const hitsContent = w ? (visibleRight + GAP > w.left) : false;
+
+        el.classList.toggle('rail-hidden', hitsStrip || hitsContent);
       });
-    }, { rootMargin: '80px 0px 80px 0px' });
-    railObserver.observe(relicStrip);
-  }
+    }
+
+    function schedule() {
+      if (!queued) { queued = true; requestAnimationFrame(check); }
+    }
+
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    // Cards expanding shifts the page under a still cursor
+    document.addEventListener('click', () => setTimeout(schedule, 700));
+    check();
+  })();
 
   // ── OPEN CARD FROM RELIC STRIP ──
   function openFromStrip(e, id) {
