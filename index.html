@@ -8,8 +8,14 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjAiIHkyPSIxIj4KPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZjBkMDgwIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjYzlhODRjIi8+CjwvbGluZWFyR3JhZGllbnQ+CjxtYXNrIGlkPSJtIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwIi8+CjxjaXJjbGUgY3g9IjMyIiBjeT0iMzIiIHI9IjI2IiBmaWxsPSIjZmZmIi8+CjxjaXJjbGUgY3g9IjQ1IiBjeT0iMjkiIHI9IjI0IiBmaWxsPSIjMDAwIi8+CjwvbWFzaz4KPC9kZWZzPgo8cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHJ4PSIxNCIgZmlsbD0iIzA3MDIxYSIvPgo8cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHJ4PSIxNCIgZmlsbD0idXJsKCNnKSIgbWFzaz0idXJsKCNtKSIvPgo8L3N2Zz4="/>
   <link rel="apple-touch-icon" href="/icon-180.png"/>
   <link rel="manifest" href="/site.webmanifest"/>
-  <title>THE LOST PAGES</title>
-  <meta name="description" content="The Lost Pages — Relics of Forgotten Worlds. The Trillionbear NFT collection on Solana." />
+  <title>The Lost Pages — Trillionbear NFT Collection on Solana</title>
+  <meta name="description" content="The Lost Pages — Relics of Forgotten Worlds. A seven-part Trillionbear NFT collection on Solana by shekels (@nosheks)." />
+  <link rel="canonical" href="https://thelostpages.net/" />
+  <meta name="author" content="shekels" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta property="og:site_name" content="The Lost Pages" />
+  <meta name="twitter:site" content="@nosheks" />
+  <meta name="twitter:creator" content="@nosheks" />
 
   <!-- Open Graph / Facebook / Discord / iMessage -->
   <meta property="og:type" content="website" />
@@ -821,6 +827,25 @@
       margin-bottom: 1rem;
     }
 
+    .footer-credit {
+      margin-bottom: 1rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+    }
+    .footer-credit a {
+      color: var(--silver);
+      opacity: 0.6;
+      text-decoration: none;
+      transition: opacity 0.3s, color 0.3s;
+    }
+    .footer-credit a:hover { opacity: 1; color: var(--gold-light); }
+    .footer-sep {
+      color: var(--muted);
+      opacity: 0.5;
+      margin: 0 0.6rem;
+    }
+
     footer p {
       font-size: 0.8rem;
       color: var(--muted);
@@ -1257,6 +1282,30 @@
       z-index: 0;
     }
   </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": "https://thelostpages.net/#collection",
+    "url": "https://thelostpages.net/",
+    "name": "The Lost Pages",
+    "description": "Relics of Forgotten Worlds \u2014 a seven-part Trillionbear NFT collection on Solana.",
+    "inLanguage": "en",
+    "creator": {
+      "@type": "Person",
+      "@id": "https://shekels.me/#person",
+      "name": "shekels",
+      "alternateName": ["nosheks", "Shekels"],
+      "url": "https://shekels.me/",
+      "sameAs": [
+        "https://shekels.me/",
+        "https://x.com/nosheks",
+        "https://trillionbear.com/"
+      ]
+    }
+  }
+  </script>
 </head>
 <body>
 
@@ -1784,8 +1833,10 @@
   <!-- FOOTER -->
   <footer>
     <div class="footer-logo">THE LOST PAGES</div>
-    <div style="margin-bottom: 1rem;">
-      <a href="https://x.com/nosheks" target="_blank" style="font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--silver); opacity: 0.6; text-decoration: none; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">-shekels</a>
+    <div class="footer-credit">
+      <a href="https://shekels.me/" rel="me">shekels</a>
+      <span class="footer-sep">·</span>
+      <a href="https://x.com/nosheks" target="_blank" rel="me">@nosheks</a>
     </div>
     <p>Relics of Forgotten Worlds &nbsp;·&nbsp; All Rights Reserved</p>
     <p style="margin-top:0.5rem; font-size:0.7rem; opacity:0.4; letter-spacing:0.2em;">✦ &nbsp; ✦ &nbsp; ✦</p>
