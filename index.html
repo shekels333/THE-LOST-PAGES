@@ -1129,6 +1129,18 @@
       background-clip: text;
     }
 
+    /* Official Solana mark (from solana.com/branding), tinted to the archive gold.
+       brightness(0) flattens either the black or white kit version to black first,
+       so the same filter chain lands on gold regardless of which file is dropped in. */
+    .stat-mark { line-height: 1; }
+    .sol-mark {
+      display: inline-block;
+      height: 1.35rem;
+      width: auto;
+      vertical-align: middle;
+      filter: brightness(0) invert(78%) sepia(42%) saturate(520%) hue-rotate(358deg) brightness(96%) contrast(92%);
+    }
+
     .archive-stat .stat-label {
       display: block;
       margin-top: 0.3rem;
@@ -1410,7 +1422,12 @@
     <div class="archive-stats">
       <div class="archive-stat"><span class="stat-num">VIII</span><span class="stat-label">Books</span></div>
       <div class="archive-stat"><span class="stat-num">430</span><span class="stat-label">Pages</span></div>
-      <div class="archive-stat"><span class="stat-num">✦</span><span class="stat-label">Solana</span></div>
+      <div class="archive-stat">
+        <span class="stat-num stat-mark">
+          <img src="/solana-mark.svg" alt="" class="sol-mark" onerror="this.replaceWith(document.createTextNode('✦'))"/>
+        </span>
+        <span class="stat-label">Solana</span>
+      </div>
     </div>
 
     <div class="mobile-quote-panel">
