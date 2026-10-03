@@ -679,12 +679,12 @@
       padding: 0 0.85rem;
       font-family: 'Cinzel', serif;
       font-size: 0.58rem;
-      font-weight: 500;
+      font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--muted);
-      background: rgba(168,184,216,0.05);
-      border: 1px solid rgba(168,184,216,0.16);
+      color: var(--gold);
+      background: rgba(201,168,76,0.05);
+      border: 1px solid rgba(201,168,76,0.22);
       border-radius: 3px;
     }
 
@@ -1144,14 +1144,18 @@
     /* Official Solana mark (from solana.com/branding), tinted to the archive gold.
        brightness(0) flattens either the black or white kit version to black first,
        so the same filter chain lands on gold regardless of which file is dropped in. */
-    .stat-mark {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    /* Same specificity as the .stat-num rule, so these actually win. The mark
+       is set to the numerals' cap height and rests on their baseline, so its top
+       and bottom line up with the gold figures beside it. */
+    .archive-stat .stat-num.stat-mark {
+      display: block;
+      text-align: center;
+      letter-spacing: 0;
     }
     .sol-mark {
-      display: block;
-      height: 1.35rem;
+      display: inline-block;
+      vertical-align: baseline;
+      height: 1.03rem;
       width: auto;
       filter: brightness(0) invert(78%) sepia(42%) saturate(520%) hue-rotate(358deg) brightness(96%) contrast(92%);
     }
