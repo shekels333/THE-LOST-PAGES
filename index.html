@@ -539,8 +539,28 @@
     }
     .gallery-slide.active { display: block; }
 
-    .gallery-slide img {
+    .gallery-slide img,
+    .gallery-slide video {
       width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+
+    /* Animated books show a small marker so the motion reads as intentional */
+    .gallery-viewer[data-media="video"]::after {
+      content: 'ANIMATED';
+      position: absolute;
+      top: 0.6rem; left: 0.6rem;
+      z-index: 3;
+      font-family: 'Cinzel', serif;
+      font-size: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: var(--gold-light);
+      background: rgba(3,1,10,0.6);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(201,168,76,0.28);
+      border-radius: 999px;
+      padding: 0.25rem 0.6rem;
+      pointer-events: none;
     }
 
     /* Placeholder gradient tiles */
@@ -1169,7 +1189,17 @@
 
 
     /* ── LIGHTBOX ── */
-    .gallery-slide img { cursor: zoom-in; }
+    .gallery-slide img, .gallery-slide video { cursor: zoom-in; }
+
+    .lightbox-figure video {
+      max-width: 100%;
+      max-height: calc(100vh - 9rem);
+      object-fit: contain;
+      border-radius: 4px;
+      border: 1px solid rgba(201,168,76,0.28);
+      box-shadow: 0 30px 90px rgba(0,0,0,0.7), 0 0 60px rgba(123,63,228,0.14);
+      cursor: zoom-out;
+    }
 
     .lightbox {
       position: fixed;
@@ -1378,8 +1408,8 @@
     </div>
 
     <div class="archive-stats">
-      <div class="archive-stat"><span class="stat-num">VII</span><span class="stat-label">Books</span></div>
-      <div class="archive-stat"><span class="stat-num">389</span><span class="stat-label">Pages</span></div>
+      <div class="archive-stat"><span class="stat-num">VIII</span><span class="stat-label">Books</span></div>
+      <div class="archive-stat"><span class="stat-num">430</span><span class="stat-label">Pages</span></div>
       <div class="archive-stat"><span class="stat-num">✦</span><span class="stat-label">Solana</span></div>
     </div>
 
@@ -1803,7 +1833,89 @@
       </div>
 
     </div>
-  </section>
+        <div class="project-card" id="card-8">
+        <div class="project-header" onclick="toggleCard('card-8')" role="button" tabindex="0" aria-expanded="false" aria-controls="card-8" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCard('card-8')}">
+          <div class="project-header-left">
+            <span class="project-number">VIII</span>
+            <div class="project-title-wrap">
+              <h3>TT 7 | THE BOOK OF WARRIORS</h3>
+              <div class="project-tag">41 pages &nbsp;·&nbsp; Solana</div>
+            </div>
+          </div>
+          <div class="project-header-right">
+            <span class="status-pill status-live">Live</span>
+            <div class="dropdown-arrow">&#9660;</div>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-body-inner">
+            <div class="project-layout">
+              <div class="gallery-viewer" id="gallery-8">
+                <div class="gallery-slide active"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Facebaf88-f82c-4113-8897-56b8628c3c30-1.png" alt="Book of Warriors — page 1" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F43658b8f-6c8c-4756-9b2e-b254839af4a5-2.png" alt="Book of Warriors — page 2" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F47e79c57-b9b6-4ef3-a88d-d0fe4ce8e87a-3.png" alt="Book of Warriors — page 3" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fe697141f-36b9-41c0-9c5e-51dc1ae49bc0-4.png" alt="Book of Warriors — page 4" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F4b8ea2e0-4118-466e-8ac4-0504ca23640d-5.png" alt="Book of Warriors — page 5" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fcdf4b313-4f84-4a95-b2d4-29e3bdd5a971-6.png" alt="Book of Warriors — page 6" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F2f1baada-89af-4f2f-adbc-34cbbdde925f-7.png" alt="Book of Warriors — page 7" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Ff47bb55b-9e5c-4d75-86e9-a81a085c2465-8.png" alt="Book of Warriors — page 8" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F276d4a60-9664-4659-b76b-d9ec7aeb6cef-9.png" alt="Book of Warriors — page 9" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fbf749819-f495-4ff5-9cba-7c47435be641-10.png" alt="Book of Warriors — page 10" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F1f7654e7-d146-43d5-87a8-2a2e569aa939-11.png" alt="Book of Warriors — page 11" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F9d5f654c-0adb-447d-afc3-d8ab5bca31b4-12.png" alt="Book of Warriors — page 12" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F5c6968e8-c825-4444-ba84-4319c8bfb26e-13.png" alt="Book of Warriors — page 13" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F102a44ce-e877-4b02-91e4-5f7fd1c7c6bf-14.png" alt="Book of Warriors — page 14" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F06841c50-9fa7-4337-aa46-afd8f9c9cf4e-15.png" alt="Book of Warriors — page 15" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F2d09b01f-d3f2-4c69-83da-cf0f0e674f8c-16.png" alt="Book of Warriors — page 16" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fda35479b-9b3c-44e6-b76e-a7de9dd69297-17.png" alt="Book of Warriors — page 17" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F6b5ad138-bf7f-4828-a84b-72b502b8e8de-18.png" alt="Book of Warriors — page 18" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F307340f3-861b-4954-870c-c3d06579113c-19.png" alt="Book of Warriors — page 19" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Faf4357f4-e849-4f7e-a3bc-ac63a0078376-20.png" alt="Book of Warriors — page 20" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F78d20eee-969d-49e1-aadd-1be909138a71-21.png" alt="Book of Warriors — page 21" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fe45a409a-2816-437a-9156-70e622ed1764-22.png" alt="Book of Warriors — page 22" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F45c012ce-5ecd-4727-a574-5ad941866bcf-23.png" alt="Book of Warriors — page 23" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fcf661caf-bf71-4ca6-8227-1ff30dc4e9bd-24.png" alt="Book of Warriors — page 24" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F5e7f8880-e989-4ec9-a350-9d8aa3f882b7-25.png" alt="Book of Warriors — page 25" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fb3a96bfe-380e-4ea4-a33b-6476e8a719c1-26.png" alt="Book of Warriors — page 26" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F56e3d5c8-a16a-453a-8c25-21c33c2fee80-27.png" alt="Book of Warriors — page 27" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F5584480b-7451-40bc-a218-fb19e29889ed-28.png" alt="Book of Warriors — page 28" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F6f2afdb2-37d5-49a7-9fbd-08afa09ed2e9-29.png" alt="Book of Warriors — page 29" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F1b0d9532-175c-4bab-a14a-feb65aed2ed0-30.png" alt="Book of Warriors — page 30" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F930afefe-4f31-47d1-883f-a1dbb9c59e8d-31.png" alt="Book of Warriors — page 31" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F3f95dd6d-75ea-45cb-9913-f67bbd982e6d-32.png" alt="Book of Warriors — page 32" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F8d3fd4b9-413c-4e37-a162-e9a422f494b9-33.png" alt="Book of Warriors — page 33" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F699f9fbd-f36c-4406-b77a-42730198ca71-34.png" alt="Book of Warriors — page 34" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fd69030b5-e98b-431f-a801-dba0538ada90-35.png" alt="Book of Warriors — page 35" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F69c8b4a9-cf1b-4060-9d83-f90586b63622-36.png" alt="Book of Warriors — page 36" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fc806acb9-d7d9-4996-a6dd-54dab46fc31c-37.png" alt="Book of Warriors — page 37" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Ffa838d7a-774c-4983-aa38-3380b94ff409-38.png" alt="Book of Warriors — page 38" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F03eda678-89e5-430e-8f59-18c33615bb3e-39.png" alt="Book of Warriors — page 39" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F6f635e37-a83e-4c06-b432-35ff7b2301dd-40.png" alt="Book of Warriors — page 40" loading="lazy" /></div>
+                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F0723af33-5ba4-4cb4-898f-c44b5ebc2a14-41.png" alt="Book of Warriors — page 41" loading="lazy" /></div>
+                <div class="gallery-controls">
+                  <button class="gallery-btn" aria-label="Previous page" onclick="slideGallery('gallery-8',-1)">&#8592;</button>
+                  <span class="gallery-count" data-for="gallery-8"></span>
+                  <button class="gallery-btn" aria-label="Next page" onclick="slideGallery('gallery-8',1)">&#8594;</button>
+                </div>
+              </div>
+              <div class="project-info">
+                <h4>Lore:</h4>
+                <p>When the watching was done, the books themselves took up arms. Not against flesh, but against forgetting — for a thing unremembered is a thing already lost. The Warriors rose from every quarter of the old world: the samurai who guarded the gate, the Spartan who held the narrow pass, the Mongol who outrode the horizon, the Viking who read the storm, the Aztec who counted the sun. Each carried a different steel, and each bore the same crescent. They had learned what the Hunters learned too late — that a blade turned inward empties a people, while a blade turned toward ruin defends them. So they did not war with one another. They stood at the edges of the archive, where the pages end and the dark begins, and they kept the dark from coming in. Theirs is the discipline after the vision: the builder dreams, the king decrees, the seeker wanders, the watcher sees — but the warrior endures the night so that morning finds the work still standing. Their verse is the shortest in the archive and the hardest to keep: hold the line, and hand it on.</p>
+                <div class="project-meta">
+                  <span class="meta-chip">41 Pages</span>
+                  <span class="meta-chip">Solana</span>
+                  <span class="meta-chip">2026</span>
+                </div>
+                <div class="project-links">
+                  <a href="https://magiceden.us/marketplace/PGjstQG4FU7ruHGQNyhomuWL8dVQCAVqGGp71qmb4Tv" target="_blank" class="btn-link btn-primary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>Magic Eden<span class="btn-arrow">&#8599;</span></a>
+                  <a href="https://x.com/trillionbear/status/2010921503441682876" target="_blank" rel="noopener" class="btn-link btn-secondary"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Read the Book<span class="btn-arrow">&#8599;</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   <section id="upcoming">
     <div class="section-header">
       <div class="section-eyebrow">✦ Lost Pages ✦</div>
@@ -1812,11 +1924,6 @@
     </div>
 
     <div class="upcoming-grid">
-      <a href="https://x.com/trillionbear/status/2010921503441682876?s=20" target="_blank" class="upcoming-card">
-        <div class="upcoming-icon">TT</div>
-        <h4>WARRIORS</h4>
-        <span class="upcoming-badge">Coming Soon</span>
-      </a>
       <a href="https://x.com/trillionbear/status/2011169136538243085?s=20" target="_blank" class="upcoming-card">
         <div class="upcoming-icon">TT</div>
         <h4>BUILDERS 2</h4>
@@ -2148,6 +2255,7 @@
       '<button class="lightbox-close" aria-label="Close viewer">&#10005;</button>' +
       '<div class="lightbox-figure">' +
         '<img alt=""/>' +
+        '<video muted loop playsinline style="display:none"></video>' +
         '<div class="lightbox-caption"></div>' +
         '<button class="lightbox-btn lightbox-prev" aria-label="Previous page">&#8592;</button>' +
         '<button class="lightbox-btn lightbox-next" aria-label="Next page">&#8594;</button>' +
@@ -2155,6 +2263,7 @@
     document.body.appendChild(el);
 
     const img = el.querySelector('img');
+    const vid = el.querySelector('video');
     const cap = el.querySelector('.lightbox-caption');
     const closeBtn = el.querySelector('.lightbox-close');
     let viewerId = null;
@@ -2169,9 +2278,20 @@
       const slides = [...viewer.querySelectorAll('.gallery-slide')];
       const i = slides.findIndex(s => s.classList.contains('active'));
       if (i < 0) return;
-      const source = slides[i].querySelector('img');
-      img.src = hiRes(source.getAttribute('src'));
-      img.alt = source.alt || '';
+      const source = slides[i].querySelector('img, video');
+      const isVideo = source.tagName === 'VIDEO';
+      img.style.display = isVideo ? 'none' : '';
+      vid.style.display = isVideo ? '' : 'none';
+      if (isVideo) {
+        if (vid.src !== source.src) vid.src = source.src;
+        vid.poster = source.dataset.poster || source.getAttribute('poster') || '';
+        const p = vid.play();
+        if (p && p.catch) p.catch(() => {});
+      } else {
+        vid.pause();
+        img.src = hiRes(source.getAttribute('src'));
+        img.alt = source.alt || '';
+      }
       const card = viewer.closest('.project-card');
       const h3 = card && card.querySelector('.project-title-wrap h3');
       const book = h3 ? h3.textContent.split('|').pop().trim() : '';
@@ -2196,6 +2316,7 @@
 
     function close() {
       el.classList.remove('open');
+      vid.pause();
       document.body.style.overflow = '';
       viewerId = null;
       if (lastFocus && lastFocus.focus) lastFocus.focus();
@@ -2208,7 +2329,7 @@
     }
 
     el.addEventListener('click', e => {
-      if (e.target === el || e.target === img || e.target === closeBtn) { close(); return; }
+      if (e.target === el || e.target === img || e.target === vid || e.target === closeBtn) { close(); return; }
       if (e.target.closest('.lightbox-prev')) step(-1);
       else if (e.target.closest('.lightbox-next')) step(1);
     });
@@ -2230,8 +2351,8 @@
   document.querySelectorAll('.gallery-viewer').forEach(viewer => {
     viewer.addEventListener('click', e => {
       if (e.target.closest('.gallery-controls')) return;   // arrows keep their job
-      const img = e.target.closest('.gallery-slide img');
-      if (img) lightbox.open(viewer.id);
+      const media = e.target.closest('.gallery-slide img, .gallery-slide video');
+      if (media) lightbox.open(viewer.id);
     });
   });
 
@@ -2259,6 +2380,7 @@
     current = (current + dir + slides.length) % slides.length;
     slides[current].classList.add('active');
     updateGalleryCount(id);
+    if (typeof syncVideos === 'function') syncVideos(viewer);
   }
 
   document.querySelectorAll('.gallery-viewer').forEach(v => updateGalleryCount(v.id));
@@ -2298,31 +2420,80 @@
     }
   }
 
+  // Build one slide. `item` is either a derivable asset index, or an object
+  // { img, vid, page } for books whose files can't be derived from a number.
+  function buildSlide(book, item, position) {
+    const slide = document.createElement('div');
+    slide.className = 'gallery-slide' + (position === 0 ? ' active' : '');
+    const explicit = (typeof item === 'object' && item !== null);
+    const poster = explicit ? item.img : pageUrl(book.uuid, item);
+    const pageNo = explicit && item.page ? item.page : position + 1;
+    const label = book.name + ' — page ' + pageNo;
+
+    if (explicit && item.vid) {
+      // Animated page: the still is the poster, so the frame is filled before
+      // the video loads, and nothing downloads until the page is viewed.
+      const vid = document.createElement('video');
+      vid.src = item.vid;
+      vid.poster = poster;
+      vid.muted = true;
+      vid.loop = true;
+      vid.playsInline = true;
+      vid.setAttribute('muted', '');
+      vid.setAttribute('playsinline', '');
+      vid.preload = 'none';
+      vid.setAttribute('aria-label', label);
+      vid.dataset.poster = poster;   // the relic strip harvests this
+      slide.appendChild(vid);
+    } else {
+      const img = document.createElement('img');
+      img.src = poster;
+      img.alt = label;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.onerror = function () { handleMissing(this); };
+      slide.appendChild(img);
+    }
+    return slide;
+  }
+
+  // Only the page you're looking at plays; everything else stays paused so a
+  // 40-page animated book doesn't decode forty loops at once.
+  function syncVideos(viewer) {
+    if (!viewer) return;
+    const card = viewer.closest('.project-card');
+    const visible = !card || card.classList.contains('open');
+    viewer.querySelectorAll('video').forEach(v => {
+      const isActive = v.closest('.gallery-slide').classList.contains('active');
+      if (isActive && visible) {
+        if (v.preload !== 'auto') v.preload = 'auto';
+        const p = v.play();
+        if (p && p.catch) p.catch(() => {});
+      } else {
+        v.pause();
+      }
+    });
+  }
+
   BOOKS.forEach(book => {
     const viewer = document.getElementById(book.gallery);
     if (!viewer) return;
     const controls = viewer.querySelector('.gallery-controls');
     viewer.querySelectorAll('.gallery-slide').forEach(s => s.remove());
 
-    // `order` lists asset indices in true page order. Without it, assets
-    // render in upload order (0,1,2…), which may not match the printed pages.
-    const seq = (book.order && book.order.length)
-      ? book.order
-      : Array.from({ length: book.pages }, (_, i) => i);
+    // `items` is an explicit list (used when filenames aren't derivable);
+    // `order` lists asset indices in true page order; otherwise assets render
+    // in upload order (0,1,2…), which may not match the printed pages.
+    const seq = (book.items && book.items.length)
+      ? book.items
+      : (book.order && book.order.length)
+        ? book.order
+        : Array.from({ length: book.pages }, (_, i) => i);
+
+    if (book.media === 'video') viewer.dataset.media = 'video';
 
     const frag = document.createDocumentFragment();
-    seq.forEach((assetIndex, position) => {
-      const slide = document.createElement('div');
-      slide.className = 'gallery-slide' + (position === 0 ? ' active' : '');
-      const img = document.createElement('img');
-      img.src = pageUrl(book.uuid, assetIndex);
-      img.alt = book.name + ' — page ' + (position + 1);
-      img.loading = 'lazy';
-      img.decoding = 'async';
-      img.onerror = function () { handleMissing(this); };
-      slide.appendChild(img);
-      frag.appendChild(slide);
-    });
+    seq.forEach((item, position) => frag.appendChild(buildSlide(book, item, position)));
     viewer.insertBefore(frag, controls);
     updateGalleryCount(book.gallery);
   });
@@ -2350,8 +2521,12 @@
       const h3 = card.querySelector('.project-title-wrap h3');
       const raw = h3 ? h3.textContent.trim() : 'The Lost Pages';
       const label = raw.split('|').pop().trim();
-      card.querySelectorAll('.gallery-slide img').forEach(img => {
-        const s = img.getAttribute('src');
+      card.querySelectorAll('.gallery-slide img, .gallery-slide video').forEach(img => {
+        // Video pages contribute their poster still — autoplaying tiles in a
+        // drifting marquee would be chaos.
+        const s = img.tagName === 'VIDEO'
+          ? (img.dataset.poster || img.getAttribute('poster'))
+          : img.getAttribute('src');
         // Keep a reference to the slide itself, not an index — slides can be
         // removed when a page 404s, which would shift any stored position.
         if (s) pool.push({
@@ -2629,6 +2804,7 @@
     viewer.querySelectorAll('.gallery-slide.active').forEach(s => s.classList.remove('active'));
     slide.classList.add('active');
     updateGalleryCount(viewer.id);
+    if (typeof syncVideos === 'function') syncVideos(viewer);
   }
 
   function openFromStrip(e, id, slide) {
@@ -2674,6 +2850,9 @@
     card.classList.toggle('open');
     const header = card.querySelector('.project-header');
     if (header) header.setAttribute('aria-expanded', String(!wasOpen));
+    if (typeof syncVideos === 'function') {
+      card.querySelectorAll('.gallery-viewer').forEach(v => syncVideos(v));
+    }
     if (wasOpen) {
       setTimeout(() => scrollToCard(card), 50);
     }
