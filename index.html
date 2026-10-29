@@ -1355,6 +1355,21 @@
       pointer-events: none;
       z-index: 0;
     }
+  
+    /* ── Book title covers ── */
+    .title-art { display: block; height: 56px; width: auto; margin-bottom: .35rem; filter: drop-shadow(0 0 10px rgba(201,168,76,.3)); }
+    .project-title-wrap:has(.title-art) { display: flex; flex-direction: column; align-items: center; }
+    .project-title-wrap:has(.title-art) .project-tag { text-align: center; }
+    .title-art.tall { height: 70px; }
+    .upcoming-art { display: block; height: 64px; width: auto; max-width: 100%; margin: 0 auto 1rem; filter: drop-shadow(0 0 12px rgba(201,168,76,.3)); }
+    .upcoming-art.tall { height: 80px; }
+    .project-title[data-art], .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    @media (max-width: 600px) {
+      .project-header-left, .project-title-wrap { min-width: 0; }
+      .project-header-right { flex-shrink: 0; }
+      .title-art { height: auto; max-height: 40px; max-width: 100%; }
+      .title-art.tall { max-height: 50px; }
+    }
   </style>
 
   <script type="application/ld+json">
@@ -1504,7 +1519,7 @@
           <span class="project-header-left">
             <span class="project-number">I</span>
             <span class="project-title-wrap">
-              <span class="project-title">TT 1 | THE BOOK OF BUILDERS</span>
+              <img class="title-art" src="assets/covers/builders.webp" alt="" width="413" height="146" decoding="async"><span class="project-title" data-art="1">TT 1 | THE BOOK OF BUILDERS</span>
               <span class="project-tag">51 pages &nbsp;·&nbsp; Solana</span>
             </span>
           </span>
@@ -1557,7 +1572,7 @@
           <span class="project-header-left">
             <span class="project-number">II</span>
             <span class="project-title-wrap">
-              <span class="project-title">TT 2 | THE BOOK OF REBELS</span>
+              <img class="title-art" src="assets/covers/rebels.webp" alt="" width="349" height="145" decoding="async"><span class="project-title" data-art="1">TT 2 | THE BOOK OF REBELS</span>
               <span class="project-tag">108 pages &nbsp;·&nbsp; Solana</span>
             </span>
           </span>
@@ -1610,7 +1625,7 @@
           <span class="project-header-left">
             <span class="project-number">III</span>
             <span class="project-title-wrap">
-              <span class="project-title">TT 3 | THE BOOK OF KINGS</span>
+              <img class="title-art" src="assets/covers/kings.webp" alt="" width="275" height="145" decoding="async"><span class="project-title" data-art="1">TT 3 | THE BOOK OF KINGS</span>
               <span class="project-tag">74 pages &nbsp;·&nbsp; Solana</span>
             </span>
           </span>
@@ -1663,7 +1678,7 @@
           <span class="project-header-left">
             <span class="project-number">IV</span>
             <span class="project-title-wrap">
-              <span class="project-title">TT 3 | THE BOOK OF KINGS | 2</span>
+              <img class="title-art tall" src="assets/covers/kings-2.webp" alt="" width="275" height="184" decoding="async"><span class="project-title" data-art="1">TT 3 | THE BOOK OF KINGS | 2</span>
               <span class="project-tag">45 pages &nbsp;·&nbsp; Solana</span>
             </span>
           </span>
@@ -1716,7 +1731,7 @@
           <span class="project-header-left">
             <span class="project-number">V</span>
             <span class="project-title-wrap">
-              <span class="project-title">TT 4 | THE BOOK OF SEEKERS</span>
+              <img class="title-art" src="assets/covers/seekers.webp" alt="" width="416" height="151" decoding="async"><span class="project-title" data-art="1">TT 4 | THE BOOK OF SEEKERS</span>
               <span class="project-tag">32 pages &nbsp;·&nbsp; Solana</span>
             </span>
           </span>
@@ -1768,7 +1783,7 @@
           <span class="project-header-left">
             <span class="project-number">VI</span>
             <span class="project-title-wrap">
-              <span class="project-title">TT 5 | THE BOOK OF HUNTERS</span>
+              <img class="title-art" src="assets/covers/hunters.webp" alt="" width="427" height="151" decoding="async"><span class="project-title" data-art="1">TT 5 | THE BOOK OF HUNTERS</span>
               <span class="project-tag">39 pages &nbsp;·&nbsp; Solana</span>
             </span>
           </span>
@@ -1820,7 +1835,7 @@
           <span class="project-header-left">
             <span class="project-number">VII</span>
             <span class="project-title-wrap">
-              <span class="project-title">TT 6 | THE BOOK OF WATCHERS</span>
+              <img class="title-art" src="assets/covers/watchers.webp" alt="" width="515" height="151" decoding="async"><span class="project-title" data-art="1">TT 6 | THE BOOK OF WATCHERS</span>
               <span class="project-tag">40 pages &nbsp;·&nbsp; Solana</span>
             </span>
           </span>
@@ -1902,7 +1917,7 @@
           <span class="project-header-left">
             <span class="project-number">VIII</span>
             <span class="project-title-wrap">
-              <span class="project-title">TT 7 | THE BOOK OF WARRIORS</span>
+              <img class="title-art" src="assets/covers/warriors.webp" alt="" width="491" height="151" decoding="async"><span class="project-title" data-art="1">TT 7 | THE BOOK OF WARRIORS</span>
               <span class="project-tag">41 pages &nbsp;·&nbsp; Solana</span>
             </span>
           </span>
@@ -1990,15 +2005,20 @@
 
     <div class="upcoming-grid">
       <a href="https://x.com/trillionbear/status/2011169136538243085?s=20" target="_blank" class="upcoming-card">
-        <div class="upcoming-icon">TT</div>
-        <h4>BUILDERS 2</h4>
+        <img class="upcoming-art tall" src="assets/covers/builders-2.webp" alt="" width="413" height="181" decoding="async">
+        <h4 class="visually-hidden">BUILDERS 2</h4>
         <span class="upcoming-badge">Coming Soon</span>
       </a>
       <a href="https://x.com/trillionbear/status/2011243871477305852?s=20" target="_blank" class="upcoming-card">
-        <div class="upcoming-icon">TT</div>
-        <h4>CRUSADERS</h4>
+        <img class="upcoming-art" src="assets/covers/crusaders.webp" alt="" width="550" height="151" decoding="async">
+        <h4 class="visually-hidden">CRUSADERS</h4>
         <span class="upcoming-badge">Coming Soon</span>
       </a>
+      <div class="upcoming-card">
+        <img class="upcoming-art" src="assets/covers/seers.webp" alt="" width="292" height="156" decoding="async">
+        <h4 class="visually-hidden">SEERS</h4>
+        <span class="upcoming-badge">Coming Soon</span>
+      </div>
     </div>
   </section>
 
