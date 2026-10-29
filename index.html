@@ -49,6 +49,7 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    img { height: auto; }
 
     html { scroll-behavior: smooth; }
 
@@ -300,7 +301,18 @@
       cursor: pointer;
       user-select: none;
       gap: 1rem;
+      /* reset native <button> styles */
+      width: 100%;
+      background: none;
+      border: 0;
+      color: inherit;
+      font: inherit;
+      letter-spacing: inherit;
+      text-align: left;
     }
+
+    .project-title-wrap,
+    .project-title-wrap .project-tag { display: block; }
 
     .project-header-left {
       display: flex;
@@ -317,7 +329,8 @@
       min-width: 30px;
     }
 
-    .project-title-wrap h3 {
+    .project-title-wrap .project-title {
+      display: block;
       font-family: 'Cinzel', serif;
       font-weight: 700;
       font-size: 1rem;
@@ -1403,7 +1416,7 @@
 </div>
 
 <div class="tb-bear">
-  <img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fgateway.pinit.io%2Fipfs%2FQmWT9GxqqLPR47TMUL7obU3Y7cx3TLp6h82yEerCr7pTLh%2F0" alt="Trillionbear" />
+  <img width="400" height="400" src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fgateway.pinit.io%2Fipfs%2FQmWT9GxqqLPR47TMUL7obU3Y7cx3TLp6h82yEerCr7pTLh%2F0" alt="Trillionbear" />
 </div>
 
 <!-- Social Bar -->
@@ -1431,26 +1444,26 @@
 
     <div class="relic-strip" aria-label="Pages from the archive">
       <div class="relic-track">
-        <a href="#card-1" onclick="openFromStrip(event,'card-1')" aria-label="Book of Builders"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F13" alt="Book of Builders page" loading="lazy" /></a>
-        <a href="#card-2" onclick="openFromStrip(event,'card-2')" aria-label="Book of Rebels"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F30" alt="Book of Rebels page" loading="lazy" /></a>
-        <a href="#card-3" onclick="openFromStrip(event,'card-3')" aria-label="Book of Kings"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F0" alt="Book of Kings page" loading="lazy" /></a>
-        <a href="#card-4" onclick="openFromStrip(event,'card-4')" aria-label="Book of Kings II"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F30" alt="Book of Kings II page" loading="lazy" /></a>
-        <a href="#card-5" onclick="openFromStrip(event,'card-5')" aria-label="Book of Seekers"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F22" alt="Book of Seekers page" loading="lazy" /></a>
-        <a href="#card-6" onclick="openFromStrip(event,'card-6')" aria-label="Book of Hunters"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/1" alt="Book of Hunters page" loading="lazy" /></a>
-        <a href="#card-7" onclick="openFromStrip(event,'card-7')" aria-label="Book of Watchers"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/d85c78ed-319d-4c62-b724-04a69cc2f7e7/506c8946-902f-4ad9-b23e-30b8fbabd111-WATCHERS4.png" alt="Book of Watchers page" loading="lazy" /></a>
-        <a href="#card-2" onclick="openFromStrip(event,'card-2')" aria-label="Book of Rebels"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F56" alt="Book of Rebels page" loading="lazy" /></a>
-        <a href="#card-3" onclick="openFromStrip(event,'card-3')" aria-label="Book of Kings"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F73" alt="Book of Kings page" loading="lazy" /></a>
-        <a href="#card-7" onclick="openFromStrip(event,'card-7')" aria-label="Book of Watchers"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/d85c78ed-319d-4c62-b724-04a69cc2f7e7/e73dba68-288c-4b2e-bc68-a45a01aa8683-WATCHERS16.png" alt="Book of Watchers page" loading="lazy" /></a>
-        <a href="#card-1" onclick="openFromStrip(event,'card-1')" aria-label="Book of Builders"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F13" alt="Book of Builders page" loading="lazy" /></a>
-        <a href="#card-2" onclick="openFromStrip(event,'card-2')" aria-label="Book of Rebels"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F30" alt="Book of Rebels page" loading="lazy" /></a>
-        <a href="#card-3" onclick="openFromStrip(event,'card-3')" aria-label="Book of Kings"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F0" alt="Book of Kings page" loading="lazy" /></a>
-        <a href="#card-4" onclick="openFromStrip(event,'card-4')" aria-label="Book of Kings II"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F30" alt="Book of Kings II page" loading="lazy" /></a>
-        <a href="#card-5" onclick="openFromStrip(event,'card-5')" aria-label="Book of Seekers"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F22" alt="Book of Seekers page" loading="lazy" /></a>
-        <a href="#card-6" onclick="openFromStrip(event,'card-6')" aria-label="Book of Hunters"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/1" alt="Book of Hunters page" loading="lazy" /></a>
-        <a href="#card-7" onclick="openFromStrip(event,'card-7')" aria-label="Book of Watchers"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/d85c78ed-319d-4c62-b724-04a69cc2f7e7/506c8946-902f-4ad9-b23e-30b8fbabd111-WATCHERS4.png" alt="Book of Watchers page" loading="lazy" /></a>
-        <a href="#card-2" onclick="openFromStrip(event,'card-2')" aria-label="Book of Rebels"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F56" alt="Book of Rebels page" loading="lazy" /></a>
-        <a href="#card-3" onclick="openFromStrip(event,'card-3')" aria-label="Book of Kings"><img src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F73" alt="Book of Kings page" loading="lazy" /></a>
-        <a href="#card-7" onclick="openFromStrip(event,'card-7')" aria-label="Book of Watchers"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/d85c78ed-319d-4c62-b724-04a69cc2f7e7/e73dba68-288c-4b2e-bc68-a45a01aa8683-WATCHERS16.png" alt="Book of Watchers page" loading="lazy" /></a>
+        <a href="#card-1" onclick="openFromStrip(event,'card-1')" aria-label="Book of Builders"><img width="400" height="400" src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F13" alt="Book of Builders page" loading="lazy" /></a>
+        <a href="#card-2" onclick="openFromStrip(event,'card-2')" aria-label="Book of Rebels"><img width="400" height="400" src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F30" alt="Book of Rebels page" loading="lazy" /></a>
+        <a href="#card-3" onclick="openFromStrip(event,'card-3')" aria-label="Book of Kings"><img width="400" height="400" src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F0" alt="Book of Kings page" loading="lazy" /></a>
+        <a href="#card-4" onclick="openFromStrip(event,'card-4')" aria-label="Book of Kings II"><img width="400" height="400" src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F30" alt="Book of Kings II page" loading="lazy" /></a>
+        <a href="#card-5" onclick="openFromStrip(event,'card-5')" aria-label="Book of Seekers"><img width="400" height="400" src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F22" alt="Book of Seekers page" loading="lazy" /></a>
+        <a href="#card-6" onclick="openFromStrip(event,'card-6')" aria-label="Book of Hunters"><img width="800" height="1000" src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/1" alt="Book of Hunters page" loading="lazy" /></a>
+        <a href="#card-7" onclick="openFromStrip(event,'card-7')" aria-label="Book of Watchers"><img width="1000" height="1000" src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/d85c78ed-319d-4c62-b724-04a69cc2f7e7/506c8946-902f-4ad9-b23e-30b8fbabd111-WATCHERS4.png" alt="Book of Watchers page" loading="lazy" /></a>
+        <a href="#card-2" onclick="openFromStrip(event,'card-2')" aria-label="Book of Rebels"><img width="400" height="400" src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F56" alt="Book of Rebels page" loading="lazy" /></a>
+        <a href="#card-3" onclick="openFromStrip(event,'card-3')" aria-label="Book of Kings"><img width="400" height="400" src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F73" alt="Book of Kings page" loading="lazy" /></a>
+        <a href="#card-7" onclick="openFromStrip(event,'card-7')" aria-label="Book of Watchers"><img width="1000" height="1000" src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/d85c78ed-319d-4c62-b724-04a69cc2f7e7/e73dba68-288c-4b2e-bc68-a45a01aa8683-WATCHERS16.png" alt="Book of Watchers page" loading="lazy" /></a>
+        <a href="#card-1" onclick="openFromStrip(event,'card-1')" aria-label="Book of Builders"><img width="400" height="400" src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F13" alt="Book of Builders page" loading="lazy" /></a>
+        <a href="#card-2" onclick="openFromStrip(event,'card-2')" aria-label="Book of Rebels"><img width="400" height="400" src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F30" alt="Book of Rebels page" loading="lazy" /></a>
+        <a href="#card-3" onclick="openFromStrip(event,'card-3')" aria-label="Book of Kings"><img width="400" height="400" src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F0" alt="Book of Kings page" loading="lazy" /></a>
+        <a href="#card-4" onclick="openFromStrip(event,'card-4')" aria-label="Book of Kings II"><img width="400" height="400" src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F30" alt="Book of Kings II page" loading="lazy" /></a>
+        <a href="#card-5" onclick="openFromStrip(event,'card-5')" aria-label="Book of Seekers"><img width="400" height="400" src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F22" alt="Book of Seekers page" loading="lazy" /></a>
+        <a href="#card-6" onclick="openFromStrip(event,'card-6')" aria-label="Book of Hunters"><img width="800" height="1000" src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/1" alt="Book of Hunters page" loading="lazy" /></a>
+        <a href="#card-7" onclick="openFromStrip(event,'card-7')" aria-label="Book of Watchers"><img width="1000" height="1000" src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/d85c78ed-319d-4c62-b724-04a69cc2f7e7/506c8946-902f-4ad9-b23e-30b8fbabd111-WATCHERS4.png" alt="Book of Watchers page" loading="lazy" /></a>
+        <a href="#card-2" onclick="openFromStrip(event,'card-2')" aria-label="Book of Rebels"><img width="400" height="400" src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F56" alt="Book of Rebels page" loading="lazy" /></a>
+        <a href="#card-3" onclick="openFromStrip(event,'card-3')" aria-label="Book of Kings"><img width="400" height="400" src="https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F73" alt="Book of Kings page" loading="lazy" /></a>
+        <a href="#card-7" onclick="openFromStrip(event,'card-7')" aria-label="Book of Watchers"><img width="1000" height="1000" src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/d85c78ed-319d-4c62-b724-04a69cc2f7e7/e73dba68-288c-4b2e-bc68-a45a01aa8683-WATCHERS16.png" alt="Book of Watchers page" loading="lazy" /></a>
       </div>
     </div>
 
@@ -1459,14 +1472,14 @@
       <div class="archive-stat"><span class="stat-num">430</span><span class="stat-label">Pages</span></div>
       <div class="archive-stat">
         <span class="stat-num stat-mark">
-          <img src="/solana-mark.svg" alt="" class="sol-mark" onerror="this.replaceWith(document.createTextNode('✦'))"/>
+          <img width="101" height="88" src="/solana-mark.svg" alt="" class="sol-mark" onerror="this.replaceWith(document.createTextNode('✦'))"/>
         </span>
         <span class="stat-label">Solana</span>
       </div>
     </div>
 
     <div class="mobile-quote-panel">
-      <img class="mobile-quote-bear" src="https://gateway.pinit.io/ipfs/QmWT9GxqqLPR47TMUL7obU3Y7cx3TLp6h82yEerCr7pTLh/0" alt="Trillionbear" />
+      <img width="1192" height="1192" class="mobile-quote-bear" src="https://gateway.pinit.io/ipfs/QmWT9GxqqLPR47TMUL7obU3Y7cx3TLp6h82yEerCr7pTLh/0" alt="Trillionbear" />
       <div class="mobile-quote-text">
         <span class="mobile-quote-mark">❝</span>
         <span class="mobile-quote-body"></span>
@@ -1487,37 +1500,37 @@
 
       <!-- PROJECT 1 -->
       <div class="project-card" id="card-1">
-        <div class="project-header" onclick="toggleCard('card-1')" role="button" tabindex="0" aria-expanded="false" aria-controls="card-1" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCard('card-1')}">
-          <div class="project-header-left">
+        <button type="button" class="project-header" onclick="toggleCard('card-1')" aria-expanded="false" aria-controls="card-1">
+          <span class="project-header-left">
             <span class="project-number">I</span>
-            <div class="project-title-wrap">
-              <h3>TT 1 | THE BOOK OF BUILDERS</h3>
-              <div class="project-tag">51 pages &nbsp;·&nbsp; Solana</div>
-            </div>
-          </div>
-          <div class="project-header-right">
+            <span class="project-title-wrap">
+              <span class="project-title">TT 1 | THE BOOK OF BUILDERS</span>
+              <span class="project-tag">51 pages &nbsp;·&nbsp; Solana</span>
+            </span>
+          </span>
+          <span class="project-header-right">
             <span class="status-pill status-live">Live</span>
-            <div class="dropdown-arrow">&#9660;</div>
-          </div>
-        </div>
+            <span class="dropdown-arrow">&#9660;</span>
+          </span>
+        </button>
         <div class="project-body">
           <div class="project-body-inner">
             <div class="project-layout">
               <div class="gallery-viewer" id="gallery-1">
-                <div class="gallery-slide active"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F13" alt="Book of Builders #1" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F39" alt="Book of Builders #2" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F37" alt="Book of Builders #3" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F27" alt="Book of Builders #4" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F46" alt="Book of Builders #5" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F29" alt="Book of Builders #6" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F9" alt="Book of Builders #7" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F47" alt="Book of Builders #8" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F12" alt="Book of Builders #9" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F10" alt="Book of Builders #10" loading="lazy" /></div>
+                <div class="gallery-slide active"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F13" alt="Book of Builders #1" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F39" alt="Book of Builders #2" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F37" alt="Book of Builders #3" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F27" alt="Book of Builders #4" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F46" alt="Book of Builders #5" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F29" alt="Book of Builders #6" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F9" alt="Book of Builders #7" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F47" alt="Book of Builders #8" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F12" alt="Book of Builders #9" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F9a469bc2-f989-413a-a7ad-c2ee1931433d%2F10" alt="Book of Builders #10" loading="lazy" /></div>
                 <div class="gallery-controls">
-                  <button class="gallery-btn" aria-label="Previous page" onclick="slideGallery('gallery-1',-1)">&#8592;</button>
+                  <button type="button" class="gallery-btn" aria-label="Previous page" onclick="slideGallery('gallery-1',-1)">&#8592;</button>
                   <span class="gallery-count" data-for="gallery-1"></span>
-                  <button class="gallery-btn" aria-label="Next page" onclick="slideGallery('gallery-1',1)">&#8594;</button>
+                  <button type="button" class="gallery-btn" aria-label="Next page" onclick="slideGallery('gallery-1',1)">&#8594;</button>
                 </div>
               </div>
               <div class="project-info">
@@ -1540,37 +1553,37 @@
 
       <!-- PROJECT 2 -->
       <div class="project-card" id="card-2">
-        <div class="project-header" onclick="toggleCard('card-2')" role="button" tabindex="0" aria-expanded="false" aria-controls="card-2" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCard('card-2')}">
-          <div class="project-header-left">
+        <button type="button" class="project-header" onclick="toggleCard('card-2')" aria-expanded="false" aria-controls="card-2">
+          <span class="project-header-left">
             <span class="project-number">II</span>
-            <div class="project-title-wrap">
-              <h3>TT 2 | THE BOOK OF REBELS</h3>
-              <div class="project-tag">108 pages &nbsp;·&nbsp; Solana</div>
-            </div>
-          </div>
-          <div class="project-header-right">
+            <span class="project-title-wrap">
+              <span class="project-title">TT 2 | THE BOOK OF REBELS</span>
+              <span class="project-tag">108 pages &nbsp;·&nbsp; Solana</span>
+            </span>
+          </span>
+          <span class="project-header-right">
             <span class="status-pill status-live">Live</span>
-            <div class="dropdown-arrow">&#9660;</div>
-          </div>
-        </div>
+            <span class="dropdown-arrow">&#9660;</span>
+          </span>
+        </button>
         <div class="project-body">
           <div class="project-body-inner">
             <div class="project-layout">
               <div class="gallery-viewer" id="gallery-2">
-                <div class="gallery-slide active"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F30" alt="Book of Rebels #1" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F4" alt="Book of Rebels #2" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F56" alt="Book of Rebels #3" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F31" alt="Book of Rebels #4" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F80" alt="Book of Rebels #5" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F60" alt="Book of Rebels #6" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F79" alt="Book of Rebels #7" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F94" alt="Book of Rebels #8" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F50" alt="Book of Rebels #9" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F57" alt="Book of Rebels #10" loading="lazy" /></div>
+                <div class="gallery-slide active"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F30" alt="Book of Rebels #1" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F4" alt="Book of Rebels #2" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F56" alt="Book of Rebels #3" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F31" alt="Book of Rebels #4" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F80" alt="Book of Rebels #5" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F60" alt="Book of Rebels #6" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F79" alt="Book of Rebels #7" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F94" alt="Book of Rebels #8" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F50" alt="Book of Rebels #9" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F62df7017-6931-4bbd-8a1b-74b3a10f07a1%2F57" alt="Book of Rebels #10" loading="lazy" /></div>
                 <div class="gallery-controls">
-                  <button class="gallery-btn" aria-label="Previous page" onclick="slideGallery('gallery-2',-1)">&#8592;</button>
+                  <button type="button" class="gallery-btn" aria-label="Previous page" onclick="slideGallery('gallery-2',-1)">&#8592;</button>
                   <span class="gallery-count" data-for="gallery-2"></span>
-                  <button class="gallery-btn" aria-label="Next page" onclick="slideGallery('gallery-2',1)">&#8594;</button>
+                  <button type="button" class="gallery-btn" aria-label="Next page" onclick="slideGallery('gallery-2',1)">&#8594;</button>
                 </div>
               </div>
               <div class="project-info">
@@ -1593,37 +1606,37 @@
 
       <!-- PROJECT 3 -->
       <div class="project-card" id="card-3">
-        <div class="project-header" onclick="toggleCard('card-3')" role="button" tabindex="0" aria-expanded="false" aria-controls="card-3" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCard('card-3')}">
-          <div class="project-header-left">
+        <button type="button" class="project-header" onclick="toggleCard('card-3')" aria-expanded="false" aria-controls="card-3">
+          <span class="project-header-left">
             <span class="project-number">III</span>
-            <div class="project-title-wrap">
-              <h3>TT 3 | THE BOOK OF KINGS</h3>
-              <div class="project-tag">74 pages &nbsp;·&nbsp; Solana</div>
-            </div>
-          </div>
-          <div class="project-header-right">
+            <span class="project-title-wrap">
+              <span class="project-title">TT 3 | THE BOOK OF KINGS</span>
+              <span class="project-tag">74 pages &nbsp;·&nbsp; Solana</span>
+            </span>
+          </span>
+          <span class="project-header-right">
             <span class="status-pill status-live">Live</span>
-            <div class="dropdown-arrow">&#9660;</div>
-          </div>
-        </div>
+            <span class="dropdown-arrow">&#9660;</span>
+          </span>
+        </button>
         <div class="project-body">
           <div class="project-body-inner">
             <div class="project-layout">
               <div class="gallery-viewer" id="gallery-3">
-                <div class="gallery-slide active"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F0" alt="Book of Kings #1" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F19" alt="Book of Kings #2" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F73" alt="Book of Kings #3" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F25" alt="Book of Kings #4" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F35" alt="Book of Kings #5" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F1" alt="Book of Kings #6" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F45" alt="Book of Kings #7" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F6" alt="Book of Kings #8" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F13" alt="Book of Kings #9" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F11" alt="Book of Kings #10" loading="lazy" /></div>
+                <div class="gallery-slide active"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F0" alt="Book of Kings #1" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F19" alt="Book of Kings #2" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F73" alt="Book of Kings #3" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F25" alt="Book of Kings #4" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F35" alt="Book of Kings #5" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F1" alt="Book of Kings #6" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F45" alt="Book of Kings #7" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F6" alt="Book of Kings #8" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F13" alt="Book of Kings #9" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F8b58226d-a7ca-4501-81e5-1603870931dd%2F11" alt="Book of Kings #10" loading="lazy" /></div>
                 <div class="gallery-controls">
-                  <button class="gallery-btn" aria-label="Previous page" onclick="slideGallery('gallery-3',-1)">&#8592;</button>
+                  <button type="button" class="gallery-btn" aria-label="Previous page" onclick="slideGallery('gallery-3',-1)">&#8592;</button>
                   <span class="gallery-count" data-for="gallery-3"></span>
-                  <button class="gallery-btn" aria-label="Next page" onclick="slideGallery('gallery-3',1)">&#8594;</button>
+                  <button type="button" class="gallery-btn" aria-label="Next page" onclick="slideGallery('gallery-3',1)">&#8594;</button>
                 </div>
               </div>
               <div class="project-info">
@@ -1646,37 +1659,37 @@
 
       <!-- PROJECT 4 -->
       <div class="project-card" id="card-4">
-        <div class="project-header" onclick="toggleCard('card-4')" role="button" tabindex="0" aria-expanded="false" aria-controls="card-4" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCard('card-4')}">
-          <div class="project-header-left">
+        <button type="button" class="project-header" onclick="toggleCard('card-4')" aria-expanded="false" aria-controls="card-4">
+          <span class="project-header-left">
             <span class="project-number">IV</span>
-            <div class="project-title-wrap">
-              <h3>TT 3 | THE BOOK OF KINGS | 2</h3>
-              <div class="project-tag">45 pages &nbsp;·&nbsp; Solana</div>
-            </div>
-          </div>
-          <div class="project-header-right">
+            <span class="project-title-wrap">
+              <span class="project-title">TT 3 | THE BOOK OF KINGS | 2</span>
+              <span class="project-tag">45 pages &nbsp;·&nbsp; Solana</span>
+            </span>
+          </span>
+          <span class="project-header-right">
             <span class="status-pill status-live">Live</span>
-            <div class="dropdown-arrow">&#9660;</div>
-          </div>
-        </div>
+            <span class="dropdown-arrow">&#9660;</span>
+          </span>
+        </button>
         <div class="project-body">
           <div class="project-body-inner">
             <div class="project-layout">
               <div class="gallery-viewer" id="gallery-4">
-                <div class="gallery-slide active"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F30" alt="Book of Kings 2 #1" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F38" alt="Book of Kings 2 #2" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F39" alt="Book of Kings 2 #3" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F11" alt="Book of Kings 2 #4" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F33" alt="Book of Kings 2 #5" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F31" alt="Book of Kings 2 #6" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F24" alt="Book of Kings 2 #7" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F21" alt="Book of Kings 2 #8" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F7" alt="Book of Kings 2 #9" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F41" alt="Book of Kings 2 #10" loading="lazy" /></div>
+                <div class="gallery-slide active"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F30" alt="Book of Kings 2 #1" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F38" alt="Book of Kings 2 #2" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F39" alt="Book of Kings 2 #3" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F11" alt="Book of Kings 2 #4" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F33" alt="Book of Kings 2 #5" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F31" alt="Book of Kings 2 #6" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F24" alt="Book of Kings 2 #7" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F21" alt="Book of Kings 2 #8" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F7" alt="Book of Kings 2 #9" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F2fa7a2ab-85d5-41fd-b8d5-8e6eb2da0a48%2F41" alt="Book of Kings 2 #10" loading="lazy" /></div>
                 <div class="gallery-controls">
-                  <button class="gallery-btn" aria-label="Previous page" onclick="slideGallery('gallery-4',-1)">&#8592;</button>
+                  <button type="button" class="gallery-btn" aria-label="Previous page" onclick="slideGallery('gallery-4',-1)">&#8592;</button>
                   <span class="gallery-count" data-for="gallery-4"></span>
-                  <button class="gallery-btn" aria-label="Next page" onclick="slideGallery('gallery-4',1)">&#8594;</button>
+                  <button type="button" class="gallery-btn" aria-label="Next page" onclick="slideGallery('gallery-4',1)">&#8594;</button>
                 </div>
               </div>
               <div class="project-info">
@@ -1699,37 +1712,37 @@
 
       <!-- PROJECT 5 -->
       <div class="project-card" id="card-5">
-        <div class="project-header" onclick="toggleCard('card-5')" role="button" tabindex="0" aria-expanded="false" aria-controls="card-5" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCard('card-5')}">
-          <div class="project-header-left">
+        <button type="button" class="project-header" onclick="toggleCard('card-5')" aria-expanded="false" aria-controls="card-5">
+          <span class="project-header-left">
             <span class="project-number">V</span>
-            <div class="project-title-wrap">
-              <h3>TT 4 | THE BOOK OF SEEKERS</h3>
-              <div class="project-tag">32 pages &nbsp;·&nbsp; Solana</div>
-            </div>
-          </div>
-          <div class="project-header-right">
+            <span class="project-title-wrap">
+              <span class="project-title">TT 4 | THE BOOK OF SEEKERS</span>
+              <span class="project-tag">32 pages &nbsp;·&nbsp; Solana</span>
+            </span>
+          </span>
+          <span class="project-header-right">
             <span class="status-pill status-live">Live</span>
-            <div class="dropdown-arrow">&#9660;</div>
-          </div>
-        </div>
+            <span class="dropdown-arrow">&#9660;</span>
+          </span>
+        </button>
         <div class="project-body">
           <div class="project-body-inner">
             <div class="project-layout">
               <div class="gallery-viewer" id="gallery-5">
-                <div class="gallery-slide active"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F22" alt="Book of Seekers #1" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F19" alt="Book of Seekers #2" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F6" alt="Book of Seekers #3" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F5" alt="Book of Seekers #4" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F3" alt="Book of Seekers #5" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F15" alt="Book of Seekers #6" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F11" alt="Book of Seekers #7" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F29" alt="Book of Seekers #8" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F18" alt="Book of Seekers #9" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F30" alt="Book of Seekers #10" loading="lazy" /></div>
+                <div class="gallery-slide active"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F22" alt="Book of Seekers #1" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F19" alt="Book of Seekers #2" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F6" alt="Book of Seekers #3" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F5" alt="Book of Seekers #4" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F3" alt="Book of Seekers #5" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F15" alt="Book of Seekers #6" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F11" alt="Book of Seekers #7" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F29" alt="Book of Seekers #8" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F18" alt="Book of Seekers #9" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1ddfaadf-124c-4379-a615-641c894e1d52%2F30" alt="Book of Seekers #10" loading="lazy" /></div>
                 <div class="gallery-controls">
-                  <button class="gallery-btn" aria-label="Previous page" onclick="slideGallery('gallery-5',-1)">&#8592;</button>
+                  <button type="button" class="gallery-btn" aria-label="Previous page" onclick="slideGallery('gallery-5',-1)">&#8592;</button>
                   <span class="gallery-count" data-for="gallery-5"></span>
-                  <button class="gallery-btn" aria-label="Next page" onclick="slideGallery('gallery-5',1)">&#8594;</button>
+                  <button type="button" class="gallery-btn" aria-label="Next page" onclick="slideGallery('gallery-5',1)">&#8594;</button>
                 </div>
               </div>
               <div class="project-info">
@@ -1751,37 +1764,37 @@
       </div>
 
       <div class="project-card" id="card-6">
-        <div class="project-header" onclick="toggleCard('card-6')" role="button" tabindex="0" aria-expanded="false" aria-controls="card-6" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCard('card-6')}">
-          <div class="project-header-left">
+        <button type="button" class="project-header" onclick="toggleCard('card-6')" aria-expanded="false" aria-controls="card-6">
+          <span class="project-header-left">
             <span class="project-number">VI</span>
-            <div class="project-title-wrap">
-              <h3>TT 5 | THE BOOK OF HUNTERS</h3>
-              <div class="project-tag">39 pages &nbsp;·&nbsp; Solana</div>
-            </div>
-          </div>
-          <div class="project-header-right">
+            <span class="project-title-wrap">
+              <span class="project-title">TT 5 | THE BOOK OF HUNTERS</span>
+              <span class="project-tag">39 pages &nbsp;·&nbsp; Solana</span>
+            </span>
+          </span>
+          <span class="project-header-right">
             <span class="status-pill status-live">Live</span>
-            <div class="dropdown-arrow">&#9660;</div>
-          </div>
-        </div>
+            <span class="dropdown-arrow">&#9660;</span>
+          </span>
+        </button>
         <div class="project-body">
           <div class="project-body-inner">
             <div class="project-layout">
               <div class="gallery-viewer" id="gallery-6">
-                <div class="gallery-slide active"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/1" alt="Hunters #1" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/6" alt="Hunters #2" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/12" alt="Hunters #3" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/18" alt="Hunters #4" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/5" alt="Hunters #5" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/0" alt="Hunters #6" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/13" alt="Hunters #7" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/22" alt="Hunters #8" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/35" alt="Hunters #9" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/37" alt="Hunters #10" loading="lazy" /></div>
+                <div class="gallery-slide active"><img width="800" height="1000" src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/1" alt="Hunters #1" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="1000" src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/6" alt="Hunters #2" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="1000" src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/12" alt="Hunters #3" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="1000" src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/18" alt="Hunters #4" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="1000" src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/5" alt="Hunters #5" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="1000" src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/0" alt="Hunters #6" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="1000" src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/13" alt="Hunters #7" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="1000" src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/22" alt="Hunters #8" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="1000" src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/35" alt="Hunters #9" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="1000" src="https://na-assets.pinit.io/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy/2f928638-5d37-4db2-9f06-ec11cd4bb92a/37" alt="Hunters #10" loading="lazy" /></div>
                 <div class="gallery-controls">
-                  <button class="gallery-btn" aria-label="Previous page" onclick="slideGallery('gallery-6',-1)">&#8592;</button>
+                  <button type="button" class="gallery-btn" aria-label="Previous page" onclick="slideGallery('gallery-6',-1)">&#8592;</button>
                   <span class="gallery-count" data-for="gallery-6"></span>
-                  <button class="gallery-btn" aria-label="Next page" onclick="slideGallery('gallery-6',1)">&#8594;</button>
+                  <button type="button" class="gallery-btn" aria-label="Next page" onclick="slideGallery('gallery-6',1)">&#8594;</button>
                 </div>
               </div>
               <div class="project-info">
@@ -1803,67 +1816,67 @@
       </div>
 
       <div class="project-card" id="card-7">
-        <div class="project-header" onclick="toggleCard('card-7')" role="button" tabindex="0" aria-expanded="false" aria-controls="card-7" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCard('card-7')}">
-          <div class="project-header-left">
+        <button type="button" class="project-header" onclick="toggleCard('card-7')" aria-expanded="false" aria-controls="card-7">
+          <span class="project-header-left">
             <span class="project-number">VII</span>
-            <div class="project-title-wrap">
-              <h3>TT 6 | THE BOOK OF WATCHERS</h3>
-              <div class="project-tag">40 pages &nbsp;·&nbsp; Solana</div>
-            </div>
-          </div>
-          <div class="project-header-right">
+            <span class="project-title-wrap">
+              <span class="project-title">TT 6 | THE BOOK OF WATCHERS</span>
+              <span class="project-tag">40 pages &nbsp;·&nbsp; Solana</span>
+            </span>
+          </span>
+          <span class="project-header-right">
             <span class="status-pill status-live">Live</span>
-            <div class="dropdown-arrow">&#9660;</div>
-          </div>
-        </div>
+            <span class="dropdown-arrow">&#9660;</span>
+          </span>
+        </button>
         <div class="project-body">
           <div class="project-body-inner">
             <div class="project-layout">
               <div class="gallery-viewer" id="gallery-7">
-                <div class="gallery-slide active"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F195580bc-daa6-4dd0-948f-8ec8cedcebd0-WATCHERS1.png" alt="Book of Watchers — page 1" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fe5ad23d3-0a47-4ca8-ad36-438aa955a990-WATCHERS2.png" alt="Book of Watchers — page 2" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fad663d30-5d64-4419-bc40-42c477351784-WATCHERS3.png" alt="Book of Watchers — page 3" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F506c8946-902f-4ad9-b23e-30b8fbabd111-WATCHERS4.png" alt="Book of Watchers — page 4" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Ff8e488e0-aa97-45b7-ad6e-227df77a1b41-WATCHERS5.png" alt="Book of Watchers — page 5" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F93b44f10-d658-4e1e-a3a1-76ffc3a6fb11-WATCHERS6.png" alt="Book of Watchers — page 6" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F6ff43df0-f260-4a7f-be5f-ded845057599-WATCHERS7.png" alt="Book of Watchers — page 7" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F63b24d59-5719-427b-9b03-1fc40c3cbbe6-WATCHERS8.png" alt="Book of Watchers — page 8" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F21a17345-b39f-4c31-82ac-90c99bc4bd5b-WATCHERS9.png" alt="Book of Watchers — page 9" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F672882d8-b8a4-4d41-9c04-5699ed0b8fee-WATCHERS10.png" alt="Book of Watchers — page 10" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fd76512d4-2940-41b4-8581-aea4c625b334-WATCHERS11.png" alt="Book of Watchers — page 11" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fb49801b3-6033-4c91-82cb-f5d795e8f758-WATCHERS12.png" alt="Book of Watchers — page 12" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F6e8f36e3-5c57-4038-a324-1c968a2705e0-WATCHERS13.png" alt="Book of Watchers — page 13" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F471d161b-725c-412c-9231-a4c4e28ac912-WATCHERS14.png" alt="Book of Watchers — page 14" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F00fcb4ac-12fb-45be-b77b-df11ef114f0a-WATCHERS15.png" alt="Book of Watchers — page 15" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fe73dba68-288c-4b2e-bc68-a45a01aa8683-WATCHERS16.png" alt="Book of Watchers — page 16" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fe84850cd-808b-4aad-83f7-8354a6f1c77d-WATCHERS17.png" alt="Book of Watchers — page 17" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fd5f02c86-9000-4172-b89d-6742fe90f1da-WATCHERS18.png" alt="Book of Watchers — page 18" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F5a46c1a7-25fa-4dd8-a105-5fba7517a0cb-WATCHERS19.png" alt="Book of Watchers — page 19" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F159b3634-ed54-404d-81df-639ec91115f6-WATCHERS20.png" alt="Book of Watchers — page 20" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F42d90907-4eca-4c8f-a79e-afd54bcc35e7-WATCHERS21.png" alt="Book of Watchers — page 21" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F1e0343cd-3e55-46da-8784-f4481d73df64-WATCHERS22.png" alt="Book of Watchers — page 22" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F89f57a22-eea4-4731-bf2a-c4a1c9f4a1ba-WATCHERS23.png" alt="Book of Watchers — page 23" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fcb536c64-e2f3-4630-82be-6570b8f15c30-WATCHERS24%2520(2).png" alt="Book of Watchers — page 24" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F05fad470-ecea-495f-937c-60f88962c65c-WATCHERS25.png" alt="Book of Watchers — page 25" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fdca2c5d8-5039-4482-9cd4-4db4e2053039-WATCHERS26.png" alt="Book of Watchers — page 26" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F96084ce3-e74b-4dda-96c8-bc0fd600abfb-WATCHERS27.png" alt="Book of Watchers — page 27" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fc7fec995-7f82-4c6c-b47c-63297aec980f-WATCHERS28.png" alt="Book of Watchers — page 28" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fbddbd163-80e2-4758-9b46-b1958345a189-WATCHERS29.png" alt="Book of Watchers — page 29" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F16279c3c-7811-4bcc-a3ff-60ecbccfcf15-WATCHERS30.png" alt="Book of Watchers — page 30" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F201bb4a0-ff9f-4b7e-8f3d-1ccb48336941-WATCHERS31.png" alt="Book of Watchers — page 31" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fc2386720-96c7-4abf-b831-fa26a95353fa-WATCHERS32.png" alt="Book of Watchers — page 32" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Ff7ef4524-b1a1-4433-97d7-cad57380feee-WATCHERS33.png" alt="Book of Watchers — page 33" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fb3b2b440-83f5-4796-8310-2ed986da0a75-WATCHERS34.png" alt="Book of Watchers — page 34" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F45f14f72-cb22-44f3-a969-153c939cbfbc-WATCHERS35.png" alt="Book of Watchers — page 35" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F493114b4-d0d9-475d-ad0e-f002315d7c1e-WATCHERS36.png" alt="Book of Watchers — page 36" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F16e37a9a-971f-4479-bb05-014b5cce265f-WATCHERS37.png" alt="Book of Watchers — page 37" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F5ae04343-b4ac-4e92-ab3f-513dac730a7c-WATCHERS38.png" alt="Book of Watchers — page 38" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F6aabf33c-2973-4d18-ad12-bfa62f660c09-WATCHERS39.png" alt="Book of Watchers — page 39" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F66d4ce7f-7523-4318-bed8-e5548c343b8f-WATCHERS40.png" alt="Book of Watchers — page 40" loading="lazy" /></div>
+                <div class="gallery-slide active"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F195580bc-daa6-4dd0-948f-8ec8cedcebd0-WATCHERS1.png" alt="Book of Watchers — page 1" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fe5ad23d3-0a47-4ca8-ad36-438aa955a990-WATCHERS2.png" alt="Book of Watchers — page 2" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fad663d30-5d64-4419-bc40-42c477351784-WATCHERS3.png" alt="Book of Watchers — page 3" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F506c8946-902f-4ad9-b23e-30b8fbabd111-WATCHERS4.png" alt="Book of Watchers — page 4" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Ff8e488e0-aa97-45b7-ad6e-227df77a1b41-WATCHERS5.png" alt="Book of Watchers — page 5" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F93b44f10-d658-4e1e-a3a1-76ffc3a6fb11-WATCHERS6.png" alt="Book of Watchers — page 6" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F6ff43df0-f260-4a7f-be5f-ded845057599-WATCHERS7.png" alt="Book of Watchers — page 7" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F63b24d59-5719-427b-9b03-1fc40c3cbbe6-WATCHERS8.png" alt="Book of Watchers — page 8" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F21a17345-b39f-4c31-82ac-90c99bc4bd5b-WATCHERS9.png" alt="Book of Watchers — page 9" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F672882d8-b8a4-4d41-9c04-5699ed0b8fee-WATCHERS10.png" alt="Book of Watchers — page 10" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fd76512d4-2940-41b4-8581-aea4c625b334-WATCHERS11.png" alt="Book of Watchers — page 11" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fb49801b3-6033-4c91-82cb-f5d795e8f758-WATCHERS12.png" alt="Book of Watchers — page 12" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F6e8f36e3-5c57-4038-a324-1c968a2705e0-WATCHERS13.png" alt="Book of Watchers — page 13" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F471d161b-725c-412c-9231-a4c4e28ac912-WATCHERS14.png" alt="Book of Watchers — page 14" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F00fcb4ac-12fb-45be-b77b-df11ef114f0a-WATCHERS15.png" alt="Book of Watchers — page 15" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fe73dba68-288c-4b2e-bc68-a45a01aa8683-WATCHERS16.png" alt="Book of Watchers — page 16" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fe84850cd-808b-4aad-83f7-8354a6f1c77d-WATCHERS17.png" alt="Book of Watchers — page 17" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fd5f02c86-9000-4172-b89d-6742fe90f1da-WATCHERS18.png" alt="Book of Watchers — page 18" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F5a46c1a7-25fa-4dd8-a105-5fba7517a0cb-WATCHERS19.png" alt="Book of Watchers — page 19" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F159b3634-ed54-404d-81df-639ec91115f6-WATCHERS20.png" alt="Book of Watchers — page 20" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F42d90907-4eca-4c8f-a79e-afd54bcc35e7-WATCHERS21.png" alt="Book of Watchers — page 21" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F1e0343cd-3e55-46da-8784-f4481d73df64-WATCHERS22.png" alt="Book of Watchers — page 22" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F89f57a22-eea4-4731-bf2a-c4a1c9f4a1ba-WATCHERS23.png" alt="Book of Watchers — page 23" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fcb536c64-e2f3-4630-82be-6570b8f15c30-WATCHERS24%2520(2).png" alt="Book of Watchers — page 24" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F05fad470-ecea-495f-937c-60f88962c65c-WATCHERS25.png" alt="Book of Watchers — page 25" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fdca2c5d8-5039-4482-9cd4-4db4e2053039-WATCHERS26.png" alt="Book of Watchers — page 26" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F96084ce3-e74b-4dda-96c8-bc0fd600abfb-WATCHERS27.png" alt="Book of Watchers — page 27" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fc7fec995-7f82-4c6c-b47c-63297aec980f-WATCHERS28.png" alt="Book of Watchers — page 28" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fbddbd163-80e2-4758-9b46-b1958345a189-WATCHERS29.png" alt="Book of Watchers — page 29" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F16279c3c-7811-4bcc-a3ff-60ecbccfcf15-WATCHERS30.png" alt="Book of Watchers — page 30" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F201bb4a0-ff9f-4b7e-8f3d-1ccb48336941-WATCHERS31.png" alt="Book of Watchers — page 31" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fc2386720-96c7-4abf-b831-fa26a95353fa-WATCHERS32.png" alt="Book of Watchers — page 32" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Ff7ef4524-b1a1-4433-97d7-cad57380feee-WATCHERS33.png" alt="Book of Watchers — page 33" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2Fb3b2b440-83f5-4796-8310-2ed986da0a75-WATCHERS34.png" alt="Book of Watchers — page 34" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F45f14f72-cb22-44f3-a969-153c939cbfbc-WATCHERS35.png" alt="Book of Watchers — page 35" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F493114b4-d0d9-475d-ad0e-f002315d7c1e-WATCHERS36.png" alt="Book of Watchers — page 36" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F16e37a9a-971f-4479-bb05-014b5cce265f-WATCHERS37.png" alt="Book of Watchers — page 37" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F5ae04343-b4ac-4e92-ab3f-513dac730a7c-WATCHERS38.png" alt="Book of Watchers — page 38" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F6aabf33c-2973-4d18-ad12-bfa62f660c09-WATCHERS39.png" alt="Book of Watchers — page 39" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2Fd85c78ed-319d-4c62-b724-04a69cc2f7e7%2F66d4ce7f-7523-4318-bed8-e5548c343b8f-WATCHERS40.png" alt="Book of Watchers — page 40" loading="lazy" /></div>
                 <div class="gallery-controls">
-                  <button class="gallery-btn" aria-label="Previous page" onclick="slideGallery('gallery-7',-1)">&#8592;</button>
+                  <button type="button" class="gallery-btn" aria-label="Previous page" onclick="slideGallery('gallery-7',-1)">&#8592;</button>
                   <span class="gallery-count" data-for="gallery-7"></span>
-                  <button class="gallery-btn" aria-label="Next page" onclick="slideGallery('gallery-7',1)">&#8594;</button>
+                  <button type="button" class="gallery-btn" aria-label="Next page" onclick="slideGallery('gallery-7',1)">&#8594;</button>
                 </div>
               </div>
               <div class="project-info">
@@ -1885,68 +1898,68 @@
       </div>
 
         <div class="project-card" id="card-8">
-        <div class="project-header" onclick="toggleCard('card-8')" role="button" tabindex="0" aria-expanded="false" aria-controls="card-8" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCard('card-8')}">
-          <div class="project-header-left">
+        <button type="button" class="project-header" onclick="toggleCard('card-8')" aria-expanded="false" aria-controls="card-8">
+          <span class="project-header-left">
             <span class="project-number">VIII</span>
-            <div class="project-title-wrap">
-              <h3>TT 7 | THE BOOK OF WARRIORS</h3>
-              <div class="project-tag">41 pages &nbsp;·&nbsp; Solana</div>
-            </div>
-          </div>
-          <div class="project-header-right">
+            <span class="project-title-wrap">
+              <span class="project-title">TT 7 | THE BOOK OF WARRIORS</span>
+              <span class="project-tag">41 pages &nbsp;·&nbsp; Solana</span>
+            </span>
+          </span>
+          <span class="project-header-right">
             <span class="status-pill status-live">Live</span>
-            <div class="dropdown-arrow">&#9660;</div>
-          </div>
-        </div>
+            <span class="dropdown-arrow">&#9660;</span>
+          </span>
+        </button>
         <div class="project-body">
           <div class="project-body-inner">
             <div class="project-layout">
               <div class="gallery-viewer" id="gallery-8">
-                <div class="gallery-slide active"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Facebaf88-f82c-4113-8897-56b8628c3c30-1.png" alt="Book of Warriors — page 1" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F43658b8f-6c8c-4756-9b2e-b254839af4a5-2.png" alt="Book of Warriors — page 2" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F47e79c57-b9b6-4ef3-a88d-d0fe4ce8e87a-3.png" alt="Book of Warriors — page 3" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fe697141f-36b9-41c0-9c5e-51dc1ae49bc0-4.png" alt="Book of Warriors — page 4" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F4b8ea2e0-4118-466e-8ac4-0504ca23640d-5.png" alt="Book of Warriors — page 5" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fcdf4b313-4f84-4a95-b2d4-29e3bdd5a971-6.png" alt="Book of Warriors — page 6" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F2f1baada-89af-4f2f-adbc-34cbbdde925f-7.png" alt="Book of Warriors — page 7" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Ff47bb55b-9e5c-4d75-86e9-a81a085c2465-8.png" alt="Book of Warriors — page 8" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F276d4a60-9664-4659-b76b-d9ec7aeb6cef-9.png" alt="Book of Warriors — page 9" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fbf749819-f495-4ff5-9cba-7c47435be641-10.png" alt="Book of Warriors — page 10" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F1f7654e7-d146-43d5-87a8-2a2e569aa939-11.png" alt="Book of Warriors — page 11" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F9d5f654c-0adb-447d-afc3-d8ab5bca31b4-12.png" alt="Book of Warriors — page 12" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F5c6968e8-c825-4444-ba84-4319c8bfb26e-13.png" alt="Book of Warriors — page 13" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F102a44ce-e877-4b02-91e4-5f7fd1c7c6bf-14.png" alt="Book of Warriors — page 14" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F06841c50-9fa7-4337-aa46-afd8f9c9cf4e-15.png" alt="Book of Warriors — page 15" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F2d09b01f-d3f2-4c69-83da-cf0f0e674f8c-16.png" alt="Book of Warriors — page 16" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fda35479b-9b3c-44e6-b76e-a7de9dd69297-17.png" alt="Book of Warriors — page 17" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F6b5ad138-bf7f-4828-a84b-72b502b8e8de-18.png" alt="Book of Warriors — page 18" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F307340f3-861b-4954-870c-c3d06579113c-19.png" alt="Book of Warriors — page 19" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Faf4357f4-e849-4f7e-a3bc-ac63a0078376-20.png" alt="Book of Warriors — page 20" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F78d20eee-969d-49e1-aadd-1be909138a71-21.png" alt="Book of Warriors — page 21" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fe45a409a-2816-437a-9156-70e622ed1764-22.png" alt="Book of Warriors — page 22" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F45c012ce-5ecd-4727-a574-5ad941866bcf-23.png" alt="Book of Warriors — page 23" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fcf661caf-bf71-4ca6-8227-1ff30dc4e9bd-24.png" alt="Book of Warriors — page 24" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F5e7f8880-e989-4ec9-a350-9d8aa3f882b7-25.png" alt="Book of Warriors — page 25" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fb3a96bfe-380e-4ea4-a33b-6476e8a719c1-26.png" alt="Book of Warriors — page 26" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F56e3d5c8-a16a-453a-8c25-21c33c2fee80-27.png" alt="Book of Warriors — page 27" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F5584480b-7451-40bc-a218-fb19e29889ed-28.png" alt="Book of Warriors — page 28" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F6f2afdb2-37d5-49a7-9fbd-08afa09ed2e9-29.png" alt="Book of Warriors — page 29" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F1b0d9532-175c-4bab-a14a-feb65aed2ed0-30.png" alt="Book of Warriors — page 30" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F930afefe-4f31-47d1-883f-a1dbb9c59e8d-31.png" alt="Book of Warriors — page 31" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F3f95dd6d-75ea-45cb-9913-f67bbd982e6d-32.png" alt="Book of Warriors — page 32" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F8d3fd4b9-413c-4e37-a162-e9a422f494b9-33.png" alt="Book of Warriors — page 33" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F699f9fbd-f36c-4406-b77a-42730198ca71-34.png" alt="Book of Warriors — page 34" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fd69030b5-e98b-431f-a801-dba0538ada90-35.png" alt="Book of Warriors — page 35" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F69c8b4a9-cf1b-4060-9d83-f90586b63622-36.png" alt="Book of Warriors — page 36" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fc806acb9-d7d9-4996-a6dd-54dab46fc31c-37.png" alt="Book of Warriors — page 37" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Ffa838d7a-774c-4983-aa38-3380b94ff409-38.png" alt="Book of Warriors — page 38" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F03eda678-89e5-430e-8f59-18c33615bb3e-39.png" alt="Book of Warriors — page 39" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F6f635e37-a83e-4c06-b432-35ff7b2301dd-40.png" alt="Book of Warriors — page 40" loading="lazy" /></div>
-                <div class="gallery-slide"><img src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F0723af33-5ba4-4cb4-898f-c44b5ebc2a14-41.png" alt="Book of Warriors — page 41" loading="lazy" /></div>
+                <div class="gallery-slide active"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Facebaf88-f82c-4113-8897-56b8628c3c30-1.png" alt="Book of Warriors — page 1" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F43658b8f-6c8c-4756-9b2e-b254839af4a5-2.png" alt="Book of Warriors — page 2" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F47e79c57-b9b6-4ef3-a88d-d0fe4ce8e87a-3.png" alt="Book of Warriors — page 3" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fe697141f-36b9-41c0-9c5e-51dc1ae49bc0-4.png" alt="Book of Warriors — page 4" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F4b8ea2e0-4118-466e-8ac4-0504ca23640d-5.png" alt="Book of Warriors — page 5" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fcdf4b313-4f84-4a95-b2d4-29e3bdd5a971-6.png" alt="Book of Warriors — page 6" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F2f1baada-89af-4f2f-adbc-34cbbdde925f-7.png" alt="Book of Warriors — page 7" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Ff47bb55b-9e5c-4d75-86e9-a81a085c2465-8.png" alt="Book of Warriors — page 8" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F276d4a60-9664-4659-b76b-d9ec7aeb6cef-9.png" alt="Book of Warriors — page 9" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fbf749819-f495-4ff5-9cba-7c47435be641-10.png" alt="Book of Warriors — page 10" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F1f7654e7-d146-43d5-87a8-2a2e569aa939-11.png" alt="Book of Warriors — page 11" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F9d5f654c-0adb-447d-afc3-d8ab5bca31b4-12.png" alt="Book of Warriors — page 12" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F5c6968e8-c825-4444-ba84-4319c8bfb26e-13.png" alt="Book of Warriors — page 13" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F102a44ce-e877-4b02-91e4-5f7fd1c7c6bf-14.png" alt="Book of Warriors — page 14" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F06841c50-9fa7-4337-aa46-afd8f9c9cf4e-15.png" alt="Book of Warriors — page 15" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F2d09b01f-d3f2-4c69-83da-cf0f0e674f8c-16.png" alt="Book of Warriors — page 16" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fda35479b-9b3c-44e6-b76e-a7de9dd69297-17.png" alt="Book of Warriors — page 17" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F6b5ad138-bf7f-4828-a84b-72b502b8e8de-18.png" alt="Book of Warriors — page 18" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F307340f3-861b-4954-870c-c3d06579113c-19.png" alt="Book of Warriors — page 19" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Faf4357f4-e849-4f7e-a3bc-ac63a0078376-20.png" alt="Book of Warriors — page 20" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F78d20eee-969d-49e1-aadd-1be909138a71-21.png" alt="Book of Warriors — page 21" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fe45a409a-2816-437a-9156-70e622ed1764-22.png" alt="Book of Warriors — page 22" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F45c012ce-5ecd-4727-a574-5ad941866bcf-23.png" alt="Book of Warriors — page 23" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fcf661caf-bf71-4ca6-8227-1ff30dc4e9bd-24.png" alt="Book of Warriors — page 24" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F5e7f8880-e989-4ec9-a350-9d8aa3f882b7-25.png" alt="Book of Warriors — page 25" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fb3a96bfe-380e-4ea4-a33b-6476e8a719c1-26.png" alt="Book of Warriors — page 26" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F56e3d5c8-a16a-453a-8c25-21c33c2fee80-27.png" alt="Book of Warriors — page 27" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F5584480b-7451-40bc-a218-fb19e29889ed-28.png" alt="Book of Warriors — page 28" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F6f2afdb2-37d5-49a7-9fbd-08afa09ed2e9-29.png" alt="Book of Warriors — page 29" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F1b0d9532-175c-4bab-a14a-feb65aed2ed0-30.png" alt="Book of Warriors — page 30" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F930afefe-4f31-47d1-883f-a1dbb9c59e8d-31.png" alt="Book of Warriors — page 31" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F3f95dd6d-75ea-45cb-9913-f67bbd982e6d-32.png" alt="Book of Warriors — page 32" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F8d3fd4b9-413c-4e37-a162-e9a422f494b9-33.png" alt="Book of Warriors — page 33" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F699f9fbd-f36c-4406-b77a-42730198ca71-34.png" alt="Book of Warriors — page 34" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fd69030b5-e98b-431f-a801-dba0538ada90-35.png" alt="Book of Warriors — page 35" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F69c8b4a9-cf1b-4060-9d83-f90586b63622-36.png" alt="Book of Warriors — page 36" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Fc806acb9-d7d9-4996-a6dd-54dab46fc31c-37.png" alt="Book of Warriors — page 37" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2Ffa838d7a-774c-4983-aa38-3380b94ff409-38.png" alt="Book of Warriors — page 38" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F03eda678-89e5-430e-8f59-18c33615bb3e-39.png" alt="Book of Warriors — page 39" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F6f635e37-a83e-4c06-b432-35ff7b2301dd-40.png" alt="Book of Warriors — page 40" loading="lazy" /></div>
+                <div class="gallery-slide"><img width="800" height="800" src="https://img-cdn.magiceden.dev/rs:fill:800:0:0/plain/https%3A%2F%2Fna-assets.pinit.io%2F35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy%2F1c6a6762-1908-4422-b8f3-96cfb5c8b339%2F0723af33-5ba4-4cb4-898f-c44b5ebc2a14-41.png" alt="Book of Warriors — page 41" loading="lazy" /></div>
                 <div class="gallery-controls">
-                  <button class="gallery-btn" aria-label="Previous page" onclick="slideGallery('gallery-8',-1)">&#8592;</button>
+                  <button type="button" class="gallery-btn" aria-label="Previous page" onclick="slideGallery('gallery-8',-1)">&#8592;</button>
                   <span class="gallery-count" data-for="gallery-8"></span>
-                  <button class="gallery-btn" aria-label="Next page" onclick="slideGallery('gallery-8',1)">&#8594;</button>
+                  <button type="button" class="gallery-btn" aria-label="Next page" onclick="slideGallery('gallery-8',1)">&#8594;</button>
                 </div>
               </div>
               <div class="project-info">
@@ -2345,7 +2358,7 @@
         img.alt = source.alt || '';
       }
       const card = viewer.closest('.project-card');
-      const h3 = card && card.querySelector('.project-title-wrap h3');
+      const h3 = card && card.querySelector('.project-title-wrap .project-title');
       const book = h3 ? h3.textContent.split('|').pop().trim() : '';
       cap.innerHTML = book + ' <span>&nbsp;·&nbsp; ' + (i + 1) + ' / ' + slides.length + '</span>';
       const multi = slides.length > 1;
@@ -2570,7 +2583,7 @@
     // Harvest every gallery image on the page
     const pool = [];
     document.querySelectorAll('.project-card').forEach(card => {
-      const h3 = card.querySelector('.project-title-wrap h3');
+      const h3 = card.querySelector('.project-title-wrap .project-title');
       const raw = h3 ? h3.textContent.trim() : 'The Lost Pages';
       const label = raw.split('|').pop().trim();
       card.querySelectorAll('.gallery-slide img, .gallery-slide video').forEach(img => {
