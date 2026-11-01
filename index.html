@@ -72,7 +72,11 @@
     /* ── STARFIELD ── */
     #starfield {
       position: fixed;
-      inset: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      height: 100lvh; /* largest viewport, so the phone address bar showing/hiding doesn't resize it */
       z-index: 0;
       pointer-events: none;
     }
@@ -2045,9 +2049,15 @@
   const ctx = canvas.getContext('2d');
   let stars = [], shootingStars = [];
 
+  // Size the canvas to its CSS box (100lvh), which stays constant while the
+  // mobile address bar slides in/out. Returns true only if the size changed.
   function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    const w = Math.round(canvas.clientWidth || window.innerWidth);
+    const h = Math.round(canvas.clientHeight || window.innerHeight);
+    if (w === canvas.width && h === canvas.height) return false;
+    canvas.width = w;
+    canvas.height = h;
+    return true;
   }
 
   function initStars() {
@@ -2055,8 +2065,8 @@
     for (let i = 0; i < 350; i++) {
       const tier = Math.random();
       stars.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
+        nx: Math.random(), // stored as 0..1 so a resize rescales stars instead of reshuffling them
+        ny: Math.random(),
         r: tier > 0.95 ? Math.random() * 2 + 1.2
           : tier > 0.7  ? Math.random() * 1.2 + 0.6
           :               Math.random() * 0.6 + 0.2,
@@ -2086,6 +2096,7 @@
 
     // Draw pulsating stars
     stars.forEach(s => {
+      s.x = s.nx * canvas.width; s.y = s.ny * canvas.height;
       const pulse = s.pulse
         ? Math.abs(Math.sin(t * s.speed * 2.5 + s.offset))
         : 0.1 + 0.9 * (0.5 + 0.5 * Math.sin(t * s.speed + s.offset));
@@ -2165,13 +2176,14 @@
   function drawStaticStars() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     stars.forEach(s => {
+      s.x = s.nx * canvas.width; s.y = s.ny * canvas.height;
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
       ctx.fillStyle = `hsla(${s.hue},60%,92%,0.6)`;
       ctx.fill();
     });
   }
-  window.addEventListener('resize', () => { resizeCanvas(); initStars(); if (reducedMotion) drawStaticStars(); });
+  window.addEventListener('resize', () => { if (resizeCanvas() && reducedMotion) drawStaticStars(); });
 
   // ── QUOTE PANEL ──
   const quotes = [
