@@ -70,17 +70,18 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
   })();
 
   // ---------- book layout, in the model's own units ----------
-  const S  = 2.8 / 0.981;            // model height -> 2.8 scene units
-  const XH = -0.332;                 // spine-side edge of the covers (hinge line)
-  const ZI = 0.055;                  // inner face of each cover board
-  const X0 = -0.261;                 // plane the inner faces lie on when open
+  const H  = 0.97928;                // model height in its own units
+  const S  = 2.8 / H;                // model height -> 2.8 scene units
+  const XH = -0.320;                 // spine-side edge of the covers (hinge line)
+  const ZI = 0.110;                  // inner face of each cover board
+  const X0 = -0.250;                 // plane the inner faces lie on when open
   const G  = 0.012;                  // half-width of the gutter when open
-  const WP = 0.696, PY0 = 0.016, PY1 = 0.957, PH = PY1 - PY0;   // page size, kept inside the cover lip
+  const WP = 0.688, PY0 = 0.018, PY1 = 0.958, PH = PY1 - PY0;   // page size, kept inside the cover lip
   const TP = ZI * 2;                 // thickness of the whole page block
   const LEAVES = Math.max(1, Math.ceil(PAGES.length / 2));
 
   const tilt = new THREE.Group(), book = new THREE.Group(), M = new THREE.Group();
-  M.scale.setScalar(S); M.position.y = -0.4905 * S;
+  M.scale.setScalar(S); M.position.y = -0.5 * H * S;
   book.add(M); tilt.add(book); scene.add(tilt);
   book.visible = false;              // nothing of the book is shown until the cover has loaded and drawn once
 
@@ -105,10 +106,7 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
                  jx:(Math.random()-.5)*2, jy:(Math.random()-.5)*2});
   }
   // dark backing under each cover's surface, so nothing shows through when a chain shifts
-  [1, -1].forEach(function(sg){
-    const m = new THREE.Mesh(new THREE.PlaneGeometry(0.700, 0.960), new THREE.MeshStandardMaterial({color:0x1a0a24, roughness:.9, envMapIntensity:.2, side:THREE.DoubleSide}));
-    m.position.set(0.022, 0.486, sg*0.063); (sg > 0 ? front : back).inner.add(m);
-  });
+  // Inner faces are lined by the endpapers below; no extra backing on this mesh.
 
   // ---------- paper ----------
   // Leaf edges: cream stock with thin separated lines. The old texture painted a
@@ -445,13 +443,13 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
   }
   const endMat = new THREE.MeshStandardMaterial({map:endTex(), roughness:.9, envMapIntensity:.3});
   function cap(inner, sign){
-    const m = new THREE.Mesh(new THREE.PlaneGeometry(0.706, 0.966), endMat);
-    m.position.set(0.022, 0.486, sign * (ZI - 0.0004)); if (sign > 0) m.rotation.y = Math.PI;
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(0.670, 0.940), endMat);
+    m.position.set(0.015, 0.489, sign * (ZI - 0.0004)); if (sign > 0) m.rotation.y = Math.PI;
     inner.add(m);
   }
   cap(front.inner, 1); cap(back.inner, -1);
-  const gutter = new THREE.Mesh(new THREE.BoxGeometry(X0 + 0.332, PH - 0.016, 0.07), dark);
-  gutter.position.set((X0 - 0.332)/2, PY0 + PH/2, 0); M.add(gutter);
+  const gutter = new THREE.Mesh(new THREE.BoxGeometry(Math.abs(X0 - XH), PH - 0.016, 0.07), dark);
+  gutter.position.set((X0 + XH)/2, PY0 + PH/2, 0); M.add(gutter);
 
   // the turning leaf
   function leafGeo(verso){
@@ -511,7 +509,7 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
   function prev(){ if (mode !== 'read' || flip) return; if (turned > 0){ flip = {dir:-1, p:1}; refresh(); } else closeBook(); }
 
   // ---------- living cover: chains that shiver, a molten moon, a glint on the metal ----------
-  const U = { uTime:{value:0}, uRattle:{value:0}, uGlint:{value:0}, uGlintAmt:{value:0} };
+  const U = { uTime:{value:0}, uRattle:{value:0}, uGlint:{value:0}, uGlintAmt:{value:0}, uUnlock:{value:0} };
   // The chains are part of the cover's surface, so the shader finds them by where they sit (a band round
   // the cover) and how far they stand proud of the leather. Everything is worked out from the vertex
   // position, with no extra vertex data, to keep it portable across phones.
@@ -522,13 +520,26 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
     mat.onBeforeCompile = function(sh){
       if (!mat.userData.live) return;
       sh.uniforms.tbTime = U.uTime; sh.uniforms.tbRattle = U.uRattle; sh.uniforms.tbGlint = U.uGlint; sh.uniforms.tbGlintAmt = U.uGlintAmt;
+      sh.uniforms.tbUnlock = U.uUnlock;
       sh.uniforms.tbS = uS; sh.uniforms.tbO = uO; sh.uniforms.tbAmp = uAmp; sh.uniforms.tbXL = uXL;
       sh.vertexShader = [
         'uniform highp float tbTime;', 'uniform highp float tbRattle;', 'uniform highp float tbAmp;', 'uniform highp float tbS;',
-        'uniform highp float tbXL;', 'uniform highp vec3 tbO;', 'varying highp vec3 tbPos;', ''].join('\n') +
+        'uniform highp float tbXL;', 'uniform highp float tbUnlock;', 'uniform highp vec3 tbO;', 'varying highp vec3 tbPos;', ''].join('\n') +
         sh.vertexShader.replace('#include <begin_vertex>', [
           '#include <begin_vertex>',
           'tbPos = position * tbS + tbO;',
+          // The clasp is still fused to the front cover, so we swing its mid-height hook out before the board opens.
+          'if (tbUnlock > 0.001){',
+          '  float tbCw = smoothstep(0.322, 0.368, tbPos.x) * (1.0 - smoothstep(0.14, 0.22, abs(tbPos.y - 0.50)));',
+          '  if (tbCw > 0.001){',
+          '    float tbA = tbUnlock * 1.15 * tbCw;',
+          '    vec3 tbP = tbPos - vec3(0.338, 0.0, 0.08);',
+          '    float tbCs = cos(tbA), tbSn = sin(tbA);',
+          '    vec3 tbQ = vec3(tbCs * tbP.x + tbSn * tbP.z, tbP.y, -tbSn * tbP.x + tbCs * tbP.z) + vec3(0.338, 0.0, 0.08);',
+          '    transformed += (tbQ - tbPos) / max(tbS, 0.0001);',
+          '    tbPos = tbQ;',
+          '  }',
+          '}',
           'if (tbRattle > 0.001 && tbXL < 1.0){',
           '  float tbH = abs(tbPos.z);',
           '  float tbCx = clamp(tbPos.x, tbXL, 0.295), tbCy = clamp(tbPos.y, 0.100, 0.895);',
@@ -554,7 +565,21 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
           'float tbM2 = sin(tbPos.y*71.0 - tbTime*1.9 + tbPos.x*23.0);',
           'totalEmissiveRadiance *= 0.86 + 0.20*tbM1 + 0.10*tbM2;',
           'float tbG = max(sin(tbPos.y*7.0 + tbPos.x*5.0 - tbGlint), 0.0);',
-          'totalEmissiveRadiance += vec3(1.0, 0.86, 0.62) * pow(tbG, 60.0) * smoothstep(0.62, 0.92, metalnessFactor) * tbGlintAmt * 0.6;'].join('\n'));
+          'totalEmissiveRadiance += vec3(1.0, 0.86, 0.62) * pow(tbG, 60.0) * smoothstep(0.62, 0.92, metalnessFactor) * tbGlintAmt * 0.6;',
+          // Crescent: the gold already painted on the cover is made to glow and breathe.
+          'float tbGold = smoothstep(0.50, 0.82, diffuseColor.r) * smoothstep(0.28, 0.62, diffuseColor.g) * (1.0 - smoothstep(0.22, 0.48, diffuseColor.b));',
+          'totalEmissiveRadiance += diffuseColor.rgb * tbGold * (0.85 + 0.55 * max(sin(tbTime * 1.7), 0.0));',
+          // Corner gears: a traveling highlight so they read as turning.
+          'vec2 tbGp[4]; tbGp[0]=vec2(-0.22,0.82); tbGp[1]=vec2(0.26,0.82); tbGp[2]=vec2(-0.22,0.18); tbGp[3]=vec2(0.26,0.18);',
+          'float tbGear = 0.0;',
+          'for (int tbI=0; tbI<4; tbI++){',
+          '  vec2 tbD = tbPos.xy - tbGp[tbI];',
+          '  float tbRad = length(tbD);',
+          '  float tbIn = 1.0 - smoothstep(0.018, 0.055, tbRad);',
+          '  float tbAng = atan(tbD.y, tbD.x);',
+          '  tbGear = max(tbGear, tbIn * (0.35 + 0.65 * pow(max(sin(tbAng * 8.0 - tbTime * 3.2), 0.0), 3.0)));',
+          '}',
+          'totalEmissiveRadiance += vec3(1.0, 0.72, 0.38) * tbGear * 0.35 * smoothstep(0.35, 0.75, metalnessFactor);'].join('\n'));
     };
     mat.customProgramCacheKey = function(){ return mat.userData.live ? 'tb-live' : 'tb-plain'; };
   }
@@ -573,27 +598,32 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
 
   // ---------- load the sculpted parts ----------
   const glowMats = new Set();
-  let claspBack = null, claspHome = null;
+  let claspBack = null, claspHome = null, claspWrap = null;
   const loadEl = document.getElementById('load'), barEl = document.getElementById('bar');
   let ready = false, appear = 1;
   function onModel(gltf){
     const rootNode = gltf.scene.getObjectByName('ROOT') || gltf.scene;
     rootNode.children.slice().forEach(function(o){
       const n = o.name;
-      if (n === 'JU') jawU.inner.add(o);
+      if (n === 'cover_front') front.inner.add(o);
+      else if (n === 'cover_back') back.inner.add(o);
+      else if (n === 'spine') M.add(o);
+      else if (n === 'clasp_wrap'){ claspWrap = o; front.inner.add(o); }
+      else if (n === 'JU') jawU.inner.add(o);
       else if (n === 'JL') jawL.inner.add(o);
       else if (n.indexOf('FC_') === 0) hang(o, front.inner);
       else if (n.indexOf('BC_') === 0) hang(o, back.inner);
       else if (n.charAt(0) === 'F') front.inner.add(o);
       else if (n.charAt(0) === 'S') M.add(o);
-      else back.inner.add(o);
+      else if (n !== 'ROOT') back.inner.add(o);
       o.traverse(function(q){
         if (!q.isMesh) return;
         const mat = q.material.clone(); q.material = mat;          // one material per part, so each knows its own placement
         [mat.map, mat.normalMap, mat.roughnessMap, mat.emissiveMap].forEach(function(t){ if (t) t.anisotropy = ANISO; });
-        mat.envMapIntensity = 1.1;
+        mat.envMapIntensity = 1.15;
+        mat.metalness = mat.metalness || 0.35;
         if (mat.emissiveMap){ mat.emissive.set(0xffffff); glowMats.add(mat); }
-        liveCover(mat, q, 9.0);          // chains move for real here, so the in-shader shiver stays off
+        liveCover(mat, q, 9.0);
       });
     });
     // Show the whole book at once. The first frame with the cover is slow on phones (its textures go to the
@@ -619,7 +649,7 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
   }
 
   // ---------- rune glow ----------
-  const RX = 0.0045, RY = 0.5035;
+  const RX = 0.020, RY = 0.500;
   function glowTex(){
     const c = document.createElement('canvas'); c.width = c.height = 256;
     const g = c.getContext('2d');
@@ -631,10 +661,10 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
   }
   const gt = glowTex();
   function rune(inner, sign){
-    const halo = new THREE.Mesh(new THREE.PlaneGeometry(0.62,0.62),
+    const halo = new THREE.Mesh(new THREE.PlaneGeometry(0.70,0.70),
       new THREE.MeshBasicMaterial({map:gt, transparent:true, blending:THREE.AdditiveBlending, depthWrite:false}));
-    halo.position.set(sign*RX, RY, sign*0.114); if (sign < 0) halo.rotation.y = Math.PI;
-    const light = new THREE.PointLight(0xffb040, 1.6, 2.6, 2); light.position.set(sign*RX, RY, sign*0.30);
+    halo.position.set(sign*RX, RY, sign*0.148); if (sign < 0) halo.rotation.y = Math.PI;
+    const light = new THREE.PointLight(0xffb040, 1.8, 2.8, 2); light.position.set(sign*RX, RY, sign*0.32);
     inner.add(halo, light);
     return {halo, light, inner, sign, n:new THREE.Vector3()};
   }
@@ -646,7 +676,7 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
     const t = new THREE.CanvasTexture(c); t.encoding = THREE.sRGBEncoding; t.anisotropy = ANISO;
     const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshStandardMaterial({
       map:t, transparent:true, metalness:.55, roughness:.42, envMapIntensity:1.2, depthWrite:false,
-      polygonOffset:true, polygonOffsetFactor:-2, polygonOffsetUnits:-2 }));
+      polygonOffset:true, polygonOffsetFactor:-4, polygonOffsetUnits:-4 }));
     m.position.set(cx, cy, z); front.inner.add(m);
     const redraw = function(){
       const g = c.getContext('2d'); g.clearRect(0,0,c.width,c.height);
@@ -681,19 +711,19 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
     g.fillRect(sx - st*0.75, base - bt*0.5, st*2.5, bt*0.5);
     return fl + st*1.75;
   }
-  plate(0.0085, 0.7875, 0.108, 0.038, 0.0995, function(g, w, h){
+  plate(0.020, 0.805, 0.132, 0.036, 0.152, function(g, w, h){
     const cap = h*0.58, base = h/2 + cap/2, gap = cap*0.50, wTT = cap*1.22, w1 = cap*(0.24 + 0.19*1.75);
     const x = (w - (wTT + gap + w1))/2;
     drawTT(g, x, base, cap); drawOne(g, x + wTT + gap, base, cap);
   });
-  plate(0.0090, 0.2635, 0.232, 0.042, 0.0995, function(g, w, h){
+  plate(0.020, 0.178, 0.168, 0.036, 0.158, function(g, w, h){
     const txt = 'BUILDERS II'; let f = Math.round(h*0.86);
     g.textBaseline = 'alphabetic'; g.textAlign = 'left';
     let sp, total;
     for (;; f -= 2){                                   // largest size that fits the plate between its rivets
       g.font = f + "px " + HEAD; sp = f*0.11; total = -sp;
       for (const ch of txt) total += g.measureText(ch).width + sp;
-      if (total <= w*0.93 || f < 20) break;
+      if (total <= w*0.86 || f < 20) break;
     }
     const m = g.measureText('B'), asc = m.actualBoundingBoxAscent || f*0.66;
     let x = (w - total)/2; const base = h/2 + asc/2;
@@ -768,8 +798,8 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
     M.updateWorldMatrix(true, false); c.set(0, 0.49, 0); M.localToWorld(c);
     for (let i=0;i<DN;i++){
       const r = Math.random();
-      if (r < 0.6) p.set(0.378, PY0 + Math.random()*PH, (Math.random()-.5)*0.08);            // fore-edge
-      else p.set(XH + Math.random()*(0.378 - XH), r < 0.8 ? PY1 : PY0, (Math.random()-.5)*0.08);   // head and tail
+      if (r < 0.6) p.set(0.355, PY0 + Math.random()*PH, (Math.random()-.5)*0.08);            // fore-edge
+      else p.set(XH + Math.random()*(0.355 - XH), r < 0.8 ? PY1 : PY0, (Math.random()-.5)*0.08);   // head and tail
       M.localToWorld(p);
       dpos[i*3] = p.x; dpos[i*3+1] = p.y; dpos[i*3+2] = p.z;
       p.sub(c).normalize().multiplyScalar(0.35 + Math.random()*0.75);
@@ -810,7 +840,7 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
   }
   closeBtn.addEventListener('click', closeBook);
   function readDist(){
-    const t = Math.tan(camera.fov * Math.PI/360), w = 2*(G+WP)*S*1.1, h = 0.981*S*1.16;
+    const t = Math.tan(camera.fov * Math.PI/360), w = 2*(G+WP)*S*1.1, h = H*S*1.16;
     return Math.max(h/2/t, w/2/(t*camera.aspect)) + 0.6;
   }
 
@@ -903,9 +933,10 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
     if (mode === 'closing'){ openT = Math.max(0, openT - dt/2.2);
       if (openT === 0){ mode = 'show'; idle = 99; zoomRead = 1; turned = 0; refresh();      // a closed book always reopens at its first page
         jolt = 0.55; flare = 0.4; puffed = false; setHint('locked'); } }
-    const la = laTest >= 0 ? laTest : sm(0, 0.2, openT), cv = sm(0.22, 1, openT);      // jaws open fully before the cover starts to move
-    // Swing the clasp out past the fore-edge and on around until it lies behind the back board.
-    jawU.p.rotation.z = la * 0.6; jawL.p.rotation.z = -la * 0.6;      // the tongs open and let go of the bar
+    const la = laTest >= 0 ? laTest : sm(0, 0.2, openT), cv = sm(0.22, 1, openT);      // clasp unlocks fully before the cover starts to move
+    U.uUnlock.value = la;
+    if (claspWrap) claspWrap.visible = la < 0.12;   // the mid-edge wrap would swing through the pages if it stayed
+    jawU.p.rotation.z = la * 0.6; jawL.p.rotation.z = -la * 0.6;
     if (claspBack){
       const c = sm(0.2, 0.75, openT);
       claspBack.position.x = claspHome.x - c * 0.07;
@@ -999,7 +1030,7 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
     if (liveChecked < 2 && ready && (frameNo++ % 20) === 19) checkLive();
     requestAnimationFrame(frame);
   }
-  if (location.hostname==='localhost') window.__book = {
+  if (location.hostname==='localhost' || location.hostname==='127.0.0.1') window.__book = {
     view:(y,p)=>{ yaw=y; pitch=p; idle=-1e9; }, peek:(d)=>{ yawRead += d; }, open:openBook, close:closeBook, next, prev, jaw:(v)=>{ laTest = v; }, kick:(v)=>{ jolt = v; }, goto:(n)=>{ turned = Math.max(0, Math.min(LEAVES, n)); refresh(); },
     state:()=>({mode, openT, turned, flip:!!flip, ready}) };
   frame();
