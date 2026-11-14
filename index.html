@@ -853,6 +853,57 @@
       font-family: 'Cinzel', serif;
     }
 
+    /* ── RELICS SECTION ── */
+    .relics-grid {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .relics-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.1rem;
+      width: 100%;
+      max-width: 320px;
+      text-decoration: none;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(26,5,51,0.6), rgba(10,26,58,0.5));
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 4px;
+      padding: 2.1rem 1.5rem 1.9rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      backdrop-filter: blur(4px);
+    }
+
+    .relics-card:hover {
+      border-color: rgba(201,168,76,0.5);
+      box-shadow: 0 0 30px rgba(123,63,228,0.2), 0 0 60px rgba(63,143,228,0.1);
+    }
+
+    .relics-mark {
+      width: 78px;
+      height: 78px;
+      color: var(--gold);
+      filter: drop-shadow(0 0 12px rgba(201,168,76,0.3));
+      transition: transform 0.3s, filter 0.3s;
+    }
+
+    .relics-card:hover .relics-mark {
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 16px rgba(201,168,76,0.45));
+    }
+
+    .relics-card h4 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.22em;
+      color: var(--gold);
+      margin: 0;
+    }
+
     /* ── FOOTER ── */
     footer {
       text-align: center;
@@ -1370,22 +1421,6 @@
     .upcoming-art { display: block; box-sizing: border-box; width: 100%; height: 84px; padding: 10px 0; object-fit: contain; margin: 0; filter: drop-shadow(0 0 12px rgba(201,168,76,.3)); }
     .upcoming-art.tall { padding: 2px 0; }
     .upcoming-card .upcoming-badge { margin: 0; }
-    .upcoming-main {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1.1rem;
-      text-decoration: none;
-      width: 100%;
-      color: inherit;
-    }
-    .upcoming-relic {
-      flex: 0 0 auto;
-      width: auto;
-      min-height: 36px;
-      padding: 0 1.1rem;
-    }
     .project-title[data-art], .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
     @media (max-width: 600px) {
       .project-header-left, .project-title-wrap { min-width: 0; }
@@ -1583,7 +1618,6 @@
                 <div class="project-links">
                   <a href="https://nft.4nbt.shop/c/lostpages?book=builders" target="_blank" rel="noopener noreferrer" class="btn-link btn-primary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>4NBT Market<span class="btn-arrow">&#8599;</span></a>
                   <a href="https://x.com/trillionbear/status/1903343718381330710" target="_blank" rel="noopener" class="btn-link btn-secondary"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Read the Book<span class="btn-arrow">&#8599;</span></a>
-                  <a href="/relics/#builders" class="btn-link btn-secondary" aria-label="View the Book of Builders relic"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M8 7h8M8 11h6"/></svg>View relic</a>
                 </div>
 </div>
             </div>
@@ -1637,7 +1671,6 @@
                 <div class="project-links">
                   <a href="https://nft.4nbt.shop/c/lostpages?book=rebels" target="_blank" rel="noopener noreferrer" class="btn-link btn-primary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>4NBT Market<span class="btn-arrow">&#8599;</span></a>
                   <a href="https://x.com/trillionbear/status/1904056341267677221" target="_blank" rel="noopener" class="btn-link btn-secondary"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Read the Book<span class="btn-arrow">&#8599;</span></a>
-                  <a href="/relics/#rebels" class="btn-link btn-secondary" aria-label="View the Book of Rebels relic"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M8 7h8M8 11h6"/></svg>View relic</a>
                 </div>
 </div>
             </div>
@@ -1691,7 +1724,6 @@
                 <div class="project-links">
                   <a href="https://nft.4nbt.shop/c/lostpages?book=kings" target="_blank" rel="noopener noreferrer" class="btn-link btn-primary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>4NBT Market<span class="btn-arrow">&#8599;</span></a>
                   <a href="https://x.com/trillionbear/status/1904735663154487417" target="_blank" rel="noopener" class="btn-link btn-secondary"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Read the Book<span class="btn-arrow">&#8599;</span></a>
-                  <a href="/relics/#kings" class="btn-link btn-secondary" aria-label="View the Book of Kings relic"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M8 7h8M8 11h6"/></svg>View relic</a>
                 </div>
 </div>
             </div>
@@ -1745,7 +1777,6 @@
                 <div class="project-links">
                   <a href="https://nft.4nbt.shop/c/lostpages?book=kings-2" target="_blank" rel="noopener noreferrer" class="btn-link btn-primary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>4NBT Market<span class="btn-arrow">&#8599;</span></a>
                   <a href="https://x.com/trillionbear/status/1905417816095760581" target="_blank" rel="noopener" class="btn-link btn-secondary"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Read the Book<span class="btn-arrow">&#8599;</span></a>
-                  <a href="/relics/#kings-2" class="btn-link btn-secondary" aria-label="View the Book of Kings II relic"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M8 7h8M8 11h6"/></svg>View relic</a>
                 </div>
 </div>
             </div>
@@ -1799,7 +1830,6 @@
                 <div class="project-links">
                   <a href="https://nft.4nbt.shop/c/lostpages?book=seekers" target="_blank" rel="noopener noreferrer" class="btn-link btn-primary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>4NBT Market<span class="btn-arrow">&#8599;</span></a>
                   <a href="https://x.com/trillionbear/status/1914824798468792411" target="_blank" rel="noopener" class="btn-link btn-secondary"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Read the Book<span class="btn-arrow">&#8599;</span></a>
-                  <a href="/relics/#seekers" class="btn-link btn-secondary" aria-label="View the Book of Seekers relic"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M8 7h8M8 11h6"/></svg>View relic</a>
                 </div>
 </div>
             </div>
@@ -1852,7 +1882,6 @@
                 <div class="project-links">
                   <a href="https://nft.4nbt.shop/c/lostpages?book=hunters" target="_blank" rel="noopener noreferrer" class="btn-link btn-primary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>4NBT Market<span class="btn-arrow">&#8599;</span></a>
                   <a href="https://x.com/trillionbear/status/1915308095258951999" target="_blank" rel="noopener" class="btn-link btn-secondary"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Read the Book<span class="btn-arrow">&#8599;</span></a>
-                  <a href="/relics/#hunters" class="btn-link btn-secondary" aria-label="View the Book of Hunters relic"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M8 7h8M8 11h6"/></svg>View relic</a>
                 </div>
 </div>
             </div>
@@ -1935,7 +1964,6 @@
                 <div class="project-links">
                   <a href="https://nft.4nbt.shop/c/lostpages?book=watchers" target="_blank" rel="noopener noreferrer" class="btn-link btn-primary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>4NBT Market<span class="btn-arrow">&#8599;</span></a>
                   <a href="https://x.com/trillionbear/status/1922882572368961860" target="_blank" rel="noopener" class="btn-link btn-secondary"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Read the Book<span class="btn-arrow">&#8599;</span></a>
-                  <a href="/relics/#watchers" class="btn-link btn-secondary" aria-label="View the Book of Watchers relic"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M8 7h8M8 11h6"/></svg>View relic</a>
                 </div>
 </div>
             </div>
@@ -2019,7 +2047,6 @@
                 <div class="project-links">
                   <a href="https://nft.4nbt.shop/c/lostpages?book=warriors" target="_blank" rel="noopener noreferrer" class="btn-link btn-primary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>4NBT Market<span class="btn-arrow">&#8599;</span></a>
                   <a href="https://x.com/trillionbear/status/2010921503441682876" target="_blank" rel="noopener" class="btn-link btn-secondary"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Read the Book<span class="btn-arrow">&#8599;</span></a>
-                  <a href="/relics/#warriors" class="btn-link btn-secondary" aria-label="View the Book of Warriors relic"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M8 7h8M8 11h6"/></svg>View relic</a>
                 </div>
               </div>
             </div>
@@ -2036,30 +2063,47 @@
     </div>
 
     <div class="upcoming-grid">
-      <div class="upcoming-card">
-        <a href="https://x.com/trillionbear/status/2011169136538243085?s=20" target="_blank" rel="noopener noreferrer" class="upcoming-main">
-          <img class="upcoming-art tall" src="assets/covers/builders-2.webp" alt="" width="413" height="181" decoding="async">
-          <h4 class="visually-hidden">BUILDERS 2</h4>
-          <span class="upcoming-badge">Coming Soon</span>
-        </a>
-        <a href="/relics/#builders-2" class="btn-link btn-secondary upcoming-relic" aria-label="View the Book of Builders II relic">View relic</a>
-      </div>
-      <div class="upcoming-card">
-        <a href="https://x.com/trillionbear/status/2011243871477305852?s=20" target="_blank" rel="noopener noreferrer" class="upcoming-main">
-          <img class="upcoming-art" src="assets/covers/crusaders.webp" alt="" width="550" height="151" decoding="async">
-          <h4 class="visually-hidden">CRUSADERS</h4>
-          <span class="upcoming-badge">Coming Soon</span>
-        </a>
-        <a href="/relics/#crusaders" class="btn-link btn-secondary upcoming-relic" aria-label="View the Book of Crusaders relic">View relic</a>
-      </div>
-      <div class="upcoming-card">
-        <a href="https://x.com/trillionbear/status/2108654075222843842" target="_blank" rel="noopener noreferrer" class="upcoming-main">
-          <img class="upcoming-art" src="assets/covers/seers.webp" alt="" width="292" height="156" decoding="async">
-          <h4 class="visually-hidden">SEERS</h4>
-          <span class="upcoming-badge">Coming Soon</span>
-        </a>
-        <a href="/relics/#seers" class="btn-link btn-secondary upcoming-relic" aria-label="View the Book of Seers relic">View relic</a>
-      </div>
+      <a href="https://x.com/trillionbear/status/2011169136538243085?s=20" target="_blank" rel="noopener noreferrer" class="upcoming-card">
+        <img class="upcoming-art tall" src="assets/covers/builders-2.webp" alt="" width="413" height="181" decoding="async">
+        <h4 class="visually-hidden">BUILDERS 2</h4>
+        <span class="upcoming-badge">Coming Soon</span>
+      </a>
+      <a href="https://x.com/trillionbear/status/2011243871477305852?s=20" target="_blank" rel="noopener noreferrer" class="upcoming-card">
+        <img class="upcoming-art" src="assets/covers/crusaders.webp" alt="" width="550" height="151" decoding="async">
+        <h4 class="visually-hidden">CRUSADERS</h4>
+        <span class="upcoming-badge">Coming Soon</span>
+      </a>
+      <a href="https://x.com/trillionbear/status/2108654075222843842" target="_blank" rel="noopener noreferrer" class="upcoming-card">
+        <img class="upcoming-art" src="assets/covers/seers.webp" alt="" width="292" height="156" decoding="async">
+        <h4 class="visually-hidden">SEERS</h4>
+        <span class="upcoming-badge">Coming Soon</span>
+      </a>
+    </div>
+  </section>
+
+  <section id="relics">
+    <div class="section-header">
+      <div class="section-eyebrow">✦ The Vault ✦</div>
+      <div class="section-title">Relics</div>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="relics-grid">
+      <a href="/relics/" class="relics-card">
+        <svg class="relics-mark" viewBox="0 0 80 80" width="78" height="78" aria-hidden="true">
+          <defs>
+            <linearGradient id="relicGold" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f0d080"/>
+              <stop offset="1" stop-color="#c9a84c"/>
+            </linearGradient>
+          </defs>
+          <circle cx="40" cy="40" r="26" fill="rgba(201,168,76,0.08)" stroke="url(#relicGold)" stroke-width="1.5"/>
+          <circle cx="40" cy="40" r="21" fill="none" stroke="url(#relicGold)" stroke-width="0.7" opacity="0.5"/>
+          <path d="M40 14v6M40 60v6M14 40h6M60 40h6" fill="none" stroke="url(#relicGold)" stroke-width="1.15" stroke-linecap="round"/>
+          <path d="M40 16C41.4 31.5 48.5 38.6 64 40C48.5 41.4 41.4 48.5 40 64C38.6 48.5 31.5 41.4 16 40C31.5 38.6 38.6 31.5 40 16Z" fill="url(#relicGold)"/>
+        </svg>
+        <h4>RELICS</h4>
+      </a>
     </div>
   </section>
 
