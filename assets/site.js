@@ -414,11 +414,33 @@
       render();
     }
 
+    function bindStep(selector, dir) {
+      const btn = el.querySelector(selector);
+      let last = 0;
+      const go = (e) => {
+        // touchend and the click that follows it must not turn two pages
+        const now = Date.now();
+        if (now - last < 400) { e.preventDefault(); e.stopPropagation(); return; }
+        last = now;
+        e.preventDefault();
+        e.stopPropagation();
+        step(dir);
+      };
+      btn.addEventListener('click', go);
+      // A tap on the arrow lands on the picture underneath unless the
+      // button is hit directly. touchend still arrives on the button.
+      btn.addEventListener('touchend', (e) => {
+        if (e.cancelable) e.preventDefault();
+        go(e);
+      }, { passive: false });
+    }
+    bindStep('.lightbox-prev', -1);
+    bindStep('.lightbox-next', 1);
+
     el.addEventListener('click', e => {
+      if (e.target.closest('.lightbox-prev, .lightbox-next, .lightbox-share')) return;
       const still = el.querySelector('img.lightbox-still');
-      if (e.target === el || e.target === still || e.target === vid || e.target === closeBtn) { close(); return; }
-      if (e.target.closest('.lightbox-prev')) step(-1);
-      else if (e.target.closest('.lightbox-next')) step(1);
+      if (e.target === el || e.target === still || e.target === vid || e.target === closeBtn) close();
     });
 
     // Keep tabbing inside the dialog while it's open
