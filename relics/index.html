@@ -10,26 +10,48 @@
   <link rel="manifest" href="/site.webmanifest"/>
 <meta name="description" content="Open the relics of The Lost Pages — Trillionbear's collection on Solana.">
 <link rel="canonical" href="https://thelostpages.net/relics/">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@600;700&family=IM+Fell+English:ital@0;1&display=swap">
 <style>
-  html,body{margin:0;height:100%;background:#000;overflow:hidden}
-  canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
-  canvas.drag{cursor:grabbing}
-  canvas.read{cursor:pointer}
-  #vig{position:fixed;inset:0;pointer-events:none;
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;min-height:100%;background:#07021a;color:#c4a36a}
+  body.is-viewer{height:100%;overflow:hidden;background:#000}
+  body.is-menu{overflow-x:hidden;overflow-y:auto}
+  canvas#c{display:none}
+  body.is-viewer canvas#c{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
+  body.is-viewer canvas#c.drag{cursor:grabbing}
+  body.is-viewer canvas#c.read{cursor:pointer}
+  #starfield{position:fixed;inset:0;width:100%;height:100vh;height:100lvh;z-index:0;pointer-events:none;display:none}
+  .nebula-bg{position:fixed;inset:0;z-index:0;pointer-events:none;display:none;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 30%, rgba(123,63,228,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 80% 70%, rgba(63,143,228,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 100% 50% at 50% 100%, rgba(26,5,51,0.8) 0%, transparent 70%),
+      #07021a}
+  body.is-menu #starfield, body.is-menu .nebula-bg{display:block}
+  #vig{position:fixed;inset:0;pointer-events:none;display:none;
     background:radial-gradient(ellipse at center,rgba(0,0,0,0) 45%,rgba(0,0,0,.85) 100%)}
-  #hint,#close,#home{font:12px/1 Georgia,'Times New Roman',serif;letter-spacing:.32em;text-transform:lowercase;color:#b08a55}
-  #hint{position:fixed;left:0;right:0;bottom:154px;text-align:center;pointer-events:none;opacity:.8;transition:opacity .8s;z-index:4;text-shadow:0 1px 8px #000,0 0 12px #000}
+  body.is-viewer #vig{display:block}
+  #hint,#close,#home,#back{font:12px/1 Georgia,'Times New Roman',serif;letter-spacing:.32em;text-transform:lowercase;color:#b08a55}
+  #hint{position:fixed;left:0;right:0;bottom:28px;text-align:center;pointer-events:none;opacity:.8;transition:opacity .8s;z-index:4;text-shadow:0 1px 8px #000,0 0 12px #000;display:none}
+  body.is-viewer #hint{display:block}
   #hint.off{opacity:0}
   #close{position:fixed;top:18px;right:20px;background:none;border:1px solid #5a4424;padding:9px 12px 9px 15px;
-    cursor:pointer;opacity:0;pointer-events:none;transition:opacity .6s;z-index:6}
+    cursor:pointer;opacity:0;pointer-events:none;transition:opacity .6s;z-index:6;display:none}
+  body.is-viewer #close{display:block}
   #close.on{opacity:.85;pointer-events:auto}
   #close:hover{color:#ffc27a;border-color:#b08a55}
-  #home{position:fixed;top:18px;left:20px;z-index:6;text-decoration:none;background:rgba(0,0,0,.35);
-    border:1px solid #3d2e18;padding:9px 12px 9px 14px;transition:color .3s,border-color .3s}
-  #home:hover{color:#ffc27a;border-color:#b08a55}
-  #load{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  #home,#back{position:fixed;top:18px;left:20px;z-index:6;text-decoration:none;background:rgba(0,0,0,.35);
+    border:1px solid #3d2e18;transition:color .3s,border-color .3s,background .3s;display:none}
+  #home{padding:9px 12px 9px 14px}
+  #back{width:42px;height:42px;padding:0;box-sizing:border-box;display:none;align-items:center;justify-content:center}
+  body.is-menu #home{display:inline-block}
+  body.is-viewer #back{display:flex}
+  #home:hover,#back:hover{color:#ffc27a;border-color:#b08a55;background:rgba(20,10,4,.7)}
+  #home:focus-visible,#back:focus-visible,#close:focus-visible{outline:2px solid #c9a84c;outline-offset:2px}
+  #back svg{display:block;width:20px;height:20px}
+  #load{position:fixed;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;
     pointer-events:none;font:12px/1 Georgia,'Times New Roman',serif;letter-spacing:.4em;color:#b08a55;transition:opacity .9s;z-index:4}
+  body.is-viewer #load{display:flex}
   #load.off{opacity:0}
   #load img{display:block;max-width:min(420px,70vw);max-height:22vh;width:auto;height:auto;object-fit:contain;
     filter:drop-shadow(0 0 16px rgba(176,138,85,.35));margin-bottom:8px}
@@ -41,43 +63,49 @@
   #nowebgl.on{display:flex}
   #nowebgl a{color:#f0c878;text-decoration:none;letter-spacing:.28em;text-transform:lowercase;border-bottom:1px solid #5a4424;padding-bottom:4px}
   #nowebgl a:hover{color:#ffc27a;border-color:#b08a55}
-  #nowebgl.on ~ #shelf, #nowebgl.on ~ #close, #nowebgl.on ~ #hint{display:none !important}
+  body.is-viewer #nowebgl.on ~ #hint, body.is-viewer #nowebgl.on ~ #close{display:none !important}
   .fontwarm{position:absolute;left:-999px;top:0;visibility:hidden}
 
-  #shelf{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;flex-wrap:wrap;justify-content:center;
-    gap:8px 10px;padding:10px 16px 16px;background:linear-gradient(to top,rgba(0,0,0,.92) 70%,rgba(0,0,0,.55));
-    box-sizing:border-box}
-  #shelf button{display:flex;flex-direction:column;align-items:center;gap:6px;width:84px;margin:0;
-    padding:5px 5px 7px;background:rgba(8,4,16,.55);border:1px solid #3d2e18;border-radius:4px;
-    color:#c4a36a;font:10px/1.2 Georgia,'Times New Roman',serif;letter-spacing:.04em;cursor:pointer;
-    transition:color .3s,border-color .3s,box-shadow .3s,background .3s}
-  #shelf button img{display:block;width:72px;height:72px;object-fit:contain;background:#050308;border-radius:2px;pointer-events:none}
-  #shelf button span{display:block;width:100%;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  #shelf button:hover{color:#ffc27a;border-color:#b08a55;background:rgba(20,10,4,.7)}
-  #shelf button.on{color:#f0c878;border-color:#c9a84c;background:rgba(30,18,6,.75);
-    box-shadow:0 0 0 1px rgba(201,168,76,.4),0 0 16px rgba(201,168,76,.38);cursor:default}
-  #shelf button:focus-visible{outline:2px solid #c9a84c;outline-offset:2px}
-  .shelf-group{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
-  .shelf-group + .shelf-group{border-left:1px solid rgba(176,138,85,.28);padding-left:16px;margin-left:6px}
-  .shelf-label{font:9px/1 Georgia,'Times New Roman',serif;letter-spacing:.22em;text-transform:uppercase;
-    color:#8a6c42}
-  .shelf-tiles{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 10px}
+  #menu{display:none;position:relative;z-index:1;max-width:1320px;margin:0 auto;padding:72px 32px 48px;box-sizing:border-box}
+  body.is-menu #menu{display:block}
+  .menu-title{margin:0;text-align:center;font:700 1.7rem/1 'Cinzel Decorative',Cinzel,serif;
+    letter-spacing:.32em;text-transform:uppercase;color:#f0c878;
+    text-shadow:0 0 24px rgba(201,168,76,.28)}
+  .menu-rule{display:block;width:72px;height:1px;margin:16px auto 8px;background:linear-gradient(to right,transparent,#b08a55,transparent);border:0}
+  .menu-group{margin-top:24px}
+  .menu-label{display:block;margin:0 0 14px;text-align:center;font:600 11px/1 Cinzel,Georgia,serif;
+    letter-spacing:.28em;text-transform:uppercase;color:#8a6c42}
+  .menu-tiles{display:flex;flex-wrap:wrap;justify-content:center;gap:16px 22px}
+  .menu-tiles a{display:flex;flex-direction:column;align-items:center;gap:10px;width:180px;margin:0;
+    padding:8px 8px 12px;background:rgba(8,4,16,.55);border:1px solid #3d2e18;border-radius:6px;
+    color:#c4a36a;font:12px/1.2 Georgia,'Times New Roman',serif;letter-spacing:.06em;text-decoration:none;
+    transition:color .3s,border-color .3s,box-shadow .3s,background .3s,transform .3s}
+  .menu-tiles img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:contain;background:#050308;border-radius:3px;pointer-events:none}
+  .menu-tiles span{display:block;width:100%;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .menu-tiles a:hover{color:#ffc27a;border-color:#b08a55;background:rgba(20,10,4,.7);
+    box-shadow:0 0 20px rgba(201,168,76,.28);transform:translateY(-2px)}
+  .menu-tiles a:focus-visible{outline:2px solid #c9a84c;outline-offset:2px}
+
   @media (max-width:720px){
     #home{top:12px;left:12px;padding:8px 8px 8px 10px;letter-spacing:.16em;font-size:11px}
+    #back{top:12px;left:12px;width:40px;height:40px}
     #close{top:12px;right:12px}
-    #shelf{flex-wrap:nowrap;justify-content:flex-start;align-items:flex-end;overflow-x:auto;overflow-y:hidden;
-      -webkit-overflow-scrolling:touch;gap:8px;padding:10px 12px 14px;scrollbar-color:#5a4424 transparent}
-    #shelf::-webkit-scrollbar{height:4px}
-    #shelf::-webkit-scrollbar-thumb{background:#5a4424;border-radius:4px}
-    #shelf button{flex:0 0 auto;width:76px;padding:4px 4px 6px}
-    #shelf button img{width:64px;height:64px}
-    .shelf-group{flex:0 0 auto;align-items:flex-start}
-    .shelf-tiles{flex-wrap:nowrap}
-    #hint{bottom:148px;padding:0 12px}
+    #hint{bottom:22px;padding:0 12px}
+    #menu{padding:76px 16px 48px}
+    .menu-title{font-size:1.25rem;letter-spacing:.24em}
+    .menu-group{margin-top:28px}
+    .menu-tiles{gap:14px 12px}
+    .menu-tiles a{width:148px;padding:6px 6px 10px;gap:8px}
+    .menu-tiles span{font-size:11px}
+  }
+  @media (max-width:360px){
+    .menu-tiles a{width:128px}
   }
 </style>
 </head>
 <body>
+<div class="nebula-bg"></div>
+<canvas id="starfield"></canvas>
 <canvas id="c"></canvas>
 <div id="vig"></div>
 <div id="load">
@@ -87,27 +115,21 @@
 </div>
 <div id="nowebgl" role="alert">
   <p>This relic needs WebGL, which this browser doesn't support.</p>
-  <a href="/">back to The Lost Pages</a>
+  <a href="/relics/">back to relics</a>
 </div>
 <div id="hint" class="off"></div>
 <a id="home" href="/">the lost pages</a>
+<a id="back" href="/relics/" aria-label="Back to relics">
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M15 5 8 12l7 7"/>
+  </svg>
+</a>
 <button id="close" type="button">close</button>
 <span class="fontwarm" style="font-family:'IM Fell English'">a<i>a</i></span>
 
-<nav id="shelf" aria-label="Choose a relic"></nav>
+<nav id="menu" aria-label="Choose a relic"></nav>
 <script>
 (function(){
-  function hasWebGL(){
-    try {
-      var c = document.createElement('canvas');
-      return !!(c.getContext('webgl') || c.getContext('experimental-webgl'));
-    } catch (e) { return false; }
-  }
-  if (!hasWebGL()){
-    document.getElementById('load').className = 'off';
-    document.getElementById('nowebgl').className = 'on';
-    return;
-  }
   // Add a relic by appending an entry here and saving a square WebP into thumbs/.
   var RELICS = [
     { id:'builders',   name:'Builders',    title:'TT 1 | The Book of Builders',    code:'book1.js',  poster:'../assets/covers/builders.webp',   thumb:'thumbs/builders.webp' },
@@ -129,87 +151,268 @@
   ];
   var BY_ID = {};
   RELICS.forEach(function(r){ BY_ID[r.id] = r; });
-  var key = (location.hash || '').replace('#', '');
-  if (!BY_ID[key]){ try { key = sessionStorage.getItem('tb-relic') || sessionStorage.getItem('tb-book'); } catch (e) {} }
-  if (!BY_ID[key]) key = 'builders';
-  document.title = BY_ID[key].title + ' — Relics';
-  var poster = document.getElementById('poster');
-  poster.alt = BY_ID[key].title;
-  poster.onload = function(){ poster.hidden = false; };
-  poster.onerror = function(){ poster.hidden = true; };
-  poster.src = BY_ID[key].poster;
 
-  var shelf = document.getElementById('shelf');
-  function go(k){
-    if (!BY_ID[k] || k === key) return;
-    try {
-      sessionStorage.setItem('tb-relic', k);
-      sessionStorage.setItem('tb-book', k);
-    } catch (e) {}
-    location.hash = k; location.reload();
+  function relicId(){
+    return (location.hash || '').replace(/^#/, '');
   }
-  function addTile(parent, r){
-    var b = document.createElement('button');
-    b.type = 'button';
-    b.setAttribute('data-relic', r.id);
-    b.setAttribute('aria-label', r.name);
-    if (r.id === key){
-      b.className = 'on';
-      b.setAttribute('aria-current', 'true');
+  function clearHash(){
+    if (location.hash){
+      history.replaceState(null, '', location.pathname + location.search);
     }
-    var img = document.createElement('img');
-    img.src = r.thumb;
-    img.alt = '';
-    img.width = 256;
-    img.height = 256;
-    img.decoding = 'async';
-    var name = document.createElement('span');
-    name.textContent = r.name;
-    b.appendChild(img);
-    b.appendChild(name);
-    b.addEventListener('click', function(){ go(r.id); });
-    parent.appendChild(b);
   }
+  function goMenu(url){
+    var dest = url || (location.pathname + location.search);
+    if (location.hash){
+      location.assign(dest);
+    } else if (location.pathname + location.search !== dest){
+      location.assign(dest);
+    }
+  }
+
+  var menu = document.getElementById('menu');
+  var title = document.createElement('h1');
+  title.className = 'menu-title';
+  title.textContent = 'Relics';
+  var rule = document.createElement('hr');
+  rule.className = 'menu-rule';
+  menu.appendChild(title);
+  menu.appendChild(rule);
   GROUPS.forEach(function(g){
     var items = RELICS.filter(function(r){ return (r.group || 'books') === g.id; });
     if (!items.length) return;
     var section = document.createElement('div');
-    section.className = 'shelf-group';
+    section.className = 'menu-group';
     section.setAttribute('role', 'group');
     section.setAttribute('aria-label', g.label);
     var label = document.createElement('span');
-    label.className = 'shelf-label';
+    label.className = 'menu-label';
     label.textContent = g.label;
     var row = document.createElement('div');
-    row.className = 'shelf-tiles';
-    items.forEach(function(r){ addTile(row, r); });
+    row.className = 'menu-tiles';
+    items.forEach(function(r){
+      var a = document.createElement('a');
+      a.href = '#' + r.id;
+      a.setAttribute('data-relic', r.id);
+      a.setAttribute('aria-label', r.name);
+      var img = document.createElement('img');
+      img.src = r.thumb;
+      img.alt = '';
+      img.width = 256;
+      img.height = 256;
+      img.decoding = 'async';
+      var name = document.createElement('span');
+      name.textContent = r.name;
+      a.appendChild(img);
+      a.appendChild(name);
+      a.addEventListener('click', function(){
+        try {
+          sessionStorage.setItem('tb-relic', r.id);
+          sessionStorage.setItem('tb-book', r.id);
+        } catch (e) {}
+      });
+      row.appendChild(a);
+    });
     section.appendChild(label);
     section.appendChild(row);
-    shelf.appendChild(section);
+    menu.appendChild(section);
   });
-  var active = shelf.querySelector('button.on');
-  if (active && active.scrollIntoView){
-    try { active.scrollIntoView({ inline:'center', block:'nearest' }); } catch (e) { active.scrollIntoView(); }
+
+  function hasWebGL(){
+    try {
+      var c = document.createElement('canvas');
+      return !!(c.getContext('webgl') || c.getContext('experimental-webgl'));
+    } catch (e) { return false; }
   }
-  shelf.addEventListener('keydown', function(e){
-    var dir = { ArrowRight:1, ArrowLeft:-1, ArrowDown:1, ArrowUp:-1 };
-    if (!(e.key in dir) && e.key !== 'Home' && e.key !== 'End') return;
-    e.stopPropagation();
-    var btns = shelf.querySelectorAll('button');
-    var i = Array.prototype.indexOf.call(btns, document.activeElement);
-    if (i < 0) return;
-    e.preventDefault();
-    if (e.key === 'Home') i = 0;
-    else if (e.key === 'End') i = btns.length - 1;
-    else i = (i + dir[e.key] + btns.length) % btns.length;
-    btns[i].focus();
-  });
-  window.addEventListener('hashchange', function(){ go((location.hash || '').replace('#', '')); });
-  function add(src, done){ var s = document.createElement('script'); s.src = src; s.onload = done; s.onerror = done; document.body.appendChild(s); }
-  add('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', function(){
-    add('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js', function(){
-      add(BY_ID[key].code);
+
+  function startStarfield(){
+    var canvas = document.getElementById('starfield');
+    if (!canvas || !canvas.getContext) return;
+    var ctx = canvas.getContext('2d');
+    var stars = [], shootingStars = [];
+    var shootingStarTimer;
+    function resizeCanvas(){
+      var w = Math.round(canvas.clientWidth || window.innerWidth);
+      var h = Math.round(canvas.clientHeight || window.innerHeight);
+      if (w === canvas.width && h === canvas.height) return false;
+      canvas.width = w;
+      canvas.height = h;
+      return true;
+    }
+    function initStars(){
+      stars = [];
+      for (var i = 0; i < 350; i++){
+        var tier = Math.random();
+        stars.push({
+          nx: Math.random(),
+          ny: Math.random(),
+          r: tier > 0.95 ? Math.random() * 2 + 1.2
+            : tier > 0.7  ? Math.random() * 1.2 + 0.6
+            :               Math.random() * 0.6 + 0.2,
+          speed:  Math.random() * 0.008 + 0.002,
+          offset: Math.random() * Math.PI * 2,
+          hue:    Math.random() > 0.85 ? 200 + Math.random() * 60 : 260 + Math.random() * 30,
+          pulse:  Math.random() > 0.7
+        });
+      }
+    }
+    function spawnShootingStar(){
+      var fromLeft = Math.random() > 0.5;
+      shootingStars.push({
+        x: fromLeft ? -20 : canvas.width + 20,
+        y: Math.random() * canvas.height * 0.6,
+        vx: fromLeft ? (4 + Math.random() * 4) : -(4 + Math.random() * 4),
+        vy: 1.5 + Math.random() * 2,
+        len: 80 + Math.random() * 120,
+        alpha: 1,
+        width: Math.random() * 1.2 + 0.4
+      });
+    }
+    function drawStaticStars(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (var i = 0; i < stars.length; i++){
+        var s = stars[i];
+        s.x = s.nx * canvas.width; s.y = s.ny * canvas.height;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'hsla(' + s.hue + ',60%,92%,0.6)';
+        ctx.fill();
+      }
+    }
+    function drawStars(t){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (var i = 0; i < stars.length; i++){
+        var s = stars[i];
+        s.x = s.nx * canvas.width; s.y = s.ny * canvas.height;
+        var pulse = s.pulse
+          ? Math.abs(Math.sin(t * s.speed * 2.5 + s.offset))
+          : 0.1 + 0.9 * (0.5 + 0.5 * Math.sin(t * s.speed + s.offset));
+        var alpha = Math.max(0.02, pulse);
+        if (s.r > 1){
+          var glow = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 4);
+          glow.addColorStop(0, 'hsla(' + s.hue + ',80%,90%,' + (alpha * 0.6) + ')');
+          glow.addColorStop(1, 'hsla(' + s.hue + ',60%,70%,0)');
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r * 4, 0, Math.PI * 2);
+          ctx.fillStyle = glow;
+          ctx.fill();
+        }
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'hsla(' + s.hue + ',60%,92%,' + alpha + ')';
+        ctx.fill();
+      }
+      for (var j = shootingStars.length - 1; j >= 0; j--){
+        var ss = shootingStars[j];
+        var tailX = ss.x - (ss.vx / Math.abs(ss.vx)) * ss.len;
+        var tailY = ss.y - (ss.vy / Math.abs(ss.vy || 1)) * (ss.len * 0.5);
+        var grad = ctx.createLinearGradient(tailX, tailY, ss.x, ss.y);
+        grad.addColorStop(0, 'rgba(255,255,255,0)');
+        grad.addColorStop(1, 'rgba(200,180,255,' + ss.alpha + ')');
+        ctx.beginPath();
+        ctx.moveTo(tailX, tailY);
+        ctx.lineTo(ss.x, ss.y);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = ss.width;
+        ctx.stroke();
+        ss.x += ss.vx;
+        ss.y += ss.vy;
+        ss.alpha -= 0.012;
+        if (ss.alpha <= 0 || ss.x < -200 || ss.x > canvas.width + 200) shootingStars.splice(j, 1);
+      }
+      requestAnimationFrame(function(ts){ drawStars(ts * 0.001); });
+    }
+    function scheduleShootingStar(){
+      shootingStarTimer = setTimeout(function(){
+        if (!document.hidden) spawnShootingStar();
+        scheduleShootingStar();
+      }, 2500 + Math.random() * 5000);
+    }
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    resizeCanvas();
+    initStars();
+    if (reducedMotion){
+      drawStaticStars();
+    } else {
+      requestAnimationFrame(function(ts){ drawStars(ts * 0.001); });
+      setTimeout(scheduleShootingStar, 1500);
+    }
+    document.addEventListener('visibilitychange', function(){
+      if (!document.hidden){
+        shootingStars = [];
+        clearTimeout(shootingStarTimer);
+        if (!reducedMotion) scheduleShootingStar();
+      }
     });
+    window.addEventListener('resize', function(){ if (resizeCanvas() && reducedMotion) drawStaticStars(); });
+  }
+
+  function startViewer(relic){
+    document.body.classList.add('is-viewer');
+    document.body.classList.remove('is-menu');
+    document.title = relic.title + ' — Relics';
+    var poster = document.getElementById('poster');
+    poster.alt = relic.title;
+    poster.onload = function(){ poster.hidden = false; };
+    poster.onerror = function(){ poster.hidden = true; };
+    poster.src = relic.poster;
+    if (!hasWebGL()){
+      document.getElementById('load').className = 'off';
+      document.getElementById('nowebgl').className = 'on';
+      return;
+    }
+    function add(src, done){ var s = document.createElement('script'); s.src = src; s.onload = done; s.onerror = done; document.body.appendChild(s); }
+    add('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', function(){
+      add('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js', function(){
+        add(relic.code);
+      });
+    });
+  }
+
+  function startMenu(){
+    document.body.classList.add('is-menu');
+    document.body.classList.remove('is-viewer');
+    document.title = 'The Lost Pages — Relics';
+    document.getElementById('load').className = 'off';
+    startStarfield();
+  }
+
+  var key = relicId();
+  var current = BY_ID[key] || null;
+  if (current){
+    try {
+      sessionStorage.setItem('tb-relic', current.id);
+      sessionStorage.setItem('tb-book', current.id);
+    } catch (e) {}
+    startViewer(current);
+  } else {
+    if (key) clearHash();
+    startMenu();
+  }
+
+  window.addEventListener('hashchange', function(){
+    var id = relicId();
+    var next = BY_ID[id] || null;
+    if (!next){
+      if (id) clearHash();
+      if (document.body.classList.contains('is-viewer')){
+        // Drop the WebGL viewer by reloading the menu; cheaper than leaving the loop running.
+        location.reload();
+      }
+      return;
+    }
+    if (current && current.id === next.id) return;
+    try {
+      sessionStorage.setItem('tb-relic', next.id);
+      sessionStorage.setItem('tb-book', next.id);
+    } catch (e) {}
+    location.reload();
+  });
+
+  window.addEventListener('keydown', function(e){
+    if (e.key !== 'Escape') return;
+    if (!document.body.classList.contains('is-viewer')) return;
+    e.preventDefault();
+    goMenu('/relics/');
   });
 })();
 </script>
