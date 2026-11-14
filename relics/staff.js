@@ -11,6 +11,7 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
 (function(){
   const canvas = document.getElementById('c');
   const THUMB = /(?:^|[?&])thumb=1(?:&|$)/.test(location.search);
+  const THUMB_KIND = ((location.search.match(/(?:^|[?&])crop=(\w+)/) || [])[1] || 'diag');
   const renderer = new THREE.WebGLRenderer({canvas, antialias:true, preserveDrawingBuffer: !!THUMB});
   renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, 2));
   renderer.outputEncoding = THREE.sRGBEncoding;
@@ -745,6 +746,12 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
     const gr = g.createRadialGradient(32,32,0,32,32,32); gr.addColorStop(0,'rgba(255,255,255,.55)'); gr.addColorStop(1,'rgba(255,255,255,0)');
     g.fillStyle = gr; g.fillRect(0,0,64,64); return new THREE.CanvasTexture(c); })()});
   const dust = new THREE.Points(dustGeo, dustMat); dust.frustumCulled = false; scene.add(dust);
+  if (THUMB){
+    smoke.forEach(function(s){ s.visible = false; });
+    embers.visible = false;
+    dust.visible = false;
+    renderer.setClearColor(0x000000, 0);
+  }
   let dustAge = 9, puffed = false;
   function puff(){
     const p = new THREE.Vector3(), c = new THREE.Vector3();
@@ -816,11 +823,40 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
     showDist = d;
     if (!pts.size) dist = d;
   }
+  const STAFF_MESH = { H_orb:1, H_cres:1, S_shaft:1, C_0:1, C_1:1, S_ferrule:1, T_tip:1 };
+  function staffMeshBox(allow){
+    const box = new THREE.Box3();
+    staffG.traverse(function(o){
+      if (!o.isMesh) return;
+      if (allow[o.name]) box.expandByObject(o);
+    });
+    if (box.isEmpty()) box.setFromObject(staffG);
+    return box;
+  }
+  function frameThumb(){
+    // Fit only the sculpted meshes so glow sprites do not shrink the staff in the tile.
+    const roll = THUMB_KIND === 'diag' ? -0.74 : 0;
+    tilt.rotation.set(pitch, yaw, roll, 'XYZ');
+    tilt.updateWorldMatrix(true, true);
+    const box = THUMB_KIND === 'head'
+      ? staffMeshBox({ H_orb:1, H_cres:1, C_1:1 })
+      : staffMeshBox(STAFF_MESH);
+    const size = box.getSize(new THREE.Vector3());
+    const center = box.getCenter(new THREE.Vector3());
+    const tan = Math.tan(camera.fov * Math.PI / 360);
+    const pad = THUMB_KIND === 'head' ? 1.08 : 1.04;
+    const d = Math.max(size.y / (2 * tan), size.x / (2 * tan * camera.aspect)) * pad;
+    camera.position.set(center.x, center.y, center.z + d);
+    camera.near = Math.max(0.01, d / 80);
+    camera.far = d * 30;
+    camera.lookAt(center);
+    camera.updateProjectionMatrix();
+  }
   const readDist = relicDist;
 
   // ---------- interaction ----------
   let yaw = -0.5, pitch = 0.12, vyaw = 0, vpitch = 0, dragging = false, lastX=0, lastY=0, idle = 99;
-  if (THUMB){ yaw = 0; pitch = 0.06; idle = -1e9; appear = 1; }
+  if (THUMB){ yaw = THUMB_KIND === 'head' ? 0.38 : 0.32; pitch = 0.08; idle = -1e9; appear = 1; }
   let downX = 0, downY = 0, downT = 0, moved = 0;
   const pts = new Map(); let pinch = 0;
   const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
@@ -1029,7 +1065,8 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
     }
     eg.attributes.position.needsUpdate = true;
 
-    camera.position.set(0, 0, dist); camera.lookAt(0,0,0);
+    if (THUMB) frameThumb();
+    else { camera.position.set(0, 0, dist); camera.lookAt(0,0,0); }
     renderer.render(scene, camera);
     if (liveChecked < 2 && ready && (frameNo++ % 20) === 19) checkLive();
     if (!manual) requestAnimationFrame(frame);
