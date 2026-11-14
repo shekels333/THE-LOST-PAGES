@@ -84,18 +84,7 @@
           sessionStorage.setItem('tb-book', r.id);
         } catch (e) {}
       });
-      var share = document.createElement('button');
-      share.type = 'button';
-      share.className = 'tile-share';
-      share.textContent = 'Copy link';
-      share.setAttribute('aria-label', 'Copy link to ' + r.name);
-      share.addEventListener('click', function(ev){
-        ev.preventDefault();
-        ev.stopPropagation();
-        shareLink(location.origin + location.pathname + '#' + r.id, r.title);
-      });
       tile.appendChild(a);
-      tile.appendChild(share);
       row.appendChild(tile);
     });
     section.appendChild(label);
@@ -304,66 +293,5 @@
     e.preventDefault();
     goMenu('/relics/');
   });
-
-  function toast(message){
-    var el = document.getElementById('share-toast');
-    if (!el){
-      el = document.createElement('div');
-      el.id = 'share-toast';
-      el.className = 'share-toast';
-      el.setAttribute('role', 'status');
-      el.setAttribute('aria-live', 'polite');
-      document.body.appendChild(el);
-    }
-    el.textContent = message;
-    el.classList.add('show');
-    clearTimeout(toast._t);
-    toast._t = setTimeout(function(){ el.classList.remove('show'); }, 1600);
-  }
-  function copyText(text){
-    if (navigator.clipboard && window.isSecureContext){
-      return navigator.clipboard.writeText(text).catch(function(){ return fallbackCopy(text); });
-    }
-    return fallbackCopy(text);
-  }
-  function fallbackCopy(text){
-    return new Promise(function(resolve, reject){
-      var area = document.createElement('textarea');
-      area.value = text;
-      area.setAttribute('readonly', '');
-      area.style.position = 'fixed';
-      area.style.left = '-9999px';
-      document.body.appendChild(area);
-      area.select();
-      try {
-        var ok = document.execCommand('copy');
-        area.remove();
-        ok ? resolve() : reject(new Error('copy'));
-      } catch (err) {
-        area.remove();
-        reject(err);
-      }
-    });
-  }
-  function shareLink(url, title){
-    var mobile = window.matchMedia('(max-width: 820px), (pointer: coarse)').matches;
-    if (mobile && typeof navigator.share === 'function'){
-      navigator.share({ title: title || document.title, url: url }).catch(function(err){
-        if (err && err.name === 'AbortError') return;
-        copyText(url).then(function(){ toast('Copied!'); }).catch(function(){ toast('Copy the link from the address bar'); });
-      });
-      return;
-    }
-    copyText(url).then(function(){ toast('Copied!'); }).catch(function(){ toast('Copy the link from the address bar'); });
-  }
-  var shareBtn = document.getElementById('share');
-  if (shareBtn){
-    shareBtn.addEventListener('click', function(){
-      var id = relicId();
-      var relic = BY_ID[id];
-      if (!relic) return;
-      shareLink(location.origin + location.pathname + '#' + relic.id, relic.title);
-    });
-  }
 
 })();

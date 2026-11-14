@@ -96,12 +96,4 @@
   .skip-link:focus{transform:translateY(12px);outline:2px solid #f0c878;outline-offset:3px}
   main:focus{outline:none}
   .menu-tile{position:relative;width:180px}
-  .tile-share,#share{font:11px/1 Georgia,'Times New Roman',serif;letter-spacing:.08em;color:#f0c878;background:rgba(7,2,26,.82);border:1px solid #5a4424;border-radius:999px;cursor:pointer}
-  .tile-share{position:absolute;top:12px;right:12px;z-index:2;padding:5px 8px}
-  .tile-share:hover,#share:hover{color:#ffc27a;border-color:#b08a55}
-  .tile-share:focus-visible,#share:focus-visible{outline:2px solid #c9a84c;outline-offset:2px}
-  #share{position:fixed;top:18px;right:108px;z-index:6;display:none;padding:9px 12px}
-  body.is-viewer #share{display:inline-block}
-  .share-toast{position:fixed;left:50%;bottom:72px;transform:translateX(-50%) translateY(160%);z-index:20;background:rgba(7,2,26,.96);color:#f0c878;border:1px solid #c9a84c;border-radius:999px;padding:8px 14px;font:12px/1 Georgia,serif;letter-spacing:.14em;text-transform:uppercase;opacity:0;pointer-events:none;transition:transform .25s ease,opacity .25s ease}
-  .share-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
   .fontwarm{font-family:'IM Fell English',Georgia,serif}

@@ -151,20 +151,15 @@
     nav a:hover::after { transform: scaleX(1); }
 
     nav a.mint-btn {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.28rem;
       margin-top: 1.4rem;
-      padding: 0.8rem 1.7rem 0.72rem;
+      padding: 0.95rem 3.4rem;
       border: 1px solid var(--gold);
       border-radius: 999px;
       background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(123,63,228,0.1));
-      letter-spacing: 0.16em;
-      font-size: 0.78rem;
+      letter-spacing: 0.4em;
+      font-size: 0.95rem;
       font-weight: 700;
-      line-height: 1.25;
-      text-indent: 0;
+      text-indent: 0.4em;
       color: var(--gold-light);
       box-shadow: 0 0 40px rgba(201,168,76,0.25), inset 0 0 20px rgba(201,168,76,0.12);
       transition: all 0.3s;
@@ -1279,10 +1274,9 @@
       justify-content: center;
       padding: clamp(1rem, 4vw, 3rem);
       background: rgba(3,1,10,0.94);
-      backdrop-filter: blur(10px);
       opacity: 0;
       visibility: hidden;
-      transition: opacity 0.32s ease, visibility 0.32s;
+      transition: opacity 0.32s ease;
     }
 
     .lightbox.open { opacity: 1; visibility: visible; }
@@ -1302,6 +1296,8 @@
     .lightbox.open .lightbox-figure { transform: scale(1); }
 
     .lightbox-figure img {
+      position: relative;
+      z-index: 1;
       max-width: 100%;
       max-height: calc(100vh - 9rem);
       object-fit: contain;
@@ -1326,17 +1322,19 @@
 
     .lightbox-btn {
       position: absolute;
+      z-index: 3;
       top: 50%;
       transform: translateY(-50%);
       width: 46px; height: 46px;
       display: flex; align-items: center; justify-content: center;
-      background: rgba(3,1,10,0.6);
-      backdrop-filter: blur(4px);
+      background: rgba(3,1,10,0.85);
       border: 1px solid rgba(201,168,76,0.3);
       border-radius: 50%;
       color: var(--gold-light);
       font-size: 1rem;
       cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
       transition: background 0.25s, border-color 0.25s, transform 0.25s;
     }
 
@@ -1350,8 +1348,10 @@
 
     .lightbox-close {
       position: fixed;
+      z-index: 4;
       top: 1.4rem; right: 1.4rem;
       width: 42px; height: 42px;
+      touch-action: manipulation;
       display: flex; align-items: center; justify-content: center;
       background: rgba(3,1,10,0.6);
       border: 1px solid rgba(201,168,76,0.3);
@@ -1408,14 +1408,6 @@
     .rune-link { color: inherit; text-decoration: none; letter-spacing: inherit; }
     .ico { flex-shrink: 0; }
     .footer-stars { margin-top: 0.5rem; font-size: 0.7rem; opacity: 0.4; letter-spacing: 0.2em; }
-
-    .mint-domain {
-      font-size: 0.62rem;
-      letter-spacing: 0.14em;
-      font-weight: 500;
-      opacity: 0.72;
-      text-indent: 0;
-    }
 
     .skip-link {
       position: absolute;

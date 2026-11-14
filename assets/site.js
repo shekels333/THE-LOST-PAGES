@@ -308,7 +308,7 @@
     el.innerHTML =
       '<button type="button" class="lightbox-close" aria-label="Close viewer">&#10005;</button>' +
       '<div class="lightbox-figure">' +
-        '<img alt="">' +
+        '<img class="lightbox-still" alt="">' +
         '<video class="lightbox-video" muted loop playsinline></video>' +
         '<div class="lightbox-caption"></div>' +
         '<button type="button" class="lightbox-btn lightbox-prev" aria-label="Previous page">&#8592;</button>' +
@@ -317,15 +317,37 @@
       '</div>';
     document.body.appendChild(el);
 
-    const img = el.querySelector('img');
     const vid = el.querySelector('video');
     const cap = el.querySelector('.lightbox-caption');
     const closeBtn = el.querySelector('.lightbox-close');
     let viewerId = null;
     let lastFocus = null;
 
-    // Gallery images are served at 800px; ask the CDN for a larger rendition
-    function hiRes(url) { return url.replace('/rs:fill:800:0:0/', '/rs:fill:1600:0:0/'); }
+    // Gallery images are served at 800px (some thumbs at 400). Ask the CDN
+    // for a larger rendition of that same file — never a different page.
+    function hiRes(url) {
+      return url.replace(/\/rs:fill:\d+:0:0\//, '/rs:fill:1600:0:0/');
+    }
+
+    // A new element every time. Reusing one <img> and only changing src
+    // while the viewer is still visibility:hidden keeps the previous book's
+    // pixels on screen (iPhone Chrome), under the new caption.
+    function placeStill(url, alt) {
+      const figure = el.querySelector('.lightbox-figure');
+      const current = figure.querySelector('img.lightbox-still');
+      if (current && current.getAttribute('src') === url) {
+        current.alt = alt || '';
+        current.classList.remove('is-off');
+        return;
+      }
+      const fresh = document.createElement('img');
+      fresh.className = 'lightbox-still';
+      fresh.alt = alt || '';
+      fresh.decoding = 'async';
+      if (current) current.replaceWith(fresh);
+      else figure.prepend(fresh);
+      fresh.src = url;
+    }
 
     function render() {
       const viewer = document.getElementById(viewerId);
@@ -334,18 +356,21 @@
       const i = slides.findIndex(s => s.classList.contains('active'));
       if (i < 0) return;
       const source = slides[i].querySelector('img, video');
+      if (!source) return;
       const isVideo = source.tagName === 'VIDEO';
-      img.classList.toggle('is-off', isVideo);
-      vid.classList.toggle('is-on', isVideo);
+      const still = el.querySelector('img.lightbox-still');
       if (isVideo) {
+        if (still) still.classList.add('is-off');
+        vid.classList.add('is-on');
         if (vid.src !== source.src) vid.src = source.src;
         vid.poster = source.dataset.poster || source.getAttribute('poster') || '';
         const p = vid.play();
         if (p && p.catch) p.catch(() => {});
       } else {
         vid.pause();
-        img.src = hiRes(source.getAttribute('src'));
-        img.alt = source.alt || '';
+        vid.classList.remove('is-on');
+        const raw = source.getAttribute('src') || '';
+        placeStill(hiRes(raw), source.alt || '');
       }
       const card = viewer.closest('.project-card');
       const h3 = card && card.querySelector('h2.project-title');
@@ -363,9 +388,11 @@
     function open(id) {
       viewerId = id;
       lastFocus = document.activeElement;
-      render();
+      // Become visible before the image request starts, so the phone
+      // actually fetches and paints this page instead of the last one.
       el.classList.add('open');
       document.body.style.overflow = 'hidden';
+      render();
       // focus() is refused while the element is still visibility:hidden, and the
       // visibility transition outlasts a single frame — focus once it settles.
       const grabFocus = () => { if (el.classList.contains('open')) closeBtn.focus(); };
@@ -387,10 +414,33 @@
       render();
     }
 
+    function bindStep(selector, dir) {
+      const btn = el.querySelector(selector);
+      let last = 0;
+      const go = (e) => {
+        // touchend and the click that follows it must not turn two pages
+        const now = Date.now();
+        if (now - last < 400) { e.preventDefault(); e.stopPropagation(); return; }
+        last = now;
+        e.preventDefault();
+        e.stopPropagation();
+        step(dir);
+      };
+      btn.addEventListener('click', go);
+      // A tap on the arrow lands on the picture underneath unless the
+      // button is hit directly. touchend still arrives on the button.
+      btn.addEventListener('touchend', (e) => {
+        if (e.cancelable) e.preventDefault();
+        go(e);
+      }, { passive: false });
+    }
+    bindStep('.lightbox-prev', -1);
+    bindStep('.lightbox-next', 1);
+
     el.addEventListener('click', e => {
-      if (e.target === el || e.target === img || e.target === vid || e.target === closeBtn) { close(); return; }
-      if (e.target.closest('.lightbox-prev')) step(-1);
-      else if (e.target.closest('.lightbox-next')) step(1);
+      if (e.target.closest('.lightbox-prev, .lightbox-next, .lightbox-share')) return;
+      const still = el.querySelector('img.lightbox-still');
+      if (e.target === el || e.target === still || e.target === vid || e.target === closeBtn) close();
     });
 
     // Keep tabbing inside the dialog while it's open
@@ -403,7 +453,13 @@
       else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     });
 
-    return { open, close, step, isOpen: () => el.classList.contains('open') };
+    function syncTo(id) {
+      if (!el.classList.contains('open')) return;
+      if (id) viewerId = id;
+      render();
+    }
+
+    return { open, close, step, syncTo, isOpen: () => el.classList.contains('open') };
   })();
 
   // Open on click of any gallery page
@@ -411,7 +467,16 @@
     viewer.addEventListener('click', e => {
       if (e.target.closest('.gallery-controls')) return;   // arrows keep their job
       const media = e.target.closest('.gallery-slide img, .gallery-slide video');
-      if (media) lightbox.open(viewer.id);
+      if (!media) return;
+      // Open the page that was actually tapped, not whichever slide
+      // still carries the active class.
+      const slide = media.closest('.gallery-slide');
+      if (slide && !slide.classList.contains('active')) {
+        viewer.querySelectorAll('.gallery-slide.active').forEach(s => s.classList.remove('active'));
+        slide.classList.add('active');
+        updateGalleryCount(viewer.id);
+      }
+      lightbox.open(viewer.id);
     });
   });
 
@@ -871,6 +936,7 @@
     slide.classList.add('active');
     updateGalleryCount(viewer.id);
     if (typeof syncVideos === 'function') syncVideos(viewer);
+    if (typeof lightbox !== 'undefined' && lightbox.isOpen()) lightbox.syncTo(viewer.id);
   }
 
   function openFromStrip(e, id, slide) {
