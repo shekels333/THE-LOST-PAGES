@@ -1,6 +1,6 @@
 (function(){
   // Bump RELIC_V whenever a relic file or thumb changes so browsers fetch the new one.
-  const RELIC_V = '20261114a';
+  const RELIC_V = '20261114b';
   // Add a relic by appending an entry here and saving a square WebP into thumbs/.
   var RELICS = [
     { id:'builders',   name:'Builders',    title:'TT 1 | The Book of Builders',    code:'book1.js',  poster:'../assets/covers/builders.webp',   thumb:'thumbs/builders.webp' },
@@ -295,3 +295,6 @@
   });
 
 })();
+// Block accidental text selection / long-press menus in the viewer on touch devices.
+document.addEventListener('selectstart', function(e){ e.preventDefault(); });
+document.addEventListener('contextmenu', function(e){ if (e.target && e.target.tagName === 'CANVAS') e.preventDefault(); });

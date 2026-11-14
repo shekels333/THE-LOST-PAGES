@@ -97,3 +97,9 @@
   main:focus{outline:none}
   .menu-tile{position:relative;width:180px}
   .fontwarm{font-family:'IM Fell English',Georgia,serif}
+
+  /* Stop long-press / double-tap from selecting the whole viewer and popping the Copy menu on phones. */
+  html,body,#menu,#menu *,canvas,#hint,#close,#home,#back{
+    -webkit-user-select:none;user-select:none;
+    -webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+  canvas{outline:none}
