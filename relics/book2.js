@@ -1,5 +1,5 @@
 /* =====================================================================
-   TT 1 | THE BOOK OF BUILDERS | 2
+   TT 1 | THE BOOK OF BUILDERS II
    VERSES — one verse per page, in order. Edit the text here.
    ===================================================================== */
 const BOOK = { kicker: 'TT 1', over: 'THE BOOK OF', title: 'BUILDERS II' };
@@ -70,18 +70,17 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
   })();
 
   // ---------- book layout, in the model's own units ----------
-  const H  = 0.97928;                // model height in its own units
-  const S  = 2.8 / H;                // model height -> 2.8 scene units
-  const XH = -0.320;                 // spine-side edge of the covers (hinge line)
-  const ZI = 0.118;                  // inner face of each cover board (thin boards, full page block)
-  const X0 = -0.250;                 // plane the inner faces lie on when open
+  const S  = 2.8 / 0.981;            // model height -> 2.8 scene units
+  const XH = -0.290;                 // spine-side edge of the covers (hinge line)
+  const ZI = 0.055;                  // inner face of each cover board
+  const X0 = -0.219;                 // plane the inner faces lie on when open
   const G  = 0.012;                  // half-width of the gutter when open
-  const WP = 0.688, PY0 = 0.008, PY1 = 0.976, PH = PY1 - PY0;   // page size, flush with the thin cover lips
+  const WP = 0.569, PY0 = 0.014, PY1 = 0.966, PH = PY1 - PY0;   // page size, kept inside the cover lip
   const TP = ZI * 2;                 // thickness of the whole page block
   const LEAVES = Math.max(1, Math.ceil(PAGES.length / 2));
 
   const tilt = new THREE.Group(), book = new THREE.Group(), M = new THREE.Group();
-  M.scale.setScalar(S); M.position.y = -0.5 * H * S;
+  M.scale.setScalar(S); M.position.y = -0.4905 * S;
   book.add(M); tilt.add(book); scene.add(tilt);
   book.visible = false;              // nothing of the book is shown until the cover has loaded and drawn once
 
@@ -91,22 +90,23 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
     return {p, inner};
   }
   const front = pivot(M, XH,  ZI), back = pivot(M, XH, -ZI);
-  // The clasp's front tongs are two real jaws, each turning on the rivet that pins them to the front cover.
-  function pivotXY(parent, x, y){
-    const p = new THREE.Group(), inner = new THREE.Group();
-    p.position.set(x, y, 0); inner.position.set(-x, -y, 0); p.add(inner); parent.add(p);
-    return {p, inner};
-  }
-  const jawU = pivotXY(front.inner, 0.2845, 0.509), jawL = pivotXY(front.inner, 0.2845, 0.509);
-  // Chains are separate pieces on this book, so they can really sway. Each hangs on a soft spring.
-  const chains = [];
-  function hang(o, inner){
-    const g = new THREE.Group(); g.add(o); inner.add(g);
-    chains.push({g, x:0, y:0, vx:0, vy:0, K:210 + Math.random()*110, D:8 + Math.random()*3, k:0.8 + Math.random()*0.4,
-                 jx:(Math.random()-.5)*2, jy:(Math.random()-.5)*2});
-  }
-  // dark backing under each cover's surface, so nothing shows through when a chain shifts
-  // Inner faces are lined by the endpapers below; no extra backing on this mesh.
+  // ---------- living parts ----------
+  // Four gears at the corners drive the clasp. Each rides a pivot at its own hub; the back wears the same train, with a great wheel meshed to a small one.
+  function part(parent, x, y, z){ const p = new THREE.Group(), inner = new THREE.Group(); p.position.set(x, y, z || 0); inner.position.set(-x, -y, -(z || 0)); p.add(inner); parent.add(p); return {p:p, inner:inner}; }
+  const GC = [[-0.1830, 0.8522], [0.2385, 0.8517], [-0.1840, 0.1233], [0.2386, 0.1234]], GDIR = [1, -1, -1, 1];
+  const gears = GC.map(function(c){ const g = part(front.inner, c[0], c[1]); g.on = 0; g.w = 0; g.v = 0; g.mat = null; return g; });
+  const bgears = GC.map(function(c){ return part(back.inner, c[0], c[1]); });
+  const wheelBig = part(back.inner, 0.0231, 0.4924), wheelSmall = part(back.inner, -0.0980, 0.4236);
+  const claspG = part(front.inner, 0.3790, 0.4899, 0.0660);                 // the clasp swings on its pin at the fore-edge
+  [1, -1].forEach(function(sg){                                           // dark liners behind the boards
+    const l = new THREE.Mesh(new THREE.PlaneGeometry(0.650, 0.972), new THREE.MeshBasicMaterial({color:0x120a12, side:THREE.DoubleSide}));
+    l.position.set(0.0385, 0.4900, sg*0.0562); l.raycast = function(){}; (sg > 0 ? front : back).inner.add(l);
+  });
+  (function(){                                                             // what lies under the clasp once it lifts: plain leather (the copper frame already runs on beneath it)
+    const lm = new THREE.MeshStandardMaterial({color:new THREE.Color(0x65238f).convertSRGBToLinear(), roughness:.72, metalness:0, envMapIntensity:.45});
+    const u = new THREE.Mesh(new THREE.PlaneGeometry(0.136, 0.250), lm); u.position.set(0.2930, 0.4899, 0.0668); u.raycast = function(){}; front.inner.add(u);
+  })();
+
 
   // ---------- paper ----------
   // Leaf edges: cream stock with thin separated lines. The old texture painted a
@@ -263,7 +263,7 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
       g.fillStyle = '#6b1410';
       const km = /^TT (\d+)$/.exec(BOOK.kicker);
       if (km){                                                   // joined TT, and a full-height 1, to match the cover plate
-        const cap = 34, gap = cap*0.5; g.font = Math.round(cap/0.66) + "px " + HEAD; g.textAlign = 'left';
+        const cap = 34, gap = cap*0.5; g.font = "bold " + Math.round(cap/0.662) + "px 'Times New Roman', Times, 'Liberation Serif', serif"; g.textAlign = 'left';
         const one = km[1] === '1', wn = one ? cap*(0.24 + 0.19*1.75) : g.measureText(km[1]).width, x = cx - (cap*1.22 + gap + wn)/2;
         drawTT(g, x, CH*0.50, cap);
         if (one) drawOne(g, x + cap*1.22 + gap, CH*0.50, cap); else g.fillText(km[1], x + cap*1.22 + gap, CH*0.50);
@@ -286,15 +286,15 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
       }
       const headH = 168, sealH = 190, blockH = lines.length*lh;
       let y = (CH - headH - blockH - sealH)/2 + 10;
-      g.fillStyle = '#5e2a8c'; g.font = "104px " + HEAD; g.fillText(String(pg.verse), cx, y + 100);      // verse number, in the cover's purple
+      g.fillStyle = '#5e2a8c'; g.font = "104px " + HEAD; g.fillText(String(pg.verse), cx, y + 100);      // verse number, in the cover's royal blue
       y += headH + fs*0.8;
       g.fillStyle = '#2b1a0e'; g.font = fs + "px " + BODY;
       lines.forEach(function(ln){ g.fillText(ln, cx, y); y += lh; });
-      // moon seal under the verse, as on the original Lost Pages: a lilac disc carrying a gold crescent
+      // moon seal under the verse: a royal-blue disc ringed in gold, carrying a gold crescent
       const sy = y - lh + 118, sr = 46;
       g.beginPath(); g.arc(cx, sy, sr, 0, Math.PI*2);
-      g.fillStyle = 'rgba(146,112,196,.62)'; g.fill();
-      g.lineWidth = 3; g.strokeStyle = 'rgba(118,84,172,.85)'; g.stroke();
+      g.fillStyle = 'rgba(86,44,128,.86)'; g.fill();
+      g.lineWidth = 3; g.strokeStyle = 'rgba(206,146,90,.95)'; g.stroke();
       drawCrescent(g, cx + 3, sy, 21, Math.PI - 0.18);
       return c;
     }
@@ -407,7 +407,7 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
     inner.add(top, edges);
     const X = q => XH - G + q, Z = h => sign < 0 ? -ZI + h : ZI - h;
     const zCover = tuck => sign < 0 ? -(ZI + tuck) : (ZI + tuck);
-    return { top, edges, sign, prof:newProfile(), set(pr){
+    return { top, sign, prof:newProfile(), set(pr){
       for (let j=0;j<=NS;j++){
         const u = j/NS, x = X(pr.q[j]), z = Z(pr.h[j] - 0.0005), tuck = tuckOf(u), zb = zCover(tuck), o = j*6;
         tp[o]=x; tp[o+1]=PY0; tp[o+2]=z; tp[o+3]=x; tp[o+4]=PY1; tp[o+5]=z;
@@ -443,13 +443,13 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
   }
   const endMat = new THREE.MeshStandardMaterial({map:endTex(), roughness:.9, envMapIntensity:.3});
   function cap(inner, sign){
-    const m = new THREE.Mesh(new THREE.PlaneGeometry(0.670, 0.960), endMat);
-    m.position.set(0.015, 0.492, sign * (ZI - 0.0004)); if (sign > 0) m.rotation.y = Math.PI;
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(0.657, 0.975), endMat);
+    m.position.set(0.0385, 0.4900, sign * (ZI - 0.0004)); if (sign > 0) m.rotation.y = Math.PI;
     inner.add(m);
   }
   cap(front.inner, 1); cap(back.inner, -1);
-  const gutter = new THREE.Mesh(new THREE.BoxGeometry(Math.abs(X0 - XH), PH - 0.016, 0.07), dark);
-  gutter.position.set((X0 + XH)/2, PY0 + PH/2, 0); M.add(gutter);
+  const gutter = new THREE.Mesh(new THREE.BoxGeometry(X0 + 0.290, PH - 0.016, 0.07), dark);
+  gutter.position.set((X0 - 0.290)/2, PY0 + PH/2, 0); M.add(gutter);
 
   // the turning leaf
   function leafGeo(verso){
@@ -509,7 +509,7 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
   function prev(){ if (mode !== 'read' || flip) return; if (turned > 0){ flip = {dir:-1, p:1}; refresh(); } else closeBook(); }
 
   // ---------- living cover: chains that shiver, a molten moon, a glint on the metal ----------
-  const U = { uTime:{value:0}, uRattle:{value:0}, uGlint:{value:0}, uGlintAmt:{value:0}, uUnlock:{value:0} };
+  const U = { uTime:{value:0}, uRattle:{value:0}, uGlint:{value:0}, uGlintAmt:{value:0} };
   // The chains are part of the cover's surface, so the shader finds them by where they sit (a band round
   // the cover) and how far they stand proud of the leather. Everything is worked out from the vertex
   // position, with no extra vertex data, to keep it portable across phones.
@@ -520,11 +520,10 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
     mat.onBeforeCompile = function(sh){
       if (!mat.userData.live) return;
       sh.uniforms.tbTime = U.uTime; sh.uniforms.tbRattle = U.uRattle; sh.uniforms.tbGlint = U.uGlint; sh.uniforms.tbGlintAmt = U.uGlintAmt;
-      sh.uniforms.tbUnlock = U.uUnlock;
       sh.uniforms.tbS = uS; sh.uniforms.tbO = uO; sh.uniforms.tbAmp = uAmp; sh.uniforms.tbXL = uXL;
       sh.vertexShader = [
         'uniform highp float tbTime;', 'uniform highp float tbRattle;', 'uniform highp float tbAmp;', 'uniform highp float tbS;',
-        'uniform highp float tbXL;', 'uniform highp float tbUnlock;', 'uniform highp vec3 tbO;', 'varying highp vec3 tbPos;', ''].join('\n') +
+        'uniform highp float tbXL;', 'uniform highp vec3 tbO;', 'varying highp vec3 tbPos;', ''].join('\n') +
         sh.vertexShader.replace('#include <begin_vertex>', [
           '#include <begin_vertex>',
           'tbPos = position * tbS + tbO;',
@@ -547,16 +546,13 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
           '}'].join('\n'));
       sh.fragmentShader = [
         'uniform highp float tbTime;', 'uniform highp float tbGlint;', 'uniform highp float tbGlintAmt;', 'varying highp vec3 tbPos;', ''].join('\n') +
-        sh.fragmentShader.replace('#include <metalnessmap_fragment>', '#include <metalnessmap_fragment>\nfloat tbPurple = smoothstep(0.45, 0.7, 1.0 - diffuseColor.g / max(min(diffuseColor.r, diffuseColor.b), 0.0005));\nmetalnessFactor *= 1.0 - tbPurple;\nroughnessFactor = mix(roughnessFactor, max(roughnessFactor, 0.6), tbPurple);').replace('#include <emissivemap_fragment>', [
+        sh.fragmentShader.replace('#include <emissivemap_fragment>', [
           '#include <emissivemap_fragment>',
           'float tbM1 = sin(tbPos.x*46.0 + tbTime*1.25 + sin(tbPos.y*38.0 - tbTime*0.8)*1.6);',
           'float tbM2 = sin(tbPos.y*71.0 - tbTime*1.9 + tbPos.x*23.0);',
           'totalEmissiveRadiance *= 0.86 + 0.20*tbM1 + 0.10*tbM2;',
           'float tbG = max(sin(tbPos.y*7.0 + tbPos.x*5.0 - tbGlint), 0.0);',
-          'totalEmissiveRadiance += vec3(1.0, 0.86, 0.62) * pow(tbG, 60.0) * smoothstep(0.62, 0.92, metalnessFactor) * tbGlintAmt * 0.6;',
-          // Crescent: the gold already painted on the cover is made to glow and breathe.
-          'float tbGold = smoothstep(0.50, 0.82, diffuseColor.r) * smoothstep(0.28, 0.62, diffuseColor.g) * (1.0 - smoothstep(0.22, 0.48, diffuseColor.b));',
-          'totalEmissiveRadiance += diffuseColor.rgb * tbGold * (0.85 + 0.55 * max(sin(tbTime * 1.7), 0.0));'].join('\n'));
+          'totalEmissiveRadiance += vec3(1.0, 0.86, 0.62) * pow(tbG, 60.0) * smoothstep(0.62, 0.92, metalnessFactor) * tbGlintAmt * 0.6;'].join('\n'));
     };
     mat.customProgramCacheKey = function(){ return mat.userData.live ? 'tb-live' : 'tb-plain'; };
   }
@@ -575,72 +571,44 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
 
   // ---------- load the sculpted parts ----------
   const glowMats = new Set();
-  let pagesMesh = null, claspFrontP = null;
-  const gears = [];
+  let claspBack = null, claspHome = null;
   const loadEl = document.getElementById('load'), barEl = document.getElementById('bar');
   let ready = false, appear = 1;
-  function dress(q, live){
-    if (!q.isMesh) return;
-    const mat = q.material.clone(); q.material = mat;
-    [mat.map, mat.normalMap, mat.roughnessMap, mat.emissiveMap].forEach(function(tex){ if (tex) tex.anisotropy = ANISO; });
-    mat.envMapIntensity = 1.15;
-    mat.metalness = mat.metalness || 0.35;
-    if (mat.emissiveMap){ mat.emissive.set(0xffffff); glowMats.add(mat); }
-    if (live) liveCover(mat, q, 9.0);
-  }
-  function spinPivot(parent, objs, speed){
-    objs.forEach(function(o){ parent.add(o); });
-    parent.updateWorldMatrix(true, true);
-    const box = new THREE.Box3();
-    objs.forEach(function(o){ box.expandByObject(o); });
-    const c = box.getCenter(new THREE.Vector3());
-    parent.worldToLocal(c);
-    const p = new THREE.Group(); p.position.copy(c); parent.add(p);
-    objs.forEach(function(o){ p.attach(o); });
-    gears.push({p, speed});
-  }
   function onModel(gltf){
     const rootNode = gltf.scene.getObjectByName('ROOT') || gltf.scene;
-    const gearBags = {};
-    let claspFrontObj = null;
     rootNode.children.slice().forEach(function(o){
       const n = o.name;
-      const live = n.indexOf('cover_front_') === 0 && n.indexOf('_cap_') < 0 && n.indexOf('_hinge_') < 0 && n.indexOf('_plate_') < 0 && n.indexOf('_corner_') < 0;
-      o.traverse(function(q){ dress(q, live); });
-      if (n === 'pages' || n.indexOf('pages') === 0){ pagesMesh = o; M.add(o); }
-      else if (n.indexOf('spine') === 0) M.add(o);
-      else if (n === 'clasp_front') claspFrontObj = o;
-      else if (n === 'clasp_back') back.inner.add(o);
-      else if (n.indexOf('gear_') === 0){
-        const key = n.replace(/_hub$/, '').replace(/_face$/, '');
-        (gearBags[key] = gearBags[key] || []).push(o);
-      }
-      else if (n.indexOf('cover_front') === 0) front.inner.add(o);
-      else if (n.indexOf('cover_back') === 0) back.inner.add(o);
-      else M.add(o);
+      let tag = '', gearK = -1;
+      if (n.charAt(0) === 'G'){ gearK = +n.charAt(2); gears[gearK].inner.add(o); tag = 'gear'; }
+      else if (n.charAt(0) === 'H'){ bgears[+n.charAt(2)].inner.add(o); tag = 'wheel'; }
+      else if (n === 'W_big'){ wheelBig.inner.add(o); tag = 'wheel'; }
+      else if (n === 'W_small'){ wheelSmall.inner.add(o); tag = 'wheel'; }
+      else if (n === 'K_clasp'){ claspG.inner.add(o); tag = 'clasp'; }
+      else if (n.charAt(0) === 'F') front.inner.add(o);
+      else if (n.charAt(0) === 'S') M.add(o);
+      else back.inner.add(o);
+      o.traverse(function(q){
+        if (!q.isMesh) return;
+        const mat = q.material.clone(); q.material = mat;          // one material per part, so each knows its own placement
+        [mat.map, mat.normalMap, mat.roughnessMap, mat.emissiveMap].forEach(function(t){ if (t) t.anisotropy = ANISO; });
+        mat.envMapIntensity = 1.1;
+        if (n === 'F_moon'){ mat.emissiveMap = mat.map; mat.emissive.set(0xffffff); glowMats.add(mat); }
+        else if (gearK >= 0){ mat.emissiveMap = mat.map; mat.emissive.set(0xffc890); mat.emissiveIntensity = 0; gears[gearK].mat = mat; }
+        q.userData.tag = tag; q.userData.gear = gearK;
+        const pa = q.geometry.attributes.position;                 // packed positions: unpack them so taps can be traced against the real surface
+        if (!(pa.array instanceof Float32Array) || pa.isInterleavedBufferAttribute){
+          const f = new Float32Array(pa.count*3), k = pa.normalized ? 1/32767 : 1;
+          for (let i = 0; i < pa.count; i++){ f[i*3] = Math.max(-1e9, pa.getX(i)*k); f[i*3+1] = pa.getY(i)*k; f[i*3+2] = pa.getZ(i)*k; }
+          q.geometry.setAttribute('position', new THREE.BufferAttribute(f, 3));
+        }
+        liveCover(mat, q, 9.0);
+      });
     });
-    Object.keys(gearBags).forEach(function(key){
-      const parent = key.indexOf('gear_b_') === 0 ? back.inner : front.inner;
-      const sign = (key.indexOf('_tl') >= 0 || key.indexOf('_br') >= 0) ? 1 : -1;
-      const extra = ({gear_f_tl:0.08, gear_f_tr:-0.05, gear_f_bl:-0.06, gear_f_br:0.07, gear_b_tl:-0.05, gear_b_tr:0.06, gear_b_bl:0.04, gear_b_br:-0.07})[key] || 0;
-      spinPivot(parent, gearBags[key], 0.7 * sign + extra);
-    });
-    if (claspFrontObj){
-      front.inner.add(claspFrontObj);
-      front.inner.updateWorldMatrix(true, true);
-      const box = new THREE.Box3().setFromObject(claspFrontObj);
-      const c = box.getCenter(new THREE.Vector3());
-      c.x = box.min.x + (box.max.x - box.min.x) * 0.16;
-      front.inner.worldToLocal(c);
-      claspFrontP = new THREE.Group(); claspFrontP.position.copy(c);
-      front.inner.add(claspFrontP);
-      claspFrontP.attach(claspFrontObj);
-    }
     // Show the whole book at once. The first frame with the cover is slow on phones (its textures go to the
     // graphics chip then), so keep the loading line up until that frame has actually been drawn.
     book.visible = true; appear = THUMB ? 1 : 0; flare = 0.8;
     requestAnimationFrame(function(){ requestAnimationFrame(function(){
-      ready = true; loadEl.classList.add('off'); setHint('drag to rotate · strike the cover three times to open');
+      ready = true; loadEl.classList.add('off'); setHint('drag to rotate · set the four gears turning');
     }); });
   }
   function onFail(err){ loadEl.querySelector('span').textContent = 'could not load the book model'; console.error(err); }
@@ -659,22 +627,22 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
   }
 
   // ---------- rune glow ----------
-  const RX = 0.020, RY = 0.500;
+  const RX = 0.0124, RY = 0.4842;
   function glowTex(){
     const c = document.createElement('canvas'); c.width = c.height = 256;
     const g = c.getContext('2d');
     const gr = g.createRadialGradient(128,128,0,128,128,128);
-    gr.addColorStop(0,'rgba(255,190,70,.13)'); gr.addColorStop(.35,'rgba(255,140,30,.07)');
+    gr.addColorStop(0,'rgba(255,190,70,.10)'); gr.addColorStop(.35,'rgba(255,140,30,.06)');
     gr.addColorStop(1,'rgba(255,80,0,0)');
     g.fillStyle = gr; g.fillRect(0,0,256,256);
     return new THREE.CanvasTexture(c);
   }
   const gt = glowTex();
   function rune(inner, sign){
-    const halo = new THREE.Mesh(new THREE.PlaneGeometry(0.70,0.70),
+    const halo = new THREE.Mesh(new THREE.PlaneGeometry(0.62,0.62),
       new THREE.MeshBasicMaterial({map:gt, transparent:true, blending:THREE.AdditiveBlending, depthWrite:false}));
-    halo.position.set(sign*RX, RY, sign*0.145); if (sign < 0) halo.rotation.y = Math.PI;
-    const light = new THREE.PointLight(0xffb040, 1.8, 2.8, 2); light.position.set(sign*RX, RY, sign*0.32);
+    halo.position.set(sign*RX, RY, sign*0.098); if (sign < 0) halo.rotation.y = Math.PI;
+    const light = new THREE.PointLight(0xffb040, 1.6, 2.6, 2); light.position.set(sign*RX, RY, sign*0.30);
     inner.add(halo, light);
     return {halo, light, inner, sign, n:new THREE.Vector3()};
   }
@@ -685,16 +653,16 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
     const c = document.createElement('canvas'); c.width = 1024; c.height = Math.round(1024*h/w);
     const t = new THREE.CanvasTexture(c); t.encoding = THREE.sRGBEncoding; t.anisotropy = ANISO;
     const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshStandardMaterial({
-      map:t, transparent:true, metalness:.55, roughness:.42, envMapIntensity:1.2, depthWrite:false,
-      polygonOffset:true, polygonOffsetFactor:-4, polygonOffsetUnits:-4 }));
+      map:t, transparent:true, metalness:.2, roughness:.6, envMapIntensity:.5, depthWrite:false,
+      polygonOffset:true, polygonOffsetFactor:-2, polygonOffsetUnits:-2 }));
     m.position.set(cx, cy, z); front.inner.add(m);
     const redraw = function(){
       const g = c.getContext('2d'); g.clearRect(0,0,c.width,c.height);
       // engraved gold: dark cut edge up-left, bright lip down-right, gold face
-      [[-3,-3,'rgba(20,10,2,.85)'],[2.5,2.5,'rgba(255,236,170,.55)'],[0,0,null]].forEach(function(p){
+      [[2.5,2.5,'rgba(255,240,210,.18)'],[-2.5,-2.5,'rgba(6,3,1,.85)'],[0,0,null]].forEach(function(p){
         g.save(); g.translate(p[0], p[1]);
         if (p[2]) g.fillStyle = p[2];
-        else { const gr = g.createLinearGradient(0,0,0,c.height); gr.addColorStop(0,'#f6d77a'); gr.addColorStop(.5,'#d9a53a'); gr.addColorStop(1,'#a8741c'); g.fillStyle = gr; }
+        else { const gr = g.createLinearGradient(0,0,0,c.height); gr.addColorStop(0,'#f6d2a0'); gr.addColorStop(.5,'#dea265'); gr.addColorStop(1,'#a9662e'); g.fillStyle = gr; }
         draw(g, c.width, c.height); g.restore();
       });
       t.needsUpdate = true;
@@ -721,19 +689,20 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
     g.fillRect(sx - st*0.75, base - bt*0.5, st*2.5, bt*0.5);
     return fl + st*1.75;
   }
-  plate(0.032, 0.792, 0.132, 0.036, 0.137, function(g, w, h){
-    const cap = h*0.58, base = h/2 + cap/2, gap = cap*0.50, wTT = cap*1.22, w1 = cap*(0.24 + 0.19*1.75);
-    const x = (w - (wTT + gap + w1))/2;
-    drawTT(g, x, base, cap); drawOne(g, x + wTT + gap, base, cap);
+  plate(0.0250, 0.7906, 0.112, 0.038, 0.0800, function(g, w, h){
+    const cap = h*0.70, base = h/2 + cap/2, gap = cap*0.50, wTT = cap*1.22;
+    g.font = "bold " + Math.round(cap/0.662) + "px 'Times New Roman', Times, 'Liberation Serif', serif"; g.textAlign = 'left'; g.textBaseline = 'alphabetic';
+    const w3 = g.measureText('1').width, x = (w - (wTT + gap + w3))/2;
+    drawTT(g, x, base, cap); g.fillText('1', x + wTT + gap, base);
   });
-  plate(0.032, 0.188, 0.168, 0.036, 0.137, function(g, w, h){
+  plate(0.0255, 0.1898, 0.150, 0.030, 0.0800, function(g, w, h){
     const txt = 'BUILDERS II'; let f = Math.round(h*0.86);
     g.textBaseline = 'alphabetic'; g.textAlign = 'left';
     let sp, total;
     for (;; f -= 2){                                   // largest size that fits the plate between its rivets
       g.font = f + "px " + HEAD; sp = f*0.11; total = -sp;
       for (const ch of txt) total += g.measureText(ch).width + sp;
-      if (total <= w*0.86 || f < 20) break;
+      if (total <= w*0.93 || f < 20) break;
     }
     const m = g.measureText('B'), asc = m.actualBoundingBoxAscent || f*0.66;
     let x = (w - total)/2; const base = h/2 + asc/2;
@@ -788,10 +757,6 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
   const embers = new THREE.Points(eg, new THREE.PointsMaterial({map:dotTex(), size:0.05, transparent:true,
     blending:THREE.AdditiveBlending, depthWrite:false, opacity:.9}));
   scene.add(embers);
-  if (THUMB){
-    smoke.forEach(function(s){ s.visible = false; });
-    embers.visible = false;
-  }
 
   // ---------- dust that puffs from the edges when the covers part ----------
   const DN = 80, dpos = new Float32Array(DN*3), dvel = new Float32Array(DN*3);
@@ -801,15 +766,19 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
     const gr = g.createRadialGradient(32,32,0,32,32,32); gr.addColorStop(0,'rgba(255,255,255,.55)'); gr.addColorStop(1,'rgba(255,255,255,0)');
     g.fillStyle = gr; g.fillRect(0,0,64,64); return new THREE.CanvasTexture(c); })()});
   const dust = new THREE.Points(dustGeo, dustMat); dust.frustumCulled = false; scene.add(dust);
-  if (THUMB) dust.visible = false;
+  if (THUMB){
+    smoke.forEach(function(s){ s.visible = false; });
+    embers.visible = false;
+    dust.visible = false;
+  }
   let dustAge = 9, puffed = false;
   function puff(){
     const p = new THREE.Vector3(), c = new THREE.Vector3();
     M.updateWorldMatrix(true, false); c.set(0, 0.49, 0); M.localToWorld(c);
     for (let i=0;i<DN;i++){
       const r = Math.random();
-      if (r < 0.6) p.set(0.355, PY0 + Math.random()*PH, (Math.random()-.5)*0.08);            // fore-edge
-      else p.set(XH + Math.random()*(0.355 - XH), r < 0.8 ? PY1 : PY0, (Math.random()-.5)*0.08);   // head and tail
+      if (r < 0.6) p.set(0.367, PY0 + Math.random()*PH, (Math.random()-.5)*0.08);            // fore-edge
+      else p.set(XH + Math.random()*(0.367 - XH), r < 0.8 ? PY1 : PY0, (Math.random()-.5)*0.08);   // head and tail
       M.localToWorld(p);
       dpos[i*3] = p.x; dpos[i*3+1] = p.y; dpos[i*3+2] = p.z;
       p.sub(c).normalize().multiplyScalar(0.35 + Math.random()*0.75);
@@ -830,19 +799,38 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
     yawRead = -Math.PI/2 + 2*Math.PI*Math.round((yaw + Math.PI/2)/(2*Math.PI));
     canvas.classList.add('read'); refresh();
   }
-  // ---------- this book's lock: the forge. Three hammer strikes on the cover open it. ----------
-  const STRIKES = 3;
-  let strikes = 0, jolt = 0, flare = 0;
-  function strike(){
-    if (mode !== 'show' || !ready) return;
-    strikes++; jolt = 1; flare = 1; idle = 0;
-    for (let k=0;k<46;k++){                         // sparks off the cover
+  // ---------- this book's lock: set the four corner gears turning. When all four run, the train draws the clasp and the book opens. ----------
+  let jolt = 0, flare = 0, claspT = 0, claspA = 0, wheelKick = 0;
+  const sv = new THREE.Vector3();
+  function pressBook(){ return false; } function releaseBook(){}
+  function sparksAt(w, count){
+    for (let k = 0; k < count; k++){
       const i = (Math.random()*N)|0;
-      ep[i*3] = (Math.random()-.5)*1.1; ep[i*3+1] = (Math.random()-.5)*1.0; ep[i*3+2] = 0.9 + Math.random()*0.8;
-      ev[i] = {vy:1.2+Math.random()*2.6, ph:Math.random()*6.28, sp:2+Math.random()*4};
+      ep[i*3] = w.x + (Math.random()-.5)*0.22; ep[i*3+1] = w.y + (Math.random()-.5)*0.22; ep[i*3+2] = w.z + 0.05 + Math.random()*0.3;
+      ev[i] = {vy:0.9 + Math.random()*2.4, ph:Math.random()*6.28, sp:2 + Math.random()*4};
     }
-    if (strikes >= STRIKES){ strikes = 0; setHint('the forge is lit'); setTimeout(openBook, 420); }
-    else setHint('strike ' + strikes + ' of ' + STRIKES + ' · strike again');
+  }
+  function startGear(k){
+    if (mode !== 'show' || !ready) return;
+    const g = gears[k]; idle = 0;
+    if (g.on){ g.v += 7; jolt = 0.1; return; }
+    g.on = 1; g.v = 9; jolt = 0.3;
+    const n = gears[0].on + gears[1].on + gears[2].on + gears[3].on;
+    front.inner.updateWorldMatrix(true, false); sv.set(GC[k][0], GC[k][1], 0.10); front.inner.localToWorld(sv); sparksAt(sv, 8);
+    if (n === 4){ flare = 1; claspT = 1; setHint('the work is one · the clasp gives'); setTimeout(openBook, 1900); }
+    else setHint(['one gear turns', 'two gears turn', 'three gears turn'][n - 1]);
+  }
+  function strike(){ for (let i = 0; i < 4; i++) if (!gears[i].on){ startGear(i); return; } }
+  function relock(){ for (let i = 0; i < 4; i++) gears[i].on = 0; claspT = 0; }
+  function tapBook(hits){
+    let h = null; for (let i = 0; i < hits.length; i++) if (hits[i].object.visible && hits[i].object.userData.tag !== undefined){ h = hits[i]; break; }
+    if (!h) return;
+    const u = h.object.userData; idle = 0;
+    if (u.gear >= 0){ startGear(u.gear); return; }
+    if (u.tag === 'wheel'){ wheelKick += 7; jolt = 0.15; setHint('the train on the back follows the four in front'); return; }
+    if (claspT) return;
+    jolt = 0.25;
+    setHint(u.tag === 'clasp' ? 'the clasp holds until the four gears turn' : 'set the four gears turning');
   }
   function closeBook(){
     if ((mode !== 'read' && mode !== 'opening') || flip) return;
@@ -850,7 +838,7 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
   }
   closeBtn.addEventListener('click', closeBook);
   function readDist(){
-    const t = Math.tan(camera.fov * Math.PI/360), w = 2*(G+WP)*S*1.1, h = H*S*1.16;
+    const t = Math.tan(camera.fov * Math.PI/360), w = 2*(G+WP)*S*1.1, h = 0.981*S*1.16;
     return Math.max(h/2/t, w/2/(t*camera.aspect)) + 0.6;
   }
 
@@ -865,6 +853,7 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
     canvas.setPointerCapture(e.pointerId); pts.set(e.pointerId,[e.clientX,e.clientY]);
     dragging = pts.size===1; lastX=downX=e.clientX; lastY=downY=e.clientY; downT=performance.now(); moved=0; pinch=0;
     if (mode === 'show') canvas.classList.add('drag'); touched();
+    if (mode === 'show' && pts.size === 1){ const r = canvas.getBoundingClientRect(); ndc.set((e.clientX-r.left)/r.width*2-1, -((e.clientY-r.top)/r.height*2-1)); ray.setFromCamera(ndc, camera); if (pressBook(ray.intersectObject(M, true))){ dragging = false; canvas.classList.remove('drag'); } }
   });
   canvas.addEventListener('pointermove', e=>{
     if (!pts.has(e.pointerId)) return;
@@ -882,6 +871,7 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
   });
   function up(e){
     if (!pts.has(e.pointerId)) return;
+    releaseBook();
     const wasSingle = pts.size === 1 && dragging;
     pts.delete(e.pointerId); dragging=false; pinch=0; canvas.classList.remove('drag');
     if (!wasSingle || e.type === 'pointercancel') return;
@@ -891,7 +881,8 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
         const r = canvas.getBoundingClientRect();
         ndc.set((e.clientX-r.left)/r.width*2-1, -((e.clientY-r.top)/r.height*2-1));
         ray.setFromCamera(ndc, camera);
-        if (ray.intersectObject(M, true).length){ vyaw = vpitch = 0; strike(); }
+        const hits = ray.intersectObject(M, true);
+        if (hits.length){ vyaw = vpitch = 0; tapBook(hits); }
       } else if (mode === 'read'){
         if (e.clientX > window.innerWidth/2) next(); else prev();
       }
@@ -930,11 +921,12 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
 
   // ---------- loop ----------
   const clock = new THREE.Clock(), toCam = new THREE.Vector3();
-  let prevYaw = -0.5, prevPitch = 0.12, frameNo = 0, laTest = -1;
+  let prevYaw = -0.5, prevPitch = 0.12, frameNo = 0, beat = 0;
+  let manual = null;                 // set only by the capture hook: freezes time so a turntable render is perfectly steady
   const sm = (a,b,x) => { const t = Math.max(0, Math.min(1, (x-a)/(b-a))); return t*t*(3-2*t); };
   refresh();
   function frame(){
-    const dt = Math.min(clock.getDelta(), 0.05), t = clock.elapsedTime;
+    const dt = manual ? manual.dt : Math.min(clock.getDelta(), 0.05), t = manual ? manual.t : clock.elapsedTime;
     idle += dt;
 
     // open / close
@@ -942,15 +934,14 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
       if (openT === 1){ mode = 'read'; closeBtn.classList.add('on'); setHint('click a page to turn · esc to close'); } }
     if (mode === 'closing'){ openT = Math.max(0, openT - dt/2.2);
       if (openT === 0){ mode = 'show'; idle = 99; zoomRead = 1; turned = 0; refresh();      // a closed book always reopens at its first page
-        jolt = 0.55; flare = 0.4; puffed = false; setHint('locked'); } }
-    const la = laTest >= 0 ? laTest : sm(0, 0.2, openT), cv = sm(0.22, 1, openT);      // clasp unlocks fully before the cover starts to move
-    U.uUnlock.value = la;
-    if (claspFrontP) claspFrontP.rotation.y = -la * 1.15;   // swing the latch off the back catch, then the cover follows
-    if (pagesMesh) pagesMesh.visible = cv < 0.06;           // the solid page block yields to the verse leaves once the boards part
-    const showLeaves = cv > 0.04;
-    leftStack.top.visible = leftStack.edges.visible = showLeaves;
-    rightStack.top.visible = rightStack.edges.visible = showLeaves;
-    gears.forEach(function(g){ g.p.rotation.z += dt * g.speed; });
+        jolt = 0.55; flare = 0.4; puffed = false; relock(); setHint('the gears run down'); } }
+    const cv = sm(0.06, 1, openT);
+    // Swing the clasp out past the fore-edge and on around until it lies behind the back board.
+    if (claspBack){
+      const c = sm(0.2, 0.75, openT);
+      claspBack.position.x = claspHome.x - c * 0.07;
+      claspBack.position.z = claspHome.z - c * 0.025;
+    }
     front.p.rotation.y = -cv * Math.PI/2; front.p.position.set(XH + (X0-XH)*cv, 0,  ZI + (G-ZI)*cv);
     back.p.rotation.y  =  cv * Math.PI/2; back.p.position.set(XH + (X0-XH)*cv, 0, -ZI - (G-ZI)*cv);
 
@@ -991,14 +982,16 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
     tilt.rotation.set(pitch, yaw, 0, 'XYZ');
     // how fast the book is being turned by hand (the slow idle spin does not count)
     const spin = mode === 'show' ? (Math.abs(yaw - prevYaw) + Math.abs(pitch - prevPitch)) / Math.max(dt, 0.001) : 0;
-    const yr = (yaw - prevYaw) / Math.max(dt, 0.001), pr = (pitch - prevPitch) / Math.max(dt, 0.001);
-    chains.forEach(function(c){
-      const tx = Math.max(-0.0026, Math.min(0.0026, -yr*0.0005*c.k)) + jolt*0.002*c.jx;
-      const ty = Math.max(-0.0026, Math.min(0.0026,  pr*0.0005*c.k)) - jolt*0.0018*Math.abs(c.jy);
-      c.vx += ((tx - c.x)*c.K - c.vx*c.D)*dt; c.x += c.vx*dt;
-      c.vy += ((ty - c.y)*c.K - c.vy*c.D)*dt; c.y += c.vy*dt;
-      c.g.position.set(c.x, c.y, 0);
-    });
+    // ---- the living parts ----
+    let drive = 0;
+    for (let i = 0; i < 4; i++){
+      const g = gears[i]; g.w += ((g.on ? 1.5 : 0) - g.w)*Math.min(1, dt*1.8); g.v *= Math.exp(-dt*2.2);
+      const sp = (g.w + g.v)*GDIR[i]*dt; g.p.rotation.z += sp; bgears[i].p.rotation.z += sp; drive += g.w + g.v;
+      if (g.mat) g.mat.emissiveIntensity = g.w*0.10 + g.v*0.02 + flare*0.15;
+    }
+    wheelKick *= Math.exp(-dt*1.6); drive = drive*0.22 + wheelKick;
+    wheelBig.p.rotation.z += drive*dt; wheelSmall.p.rotation.z -= drive*dt*1.86;
+    claspA += (claspT - claspA)*Math.min(1, dt*3.2); claspG.p.rotation.y = claspA*0.34;
     prevYaw = yaw; prevPitch = pitch;
     const rTarget = Math.min(1, Math.max(0, (spin - 0.7)/4.5) + jolt*1.4);
     U.uRattle.value += (rTarget - U.uRattle.value) * (1 - Math.exp(-dt*(rTarget > U.uRattle.value ? 28 : 3.2)));
@@ -1014,11 +1007,11 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
 
     // rune pulse with a little fire flicker
     const pulse = 0.5+0.5*Math.sin(t*1.7), flick = 0.06*Math.sin(t*13.1)+0.04*Math.sin(t*23.7);
-    const e = 0.95 + pulse*0.75 + flick + flare*2.4;
+    const e = 0.95 + pulse*0.55 + beat*0.45 + flick + flare*2.4;
     glowMats.forEach(function(m){ m.emissiveIntensity = e; });
     toCam.copy(camera.position).normalize();
     runes.forEach(function(r){
-      r.light.intensity = 0.2 + pulse*0.3 + flick*1.2 + flare*4;
+      r.light.intensity = 0.12 + pulse*0.2 + flick*0.8 + flare*3.5;
       r.n.set(0,0,r.sign).transformDirection(r.inner.matrixWorld);
       r.halo.material.opacity = Math.pow(Math.max(0, r.n.dot(toCam)),1.6) * Math.min(1.6, 0.55 + pulse*0.45 + flare*0.9);
     });
@@ -1037,10 +1030,10 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
     camera.position.set(0, 0, dist); camera.lookAt(0,0,0);
     renderer.render(scene, camera);
     if (liveChecked < 2 && ready && (frameNo++ % 20) === 19) checkLive();
-    requestAnimationFrame(frame);
+    if (!manual) requestAnimationFrame(frame);
   }
   if (location.hostname==='localhost' || location.hostname==='127.0.0.1') window.__book = {
-    view:(y,p)=>{ yaw=y; pitch=p; idle=-1e9; }, peek:(d)=>{ yawRead += d; }, open:openBook, close:closeBook, next, prev, jaw:(v)=>{ laTest = v; }, kick:(v)=>{ jolt = v; }, goto:(n)=>{ turned = Math.max(0, Math.min(LEAVES, n)); refresh(); },
-    dist:(d)=>{ dist=Math.max(3.2, Math.min(14, d)); }, state:()=>({mode, openT, turned, flip:!!flip, ready, dist}) };
+    view:(y,p)=>{ yaw=y; yawRead=y; pitch=p; idle=-1e9; }, aim:(y,p,d)=>{ yaw=y; yawRead=y; pitch=p; if(d!=null){ dist=showDist=d; if(mode!=='show') zoomRead=d/Math.max(0.01,readDist()); } idle=-1e9; }, peek:(d)=>{ yawRead += d; }, open:openBook, close:closeBook, next, prev, gear:(k)=>startGear(k), kick:(v)=>{ jolt = v; }, lit:()=>gears.map(g=>g.on).concat([+claspA.toFixed(2)]), info:()=>{ const out=[]; M.traverse(o=>{ if(o.isMesh&&o.name){ const g=o.geometry, a=g.attributes.position; out.push([o.name, a.array.constructor.name, a.normalized, g.index?g.index.count:0, o.material.side, g.boundingSphere?+g.boundingSphere.radius.toFixed(3):null, o.scale.x.toFixed(5), o.visible]); } }); return out.slice(0,6); }, probe:(x,y)=>{ const r=canvas.getBoundingClientRect(); ndc.set((x-r.left)/r.width*2-1, -((y-r.top)/r.height*2-1)); ray.setFromCamera(ndc, camera); return ray.intersectObject(M, true).slice(0,8).map(h=>[h.object.name||h.object.type, +h.distance.toFixed(3), h.object.userData.jewel, h.object.userData.tag]); }, hide:(re,v)=>{ M.traverse(o=>{ if (o.name && new RegExp(re).test(o.name)) o.visible = v; }); }, still:(y,p)=>{ manual = {t:2.0, dt:0}; yaw = y; pitch = p; idle = -1e9; frame(); return canvas.toDataURL('image/png'); }, goto:(n)=>{ turned = Math.max(0, Math.min(LEAVES, n)); refresh(); },
+    dist:(d)=>{ dist=Math.max(3.2, Math.min(14, d)); showDist=dist; }, state:()=>({mode, openT, turned, flip:!!flip, ready, dist, claspA, claspT}) };
   frame();
 })();
