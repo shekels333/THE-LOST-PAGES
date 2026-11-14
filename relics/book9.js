@@ -108,12 +108,13 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
 
 (function(){
   const canvas = document.getElementById('c');
-  const renderer = new THREE.WebGLRenderer({canvas, antialias:true});
+  const THUMB = /(?:^|[?&])thumb=1(?:&|$)/.test(location.search);
+  const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true, preserveDrawingBuffer: !!THUMB});
   renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, 2));
   renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.15;
-  renderer.setClearColor(0x000000, 1);
+  renderer.setClearColor(0x000000, 0);
   const ANISO = renderer.capabilities.getMaxAnisotropy();
 
   const scene = new THREE.Scene();
@@ -799,7 +800,7 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
     });
     // Show the whole book at once. The first frame with the cover is slow on phones (its textures go to the
     // graphics chip then), so keep the loading line up until that frame has actually been drawn.
-    book.visible = true; appear = 0; flare = 0.8;
+    book.visible = true; appear = THUMB ? 1 : 0; flare = 0.8;
     requestAnimationFrame(function(){ requestAnimationFrame(function(){
       ready = true; loadEl.classList.add('off'); setHint('drag to rotate · plant a seed in the bare ground');
     }); });
@@ -950,6 +951,10 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
   const embers = new THREE.Points(eg, new THREE.PointsMaterial({map:dotTex(), size:0.05, transparent:true,
     blending:THREE.AdditiveBlending, depthWrite:false, opacity:.9}));
   scene.add(embers);
+  if (THUMB){
+    smoke.forEach(function(s){ s.visible = false; });
+    embers.visible = false;
+  }
 
   // ---------- dust that puffs from the edges when the covers part ----------
   const DN = 80, dpos = new Float32Array(DN*3), dvel = new Float32Array(DN*3);
@@ -959,6 +964,7 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
     const gr = g.createRadialGradient(32,32,0,32,32,32); gr.addColorStop(0,'rgba(255,255,255,.55)'); gr.addColorStop(1,'rgba(255,255,255,0)');
     g.fillStyle = gr; g.fillRect(0,0,64,64); return new THREE.CanvasTexture(c); })()});
   const dust = new THREE.Points(dustGeo, dustMat); dust.frustumCulled = false; scene.add(dust);
+  if (THUMB) dust.visible = false;
   let dustAge = 9, puffed = false;
   function puff(){
     const p = new THREE.Vector3(), c = new THREE.Vector3();
@@ -1029,6 +1035,7 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
 
   // ---------- interaction ----------
   let yaw = -0.5, pitch = 0.12, vyaw = 0, vpitch = 0, dragging = false, lastX=0, lastY=0, idle = 99;
+  if (THUMB){ yaw = 0; pitch = 0.06; idle = -1e9; appear = 1; }
   let downX = 0, downY = 0, downT = 0, moved = 0;
   const pts = new Map(); let pinch = 0;
   const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();

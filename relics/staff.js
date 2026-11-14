@@ -12,12 +12,12 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
   const canvas = document.getElementById('c');
   const THUMB = /(?:^|[?&])thumb=1(?:&|$)/.test(location.search);
   const THUMB_KIND = ((location.search.match(/(?:^|[?&])crop=(\w+)/) || [])[1] || 'diag');
-  const renderer = new THREE.WebGLRenderer({canvas, antialias:true, preserveDrawingBuffer: !!THUMB});
+  const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true, preserveDrawingBuffer: !!THUMB});
   renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, 2));
   renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.15;
-  renderer.setClearColor(0x000000, 1);
+  renderer.setClearColor(0x000000, 0);
   const ANISO = renderer.capabilities.getMaxAnisotropy();
 
   const scene = new THREE.Scene();
