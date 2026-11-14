@@ -727,19 +727,7 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
     const w3 = g.measureText('6').width, x = (w - (wTT + gap + w3))/2;
     drawTT(g, x, base, cap); g.fillText('6', x + wTT + gap, base);
   });
-  plate(0.007, 0.2795, 0.430, 0.086, 0.1182, function(g, w, h){
-    const txt = 'WATCHERS'; let f = Math.round(h*0.86);
-    g.textBaseline = 'alphabetic'; g.textAlign = 'left';
-    let sp, total;
-    for (;; f -= 2){                                   // largest size that fits the plate between its rivets
-      g.font = f + "px " + HEAD; sp = f*0.11; total = -sp;
-      for (const ch of txt) total += g.measureText(ch).width + sp;
-      if (total <= w*0.93 || f < 20) break;
-    }
-    const m = g.measureText('B'), asc = m.actualBoundingBoxAscent || f*0.66;
-    let x = (w - total)/2; const base = h/2 + asc/2;
-    for (const ch of txt){ g.fillText(ch, x, base); x += g.measureText(ch).width + sp; }
-  });
+  // The plate above the control keys is left blank, to match the rest of the cover.
 
   // ---------- lights ----------
   scene.add(new THREE.AmbientLight(0x4a3f38, 0.55));
