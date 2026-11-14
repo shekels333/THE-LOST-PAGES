@@ -721,12 +721,7 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
     g.fillRect(sx - st*0.75, base - bt*0.5, st*2.5, bt*0.5);
     return fl + st*1.75;
   }
-  plate(0.090, 0.8715, 0.150, 0.036, 0.1157, function(g, w, h){
-    const cap = h*0.70, base = h/2 + cap/2, gap = cap*0.50, wTT = cap*1.22;
-    g.font = "bold " + Math.round(cap/0.662) + "px 'Times New Roman', Times, 'Liberation Serif', serif"; g.textAlign = 'left'; g.textBaseline = 'alphabetic';
-    const w3 = g.measureText('6').width, x = (w - (wTT + gap + w3))/2;
-    drawTT(g, x, base, cap); g.fillText('6', x + wTT + gap, base);
-  });
+  // The top bar next to the status lights is left blank.
   // The plate above the control keys is left blank, to match the rest of the cover.
 
   // ---------- lights ----------
