@@ -896,26 +896,11 @@
       filter: drop-shadow(0 0 16px rgba(201,168,76,0.45));
     }
 
-    .relics-copy {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
     .relics-card h4 {
       font-family: 'Cinzel', serif;
       font-size: 0.85rem;
       letter-spacing: 0.22em;
       color: var(--gold);
-      margin: 0;
-    }
-
-    .relics-card p {
-      font-size: 0.85rem;
-      color: var(--muted);
-      font-style: italic;
-      line-height: 1.5;
       margin: 0;
     }
 
@@ -2112,17 +2097,12 @@
               <stop offset="1" stop-color="#c9a84c"/>
             </linearGradient>
           </defs>
-          <path d="M20 14h36a4 4 0 0 1 4 4v46a4 4 0 0 1-4 4H20a4 4 0 0 1-4-4V18a4 4 0 0 1 4-4z" fill="rgba(201,168,76,0.08)" stroke="url(#relicGold)" stroke-width="1.6"/>
-          <path d="M24 14v54" fill="none" stroke="url(#relicGold)" stroke-width="1.4"/>
-          <rect x="30" y="22" width="24" height="38" rx="1.5" fill="none" stroke="url(#relicGold)" stroke-width="0.9" opacity="0.85"/>
-          <circle cx="42" cy="38" r="6.2" fill="none" stroke="url(#relicGold)" stroke-width="1.1"/>
-          <path d="M42 29.5v4.2M42 42.3v4.2M33.5 38h4.2M46.3 38h4.2" fill="none" stroke="url(#relicGold)" stroke-width="0.9" stroke-linecap="round"/>
-          <path d="M39.4 38l2.6-2.6 2.6 2.6-2.6 2.6z" fill="url(#relicGold)" opacity="0.9"/>
+          <circle cx="40" cy="40" r="26" fill="rgba(201,168,76,0.08)" stroke="url(#relicGold)" stroke-width="1.5"/>
+          <circle cx="40" cy="40" r="21" fill="none" stroke="url(#relicGold)" stroke-width="0.7" opacity="0.5"/>
+          <path d="M40 14v6M40 60v6M14 40h6M60 40h6" fill="none" stroke="url(#relicGold)" stroke-width="1.15" stroke-linecap="round"/>
+          <path d="M40 16C41.4 31.5 48.5 38.6 64 40C48.5 41.4 41.4 48.5 40 64C38.6 48.5 31.5 41.4 16 40C31.5 38.6 38.6 31.5 40 16Z" fill="url(#relicGold)"/>
         </svg>
-        <div class="relics-copy">
-          <h4>RELICS</h4>
-          <p>View the digital relic books</p>
-        </div>
+        <h4>RELICS</h4>
       </a>
     </div>
   </section>
