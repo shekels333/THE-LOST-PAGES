@@ -588,20 +588,21 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
     if (mat.emissiveMap){ mat.emissive.set(0xffffff); glowMats.add(mat); }
     if (live) liveCover(mat, q, 9.0);
   }
-  function spinPivot(parent, objs, speed){
-    objs.forEach(function(o){ parent.add(o); });
-    parent.updateWorldMatrix(true, true);
-    const box = new THREE.Box3();
-    objs.forEach(function(o){ box.expandByObject(o); });
-    const c = box.getCenter(new THREE.Vector3());
-    parent.worldToLocal(c);
-    const p = new THREE.Group(); p.position.copy(c); parent.add(p);
-    objs.forEach(function(o){ p.attach(o); });
+  // Each spinning gear is a quantized node whose translation is already its
+  // center and whose mesh is built around the origin. Pivot there, on the cover
+  // normal (local Z), so the gear turns in its socket instead of orbiting off it.
+  // The _face pieces are offset decorative plates, not the gears; they stay put.
+  function spinGear(parent, obj, speed){
+    parent.add(obj);
+    const p = new THREE.Group();
+    p.position.copy(obj.position);
+    parent.add(p);
+    p.attach(obj);
     gears.push({p, speed});
   }
   function onModel(gltf){
     const rootNode = gltf.scene.getObjectByName('ROOT') || gltf.scene;
-    const gearBags = {};
+    const gearHubs = [];
     let claspFrontObj = null;
     rootNode.children.slice().forEach(function(o){
       const n = o.name;
@@ -611,20 +612,24 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
       else if (n.indexOf('spine') === 0) M.add(o);
       else if (n === 'clasp_front') claspFrontObj = o;
       else if (n === 'clasp_back') back.inner.add(o);
-      else if (n.indexOf('gear_') === 0){
-        const key = n.replace(/_hub$/, '').replace(/_face$/, '');
-        (gearBags[key] = gearBags[key] || []).push(o);
+      else if (/^gear_.*_hub$/.test(n)){
+        const parent = n.indexOf('gear_b_') === 0 ? back.inner : front.inner;
+        const sign = (n.indexOf('_tl_') >= 0 || n.indexOf('_br_') >= 0) ? 1 : -1;
+        gearHubs.push({parent, o, speed: 0.55 * sign});
+      }
+      else if (/^gear_.*_face$/.test(n)){
+        (n.indexOf('gear_b_') === 0 ? back.inner : front.inner).add(o);
       }
       else if (n.indexOf('cover_front') === 0) front.inner.add(o);
-      else if (n.indexOf('cover_back') === 0) back.inner.add(o);
+      else if (n.indexOf('cover_back') === 0){
+        // Keep the leather, copper frame, caps and hinges; drop the gothic arch,
+        // medallion and nameplates so the back can have its own centerpiece.
+        if (/_medallion$|_ring$|_plate_bot$|_center$/.test(n)) return;
+        back.inner.add(o);
+      }
       else M.add(o);
     });
-    Object.keys(gearBags).forEach(function(key){
-      const parent = key.indexOf('gear_b_') === 0 ? back.inner : front.inner;
-      const sign = (key.indexOf('_tl') >= 0 || key.indexOf('_br') >= 0) ? 1 : -1;
-      const extra = ({gear_f_tl:0.08, gear_f_tr:-0.05, gear_f_bl:-0.06, gear_f_br:0.07, gear_b_tl:-0.05, gear_b_tr:0.06, gear_b_bl:0.04, gear_b_br:-0.07})[key] || 0;
-      spinPivot(parent, gearBags[key], 0.7 * sign + extra);
-    });
+    gearHubs.forEach(function(g){ spinGear(g.parent, g.o, g.speed); });
     if (claspFrontObj){
       front.inner.add(claspFrontObj);
       front.inner.updateWorldMatrix(true, true);
@@ -681,13 +686,14 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
   const runes = [rune(front.inner, 1)];
   // ---------- nameplate lettering (drawn here so it stays sharp; the model's plates are blank) ----------
   const plates = [];
-  function plate(cx, cy, w, h, z, draw){
+  function plate(cx, cy, w, h, z, draw, into, rotY){
     const c = document.createElement('canvas'); c.width = 1024; c.height = Math.round(1024*h/w);
     const t = new THREE.CanvasTexture(c); t.encoding = THREE.sRGBEncoding; t.anisotropy = ANISO;
     const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshStandardMaterial({
       map:t, transparent:true, metalness:.55, roughness:.42, envMapIntensity:1.2, depthWrite:false,
       polygonOffset:true, polygonOffsetFactor:-4, polygonOffsetUnits:-4 }));
-    m.position.set(cx, cy, z); front.inner.add(m);
+    m.position.set(cx, cy, z); if (rotY) m.rotation.y = rotY;
+    (into || front.inner).add(m);
     const redraw = function(){
       const g = c.getContext('2d'); g.clearRect(0,0,c.width,c.height);
       // engraved gold: dark cut edge up-left, bright lip down-right, gold face
@@ -739,6 +745,87 @@ const PAGES = [{ cover: true }].concat(VERSES.map(function(t, i){ return { verse
     let x = (w - total)/2; const base = h/2 + asc/2;
     for (const ch of txt){ g.fillText(ch, x, base); x += g.measureText(ch).width + sp; }
   });
+
+  // ---------- back cover: a copper compass-gear, not a second moon ----------
+  // Built in +Z-facing local space, then turned 180 around Y so it faces out
+  // the back. That flip puts the spine on the viewer's right and keeps the
+  // crescent and the TRILLIONBEAR plate reading correctly, not mirrored.
+  const cu = new THREE.MeshStandardMaterial({color:0x9a6f38, metalness:0.74, roughness:0.42, envMapIntensity:1.25});
+  const cuDark = new THREE.MeshStandardMaterial({color:0x6e4a24, metalness:0.68, roughness:0.55, envMapIntensity:1.1});
+  const cuBright = new THREE.MeshStandardMaterial({color:0xc09648, metalness:0.8, roughness:0.32, envMapIntensity:1.3});
+  (function emblem(){
+    const g = new THREE.Group();
+    g.position.set(0.032, 0.525, -0.126);
+    g.rotation.y = Math.PI;
+    function disc(r, thick, mat, z){
+      const m = new THREE.Mesh(new THREE.CylinderGeometry(r, r, thick, 64), mat);
+      m.rotation.x = Math.PI/2; m.position.z = z; g.add(m); return m;
+    }
+    // stepped medallion, proud of the leather
+    disc(0.172, 0.008, cuDark, 0.000);
+    disc(0.158, 0.010, cu, 0.003);
+    const TEETH = 20;
+    for (let i = 0; i < TEETH; i++){
+      const a = i / TEETH * Math.PI * 2;
+      const tooth = new THREE.Mesh(new THREE.BoxGeometry(0.026, 0.020, 0.008), cu);
+      tooth.position.set(Math.cos(a) * 0.162, Math.sin(a) * 0.162, 0.004);
+      tooth.rotation.z = a;
+      g.add(tooth);
+    }
+    disc(0.130, 0.007, cuDark, 0.007);
+    disc(0.118, 0.008, cu, 0.010);
+    // rings sit in the XY plane (torus hole along Z) so they face out the back
+    function ring(r, tube, z, mat){
+      const m = new THREE.Mesh(new THREE.TorusGeometry(r, tube, 12, 48), mat);
+      m.position.z = z; g.add(m);
+    }
+    ring(0.112, 0.0055, 0.015, cuBright);
+    ring(0.070, 0.0045, 0.016, cuDark);
+    // compass spears start outside the hub so the crescent stays visible
+    function spear(len, rad, mat, z, inset, angle){
+      const mesh = new THREE.Mesh(new THREE.ConeGeometry(rad, len, 4), mat);
+      mesh.position.z = z;
+      mesh.rotation.z = angle;
+      mesh.translateY(inset + len/2);   // after rotation, local Y points outward from the hub
+      return mesh;
+    }
+    for (let i = 0; i < 4; i++) g.add(spear(0.125, 0.020, cuBright, 0.018, 0.052, i * Math.PI/2));
+    for (let i = 0; i < 4; i++) g.add(spear(0.088, 0.013, cu, 0.016, 0.052, i * Math.PI/2 + Math.PI/4));
+    // hub + a clear engraved crescent on top
+    disc(0.050, 0.012, cuBright, 0.020);
+    disc(0.036, 0.010, cuDark, 0.026);
+    (function moon(){
+      const shape = new THREE.Shape();
+      shape.absarc(0, 0, 0.024, 0, Math.PI*2, false);
+      const hole = new THREE.Path();
+      hole.absarc(0.010, 0.005, 0.018, 0, Math.PI*2, true);
+      shape.holes.push(hole);
+      const geo = new THREE.ExtrudeGeometry(shape, {depth: 0.005, bevelEnabled: true, bevelThickness: 0.001, bevelSize: 0.001, bevelSegments: 1});
+      const m = new THREE.Mesh(geo, cuBright);
+      m.position.set(-0.002, 0.000, 0.032);
+      g.add(m);
+    })();
+    for (let i = 0; i < 8; i++){
+      const a = i / 8 * Math.PI * 2 + Math.PI/8;
+      const r = new THREE.Mesh(new THREE.SphereGeometry(0.005, 10, 8), cuBright);
+      r.position.set(Math.cos(a)*0.112, Math.sin(a)*0.112, 0.018);
+      g.add(r);
+    }
+    back.inner.add(g);
+  })();
+  plate(0.032, 0.188, 0.220, 0.034, -0.137, function(g, w, h){
+    const txt = 'TRILLIONBEAR'; let f = Math.round(h*0.72);
+    g.textBaseline = 'alphabetic'; g.textAlign = 'left';
+    let sp, total;
+    for (;; f -= 2){
+      g.font = f + "px " + HEAD; sp = f*0.10; total = -sp;
+      for (const ch of txt) total += g.measureText(ch).width + sp;
+      if (total <= w*0.86 || f < 18) break;
+    }
+    const m = g.measureText('T'), asc = m.actualBoundingBoxAscent || f*0.66;
+    let x = (w - total)/2; const base = h/2 + asc/2;
+    for (const ch of txt){ g.fillText(ch, x, base); x += g.measureText(ch).width + sp; }
+  }, back.inner, Math.PI);
 
   // ---------- lights ----------
   scene.add(new THREE.AmbientLight(0x4a3f38, 0.55));
