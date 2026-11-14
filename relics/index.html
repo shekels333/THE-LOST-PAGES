@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Lost Pages — Relics</title>
+<meta name="description" content="Open the digital relic books of The Lost Pages — Trillionbear's collection on Solana.">
+<link rel="canonical" href="https://thelostpages.net/relics/">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap">
+<style>
+  html,body{margin:0;height:100%;background:#000;overflow:hidden}
+  canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
+  canvas.drag{cursor:grabbing}
+  canvas.read{cursor:pointer}
+  #vig{position:fixed;inset:0;pointer-events:none;
+    background:radial-gradient(ellipse at center,rgba(0,0,0,0) 45%,rgba(0,0,0,.85) 100%)}
+  #hint,#close,#home,#books-btn{font:12px/1 Georgia,'Times New Roman',serif;letter-spacing:.32em;text-transform:lowercase;color:#b08a55}
+  #hint{position:fixed;left:0;right:0;bottom:22px;text-align:center;pointer-events:none;opacity:.8;transition:opacity .8s}
+  #hint.off{opacity:0}
+  #close{position:fixed;top:18px;right:20px;background:none;border:1px solid #5a4424;padding:9px 12px 9px 15px;
+    cursor:pointer;opacity:0;pointer-events:none;transition:opacity .6s;z-index:6}
+  #close.on{opacity:.85;pointer-events:auto}
+  #close:hover{color:#ffc27a;border-color:#b08a55}
+  #home{position:fixed;top:18px;left:20px;z-index:6;text-decoration:none;background:rgba(0,0,0,.35);
+    border:1px solid #3d2e18;padding:9px 12px 9px 14px;transition:color .3s,border-color .3s}
+  #home:hover{color:#ffc27a;border-color:#b08a55}
+  #load{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+    pointer-events:none;font:12px/1 Georgia,'Times New Roman',serif;letter-spacing:.4em;color:#b08a55;transition:opacity .9s;z-index:4}
+  #load.off{opacity:0}
+  #load img{display:block;max-width:min(420px,70vw);max-height:22vh;width:auto;height:auto;object-fit:contain;
+    filter:drop-shadow(0 0 16px rgba(176,138,85,.35));margin-bottom:8px}
+  #load img[hidden]{display:none}
+  #load i{display:block;width:160px;height:1px;background:#3a2c1a}
+  #load b{display:block;height:1px;width:0;background:#ffb060;box-shadow:0 0 8px #ff8a2a;transition:width .2s}
+  #nowebgl{position:fixed;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+    padding:24px;text-align:center;font:14px/1.6 Georgia,'Times New Roman',serif;letter-spacing:.12em;color:#b08a55;z-index:8}
+  #nowebgl.on{display:flex}
+  #nowebgl a{color:#f0c878;text-decoration:none;letter-spacing:.28em;text-transform:lowercase;border-bottom:1px solid #5a4424;padding-bottom:4px}
+  #nowebgl a:hover{color:#ffc27a;border-color:#b08a55}
+  #nowebgl.on ~ #shelf, #nowebgl.on ~ #books-btn, #nowebgl.on ~ #close, #nowebgl.on ~ #hint{display:none !important}
+  .fontwarm{position:absolute;left:-999px;top:0;visibility:hidden}
+
+  #shelf{position:fixed;top:18px;left:166px;right:96px;display:flex;flex-wrap:wrap;gap:8px;z-index:5}
+  #shelf button{font:12px/1 Georgia,'Times New Roman',serif;letter-spacing:.28em;text-transform:lowercase;color:#8a6c42;
+    background:rgba(0,0,0,.35);border:1px solid #3d2e18;padding:9px 11px 9px 14px;cursor:pointer;transition:color .3s,border-color .3s}
+  #shelf button:hover{color:#ffc27a;border-color:#b08a55}
+  #shelf button.on{color:#f0c878;border-color:#b08a55;cursor:default}
+  #books-btn{display:none;background:rgba(0,0,0,.35);border:1px solid #3d2e18;padding:9px 11px 9px 14px;cursor:pointer}
+  #books-btn:hover,#books-btn[aria-expanded="true"]{color:#ffc27a;border-color:#b08a55}
+  @media (max-width:520px){
+    #home{top:12px;left:12px;padding:8px 8px 8px 10px;letter-spacing:.16em;font-size:11px}
+    #close{top:12px;right:12px}
+    #books-btn{display:inline-block;position:fixed;top:12px;left:132px;z-index:6;letter-spacing:.16em;font-size:11px;padding:8px 10px}
+    #shelf{top:52px;left:12px;right:12px;flex-direction:column;align-items:flex-start;gap:0;
+      background:rgba(0,0,0,.88);border:1px solid #3d2e18;padding:8px;max-height:min(70vh,calc(100% - 70px));overflow:auto;
+      display:none}
+    #shelf.open{display:flex}
+    #shelf button{width:100%;text-align:left;letter-spacing:.16em;padding:10px 12px;font-size:11px;border-color:transparent;background:transparent}
+    #shelf button:hover,#shelf button.on{border-color:#b08a55}
+    #hint{bottom:56px;padding:0 12px}
+  }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="vig"></div>
+<div id="load">
+  <img id="poster" alt="" hidden>
+  <span>loading</span>
+  <i><b id="bar"></b></i>
+</div>
+<div id="nowebgl" role="alert">
+  <p>This relic needs WebGL, which this browser doesn't support.</p>
+  <a href="/">back to The Lost Pages</a>
+</div>
+<div id="hint" class="off"></div>
+<a id="home" href="/">the lost pages</a>
+<button id="close" type="button">close</button>
+<button id="books-btn" type="button" aria-expanded="false" aria-controls="shelf">books</button>
+<span class="fontwarm" style="font-family:'IM Fell English'">a<i>a</i></span>
+
+<nav id="shelf" aria-label="Choose a book">
+  <button type="button" data-book="builders">Builders</button>
+  <button type="button" data-book="builders-2">Builders II</button>
+  <button type="button" data-book="rebels">Rebels</button>
+  <button type="button" data-book="kings">Kings</button>
+  <button type="button" data-book="kings-2">Kings II</button>
+  <button type="button" data-book="seekers">Seekers</button>
+  <button type="button" data-book="hunters">Hunters</button>
+  <button type="button" data-book="watchers">Watchers</button>
+  <button type="button" data-book="warriors">Warriors</button>
+  <button type="button" data-book="crusaders">Crusaders</button>
+  <button type="button" data-book="seers">Seers</button>
+</nav>
+<script>
+(function(){
+  function hasWebGL(){
+    try {
+      var c = document.createElement('canvas');
+      return !!(c.getContext('webgl') || c.getContext('experimental-webgl'));
+    } catch (e) { return false; }
+  }
+  if (!hasWebGL()){
+    document.getElementById('load').className = 'off';
+    document.getElementById('nowebgl').className = 'on';
+    return;
+  }
+  var BOOKS = {
+    'builders':   { title:'TT 1 | The Book of Builders',    code:'book1.js',  poster:'../assets/covers/builders.webp' },
+    'builders-2': { title:'TT 1 | The Book of Builders II', code:'book2.js',  poster:'../assets/covers/builders-2.webp' },
+    'rebels':     { title:'TT 2 | The Book of Rebels',      code:'book3.js',  poster:'../assets/covers/rebels.webp' },
+    'kings':      { title:'TT 3 | The Book of Kings',       code:'book4.js',  poster:'../assets/covers/kings.webp' },
+    'kings-2':    { title:'TT 3 | The Book of Kings II',    code:'book5.js',  poster:'../assets/covers/kings-2.webp' },
+    'seekers':    { title:'TT 4 | The Book of Seekers',     code:'book6.js',  poster:'../assets/covers/seekers.webp' },
+    'warriors':   { title:'TT 7 | The Book of Warriors',    code:'book7.js',  poster:'../assets/covers/warriors.webp' },
+    'crusaders':  { title:'TT 8 | The Book of Crusaders',   code:'book8.js',  poster:'../assets/covers/crusaders.webp' },
+    'seers':      { title:'TT 9 | The Book of Seers',       code:'book9.js',  poster:'../assets/covers/seers.webp' },
+    'hunters':    { title:'TT 5 | The Book of Hunters',     code:'book10.js', poster:'../assets/covers/hunters.webp' },
+    'watchers':   { title:'TT 6 | The Book of Watchers',    code:'book11.js', poster:'../assets/covers/watchers.webp' }
+  };
+  var key = (location.hash || '').replace('#', '');
+  if (!BOOKS[key]){ try { key = sessionStorage.getItem('tb-book'); } catch (e) {} }
+  if (!BOOKS[key]) key = 'builders';
+  document.title = BOOKS[key].title + ' — Relics';
+  var poster = document.getElementById('poster');
+  poster.alt = BOOKS[key].title;
+  poster.onload = function(){ poster.hidden = false; };
+  poster.onerror = function(){ poster.hidden = true; };
+  poster.src = BOOKS[key].poster;
+
+  var shelf = document.getElementById('shelf');
+  var booksBtn = document.getElementById('books-btn');
+  function setMenu(open){
+    shelf.classList.toggle('open', open);
+    booksBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  booksBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    setMenu(!shelf.classList.contains('open'));
+  });
+  document.addEventListener('click', function(e){
+    if (!shelf.contains(e.target) && e.target !== booksBtn) setMenu(false);
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') setMenu(false);
+  });
+
+  function go(k){
+    if (!BOOKS[k] || k === key) return;
+    try { sessionStorage.setItem('tb-book', k); } catch (e) {}
+    location.hash = k; location.reload();
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('#shelf button'), function(b){
+    if (b.getAttribute('data-book') === key) b.className = 'on';
+    b.addEventListener('click', function(){ go(b.getAttribute('data-book')); });
+  });
+  window.addEventListener('hashchange', function(){ go((location.hash || '').replace('#', '')); });
+  function add(src, done){ var s = document.createElement('script'); s.src = src; s.onload = done; s.onerror = done; document.body.appendChild(s); }
+  add('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', function(){
+    add('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js', function(){
+      add(BOOKS[key].code);
+    });
+  });
+})();
+</script>
+</body>
+</html>
