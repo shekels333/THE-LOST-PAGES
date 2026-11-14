@@ -1370,6 +1370,22 @@
     .upcoming-art { display: block; box-sizing: border-box; width: 100%; height: 84px; padding: 10px 0; object-fit: contain; margin: 0; filter: drop-shadow(0 0 12px rgba(201,168,76,.3)); }
     .upcoming-art.tall { padding: 2px 0; }
     .upcoming-card .upcoming-badge { margin: 0; }
+    .upcoming-main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.1rem;
+      text-decoration: none;
+      width: 100%;
+      color: inherit;
+    }
+    .upcoming-relic {
+      flex: 0 0 auto;
+      width: auto;
+      min-height: 36px;
+      padding: 0 1.1rem;
+    }
     .project-title[data-art], .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
     @media (max-width: 600px) {
       .project-header-left, .project-title-wrap { min-width: 0; }
@@ -1461,6 +1477,7 @@
     <div class="header-divider"></div>
     <nav>
       <a href="https://x.com/i/communities/1891898427790733405" target="_blank">YEEZY 4NBT</a>
+      <a href="/relics/">Relics</a>
       <a href="https://www.launchmynft.io/profile/35rXS2wX8bBZoFoLgHgQtd2ayTEGuKq9Z5bko8Aq6zQy" target="_blank" class="mint-btn">Mint</a>
     </nav>
 
@@ -1566,6 +1583,7 @@
                 <div class="project-links">
                   <a href="https://magiceden.us/marketplace/tt_1_book_of_builders" target="_blank" class="btn-link btn-primary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>Magic Eden<span class="btn-arrow">&#8599;</span></a>
                   <a href="https://x.com/trillionbear/status/1903343718381330710" target="_blank" rel="noopener" class="btn-link btn-secondary"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Read the Book<span class="btn-arrow">&#8599;</span></a>
+                  <a href="/relics/#builders" class="btn-link btn-secondary" aria-label="View the Book of Builders relic"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M8 7h8M8 11h6"/></svg>View relic</a>
                 </div>
 </div>
             </div>
@@ -1619,6 +1637,7 @@
                 <div class="project-links">
                   <a href="https://magiceden.us/marketplace/tt_2_book_of_rebels" target="_blank" class="btn-link btn-primary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>Magic Eden<span class="btn-arrow">&#8599;</span></a>
                   <a href="https://x.com/trillionbear/status/1904056341267677221" target="_blank" rel="noopener" class="btn-link btn-secondary"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Read the Book<span class="btn-arrow">&#8599;</span></a>
+                  <a href="/relics/#rebels" class="btn-link btn-secondary" aria-label="View the Book of Rebels relic"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M8 7h8M8 11h6"/></svg>View relic</a>
                 </div>
 </div>
             </div>
@@ -1672,6 +1691,7 @@
                 <div class="project-links">
                   <a href="https://magiceden.us/marketplace/tt_3_book_of_kings_p1" target="_blank" class="btn-link btn-primary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>Magic Eden<span class="btn-arrow">&#8599;</span></a>
                   <a href="https://x.com/trillionbear/status/1904735663154487417" target="_blank" rel="noopener" class="btn-link btn-secondary"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Read the Book<span class="btn-arrow">&#8599;</span></a>
+                  <a href="/relics/#kings" class="btn-link btn-secondary" aria-label="View the Book of Kings relic"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M8 7h8M8 11h6"/></svg>View relic</a>
                 </div>
 </div>
             </div>
@@ -1725,6 +1745,7 @@
                 <div class="project-links">
                   <a href="https://magiceden.us/marketplace/tt_3_book_of_kings_part_2" target="_blank" class="btn-link btn-primary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>Magic Eden<span class="btn-arrow">&#8599;</span></a>
                   <a href="https://x.com/trillionbear/status/1905417816095760581" target="_blank" rel="noopener" class="btn-link btn-secondary"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Read the Book<span class="btn-arrow">&#8599;</span></a>
+                  <a href="/relics/#kings-2" class="btn-link btn-secondary" aria-label="View the Book of Kings II relic"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M8 7h8M8 11h6"/></svg>View relic</a>
                 </div>
 </div>
             </div>
@@ -1778,6 +1799,7 @@
                 <div class="project-links">
                   <a href="https://magiceden.us/marketplace/3QFBVipiBLCC3sEiHdXbawdC7ed7h2Mw3KsiCBqVdgMA" target="_blank" class="btn-link btn-primary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>Magic Eden<span class="btn-arrow">&#8599;</span></a>
                   <a href="https://x.com/trillionbear/status/1914824798468792411" target="_blank" rel="noopener" class="btn-link btn-secondary"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Read the Book<span class="btn-arrow">&#8599;</span></a>
+                  <a href="/relics/#seekers" class="btn-link btn-secondary" aria-label="View the Book of Seekers relic"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M8 7h8M8 11h6"/></svg>View relic</a>
                 </div>
 </div>
             </div>
@@ -1830,6 +1852,7 @@
                 <div class="project-links">
                   <a href="https://magiceden.us/marketplace/DukRLtAEcVjsUyMVqz9aqr3v7ZbckVyGVLZTSm6NgbGL" target="_blank" class="btn-link btn-primary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>Magic Eden<span class="btn-arrow">&#8599;</span></a>
                   <a href="https://x.com/trillionbear/status/1915308095258951999" target="_blank" rel="noopener" class="btn-link btn-secondary"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Read the Book<span class="btn-arrow">&#8599;</span></a>
+                  <a href="/relics/#hunters" class="btn-link btn-secondary" aria-label="View the Book of Hunters relic"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M8 7h8M8 11h6"/></svg>View relic</a>
                 </div>
 </div>
             </div>
@@ -1912,6 +1935,7 @@
                 <div class="project-links">
                   <a href="https://magiceden.us/marketplace/E3e7SnugMdGSovBK6SD6FKbxfXVrpHFjVKHSSSApz6Lm" target="_blank" class="btn-link btn-primary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>Magic Eden<span class="btn-arrow">&#8599;</span></a>
                   <a href="https://x.com/trillionbear/status/1922882572368961860" target="_blank" rel="noopener" class="btn-link btn-secondary"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Read the Book<span class="btn-arrow">&#8599;</span></a>
+                  <a href="/relics/#watchers" class="btn-link btn-secondary" aria-label="View the Book of Watchers relic"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M8 7h8M8 11h6"/></svg>View relic</a>
                 </div>
 </div>
             </div>
@@ -1995,6 +2019,7 @@
                 <div class="project-links">
                   <a href="https://magiceden.us/marketplace/PGjstQG4FU7ruHGQNyhomuWL8dVQCAVqGGp71qmb4Tv" target="_blank" class="btn-link btn-primary"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>Magic Eden<span class="btn-arrow">&#8599;</span></a>
                   <a href="https://x.com/trillionbear/status/2010921503441682876" target="_blank" rel="noopener" class="btn-link btn-secondary"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Read the Book<span class="btn-arrow">&#8599;</span></a>
+                  <a href="/relics/#warriors" class="btn-link btn-secondary" aria-label="View the Book of Warriors relic"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M8 7h8M8 11h6"/></svg>View relic</a>
                 </div>
               </div>
             </div>
@@ -2011,21 +2036,30 @@
     </div>
 
     <div class="upcoming-grid">
-      <a href="https://x.com/trillionbear/status/2011169136538243085?s=20" target="_blank" rel="noopener noreferrer" class="upcoming-card">
-        <img class="upcoming-art tall" src="assets/covers/builders-2.webp" alt="" width="413" height="181" decoding="async">
-        <h4 class="visually-hidden">BUILDERS 2</h4>
-        <span class="upcoming-badge">Coming Soon</span>
-      </a>
-      <a href="https://x.com/trillionbear/status/2011243871477305852?s=20" target="_blank" rel="noopener noreferrer" class="upcoming-card">
-        <img class="upcoming-art" src="assets/covers/crusaders.webp" alt="" width="550" height="151" decoding="async">
-        <h4 class="visually-hidden">CRUSADERS</h4>
-        <span class="upcoming-badge">Coming Soon</span>
-      </a>
-      <a href="https://x.com/trillionbear/status/2108654075222843842" target="_blank" rel="noopener noreferrer" class="upcoming-card">
-        <img class="upcoming-art" src="assets/covers/seers.webp" alt="" width="292" height="156" decoding="async">
-        <h4 class="visually-hidden">SEERS</h4>
-        <span class="upcoming-badge">Coming Soon</span>
-      </a>
+      <div class="upcoming-card">
+        <a href="https://x.com/trillionbear/status/2011169136538243085?s=20" target="_blank" rel="noopener noreferrer" class="upcoming-main">
+          <img class="upcoming-art tall" src="assets/covers/builders-2.webp" alt="" width="413" height="181" decoding="async">
+          <h4 class="visually-hidden">BUILDERS 2</h4>
+          <span class="upcoming-badge">Coming Soon</span>
+        </a>
+        <a href="/relics/#builders-2" class="btn-link btn-secondary upcoming-relic" aria-label="View the Book of Builders II relic">View relic</a>
+      </div>
+      <div class="upcoming-card">
+        <a href="https://x.com/trillionbear/status/2011243871477305852?s=20" target="_blank" rel="noopener noreferrer" class="upcoming-main">
+          <img class="upcoming-art" src="assets/covers/crusaders.webp" alt="" width="550" height="151" decoding="async">
+          <h4 class="visually-hidden">CRUSADERS</h4>
+          <span class="upcoming-badge">Coming Soon</span>
+        </a>
+        <a href="/relics/#crusaders" class="btn-link btn-secondary upcoming-relic" aria-label="View the Book of Crusaders relic">View relic</a>
+      </div>
+      <div class="upcoming-card">
+        <a href="https://x.com/trillionbear/status/2108654075222843842" target="_blank" rel="noopener noreferrer" class="upcoming-main">
+          <img class="upcoming-art" src="assets/covers/seers.webp" alt="" width="292" height="156" decoding="async">
+          <h4 class="visually-hidden">SEERS</h4>
+          <span class="upcoming-badge">Coming Soon</span>
+        </a>
+        <a href="/relics/#seers" class="btn-link btn-secondary upcoming-relic" aria-label="View the Book of Seers relic">View relic</a>
+      </div>
     </div>
   </section>
 
