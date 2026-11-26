@@ -258,7 +258,7 @@
   }
 
   // ── FLOATING CA CHARACTERS ──
-  document.querySelectorAll('.vertical-ca a, .mobile-ca-inline a').forEach(caLink => {
+  document.querySelectorAll('.vertical-ca a').forEach(caLink => {
     if (!caLink) return;
     const text = caLink.textContent;
     caLink.textContent = '';

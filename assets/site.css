@@ -362,25 +362,6 @@
     }
 
 
-    /* Hide mobile CA inline on desktop */
-    .mobile-ca-inline { display: none; }
-
-    @media (max-width: 680px) {
-      .mobile-ca-inline {
-        display: block !important;
-        text-align: center;
-        margin-top: 0.2rem;
-      }
-      .mobile-ca-inline a {
-        font-family: 'Crimson Pro', serif;
-        font-style: italic;
-        font-size: 0.7rem;
-        letter-spacing: 0.07em;
-        color: var(--gold);
-        text-decoration: none;
-        word-break: break-all;
-      }
-    }
     .mobile-feature { display: none; }
     .mobile-ca { display: none; }
     .mobile-quote-panel { display: none; }
@@ -903,8 +884,7 @@
       50%       { opacity: 0.6; }
     }
 
-    .vertical-ca .ca-char,
-    .mobile-ca-inline .ca-char {
+    .vertical-ca .ca-char {
       display: inline-block;
       animation: charFade var(--dur) ease-in-out var(--delay) infinite;
     }
