@@ -104,8 +104,20 @@
       color: var(--silver);
       opacity: 0.7;
       font-size: 1.1rem;
-      letter-spacing: 0.15em;
       animation: fadeDown 1.6s ease both;
+    }
+
+    /* Tracking lives on the words only. The negative right margin cancels the
+       letter-spacing CSS adds after the last letter. The closing ornament also
+       sits inset in its box, so it is pulled left until the ink gap matches
+       the opening quote. */
+    .header-sub-text {
+      letter-spacing: 0.15em;
+      margin-left: 0.42em;
+      margin-right: calc(0.42em - 0.15em);
+    }
+    .header-sub .deco-quote:last-child {
+      margin-left: -0.28em;
     }
 
     /* ── NAV ── */
@@ -358,6 +370,7 @@
       color: var(--gold);
       opacity: 0.5;
       font-size: 1.1em;
+      letter-spacing: 0;
       vertical-align: middle;
     }
 
@@ -432,6 +445,13 @@
 
       .site-wrap { padding-top: 95px; }
       header { padding-top: 1rem; }
+
+      /* Full 0.15em tracking is wider than the hero column around 360–430px
+         and pushes the closing quote onto its own line. */
+      .header-sub-text {
+        letter-spacing: 0.02em;
+        margin-right: calc(0.42em - 0.02em);
+      }
 
       .mobile-bear-wrap {
         display: flex !important;
