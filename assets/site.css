@@ -433,6 +433,10 @@
       .site-wrap { padding-top: 95px; }
       header { padding-top: 1rem; }
 
+      /* The 0.15em tracking is wider than the hero column around 360–430px,
+         so the closing quote wraps onto its own line and leaves the right side bare. */
+      .header-sub { letter-spacing: 0.02em; }
+
       .mobile-bear-wrap {
         display: flex !important;
         justify-content: center;
